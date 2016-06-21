@@ -1,4 +1,4 @@
-// Copyright (C) 2012 The Android Open Source Project
+// Copyright (C) 2016 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,19 +14,10 @@
 
 package com.googlesource.gerrit.plugins.hooks;
 
-import java.nio.file.Path;
-import java.util.List;
+import com.google.inject.AbstractModule;
 
-class Hook {
-  private final HookQueue hooks;
-  private final Path hook;
-
-  Hook(HookQueue hooks, Path path) {
-    this.hooks = hooks;
-    this.hook = path;
-  }
-
-  void submit(List<String> args) {
-    hooks.submit(hook, args);
+class Module extends AbstractModule {
+  @Override
+  protected void configure() {
   }
 }
