@@ -14,19 +14,58 @@
 
 package com.googlesource.gerrit.plugins.hooks;
 
-import java.io.File;
-import java.util.List;
+import com.google.gerrit.server.config.GerritServerConfig;
+import com.google.gerrit.server.config.SitePaths;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
-class Hook {
-  private final HookQueue hooks;
-  private final File hook;
+import org.eclipse.jgit.lib.Config;
 
-  Hook(HookQueue hooks, File hook) {
-    this.hooks = hooks;
-    this.hook = hook;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+public class Hook {
+  @Singleton
+  public static class Factory {
+    private final HookQueue queue;
+    private final Config config;
+    private final Path hooksPath;
+
+    @Inject
+    Factory(HookQueue queue,
+        @GerritServerConfig Config config,
+        SitePaths sitePaths) {
+      this.queue = queue;
+      this.config = config;
+
+      String v = config.getString("hooks", null, "path");
+      if (v != null) {
+        this.hooksPath = Paths.get(v);
+      } else {
+        this.hooksPath = sitePaths.hooks_dir;
+      }
+    }
+
+    public Hook create(String configName, String defaultName) {
+      String v = config.getString("hooks", null, configName);
+      Path path = hooksPath.resolve(v != null ? v : defaultName);
+      return new Hook(queue, path);
+    }
   }
 
-  void submit(List<String> args) {
-    hooks.submit(hook, args);
+  private final HookQueue queue;
+  private final Path path;
+
+  Hook(HookQueue queue, Path path) {
+    this.queue = queue;
+    this.path = path;
+  }
+
+  void submit(HookArgs args) {
+    queue.submit(path, args);
+  }
+
+  void submit(String projectName, HookArgs args) {
+    queue.submit(projectName, path, args);
   }
 }
