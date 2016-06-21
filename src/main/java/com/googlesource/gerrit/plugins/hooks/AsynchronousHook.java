@@ -16,10 +16,19 @@ package com.googlesource.gerrit.plugins.hooks;
 
 import java.nio.file.Path;
 
-public class Hook {
-  protected final Path path;
+public class AsynchronousHook extends Hook {
+  private final HookQueue queue;
 
-  Hook(Path path) {
-    this.path = path;
+  AsynchronousHook(HookQueue queue, Path path) {
+    super(path);
+    this.queue = queue;
+  }
+
+  void submit(HookArgs args) {
+    queue.submit(path, args);
+  }
+
+  void submit(String projectName, HookArgs args) {
+    queue.submit(projectName, path, args);
   }
 }

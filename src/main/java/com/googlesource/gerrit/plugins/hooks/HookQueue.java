@@ -1,4 +1,4 @@
-// Copyright (C) 2012 The Android Open Source Project
+// Copyright (C) 2016 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,69 +14,42 @@
 
 package com.googlesource.gerrit.plugins.hooks;
 
-import com.google.gerrit.extensions.annotations.Listen;
 import com.google.gerrit.extensions.events.LifecycleListener;
-import com.google.gerrit.server.config.GerritServerConfig;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
-import org.eclipse.jgit.lib.Config;
+import java.nio.file.Path;
 
-import java.io.File;
-import java.util.List;
-
-@Listen
-@Singleton
 class HookQueue implements LifecycleListener {
   private final GitRepositoryManager gitManager;
   private final WorkQueue workQueue;
   private final SitePaths sitePaths;
-  private final Config config;
-  private final File hooks;
 
   private WorkQueue.Executor queue;
 
   @Inject
   HookQueue(GitRepositoryManager m,
       WorkQueue q,
-      SitePaths s,
-      @GerritServerConfig Config c) {
+      SitePaths s) {
     gitManager = m;
     workQueue = q;
     sitePaths = s;
-    config = c;
-
-    String v = config.getString("hooks", null, "path");
-    if (v == null) {
-      v = "hooks";
-    }
-    hooks = sitePaths.resolve(v);
   }
 
-  Hook resolve(String configName, String defaultHook) {
-    String v = config.getString("hooks", null, configName);
-    if (v == null) {
-      v = defaultHook;
-    }
-    return new Hook(
-        this,
-        sitePaths.resolve(new File(hooks, v).getPath()));
-  }
-
-  void submit(File hook, List<String> args) {
+  void submit(Path hook, HookArgs args) {
     submit(null, hook, args);
   }
 
-  void submit(String projectName, File hook, List<String> args) {
-    if (hook.exists()) {
-      queue.submit(new RunHookTask(
+  void submit(String projectName, Path hook, HookArgs args) {
+    if (hook.toFile().exists()) {
+      queue.submit(new HookTask.Async(
           gitManager,
           sitePaths.site_path,
           projectName,
-          hook, args));
+          hook,
+          args));
     }
   }
 
