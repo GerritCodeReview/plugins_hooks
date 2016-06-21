@@ -14,19 +14,22 @@
 
 package com.googlesource.gerrit.plugins.hooks;
 
-import java.io.File;
-import java.util.List;
+import java.nio.file.Path;
 
-class Hook {
-  private final HookQueue hooks;
-  private final File hook;
+public class Hook {
+  private final HookQueue queue;
+  private final Path path;
 
-  Hook(HookQueue hooks, File hook) {
-    this.hooks = hooks;
-    this.hook = hook;
+  public Hook(HookQueue queue, Path path) {
+    this.queue = queue;
+    this.path = path;
   }
 
-  void submit(List<String> args) {
-    hooks.submit(hook, args);
+  void submit(HookArgs args) {
+    queue.submit(path, args);
+  }
+
+  void submit(String projectName, HookArgs args) {
+    queue.submit(projectName, path, args);
   }
 }
