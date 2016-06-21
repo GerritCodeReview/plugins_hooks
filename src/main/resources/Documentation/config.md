@@ -1,95 +1,75 @@
-Plugin @PLUGIN@
-===============
+Configuration
+=============
 
-Gerrit does not run any of the standard git hooks in the repositories
-it works with, but this plugin its own hook mechanism. This plugin
-looks in `$site_path/hooks` for executables with names listed below.
+Environment
+-----------
 
 The environment will have GIT_DIR set to the full path of the
 affected git repository so that git commands can be easily run.
 
 Make sure your hook scripts are executable if running on *nix.
 
-Hooks are run in the background after the relevant change has
-taken place so are unable to affect the outcome of any given
-change. Because of the fact the hooks are run in the background
+With the exception of the `ref-update` hook, hooks are run in the background
+after the relevant change has taken place so are unable to affect the outcome
+of any given change. Because of the fact the hooks are run in the background
 after the activity, a hook might not be notified about an event if
 the server is shutdown before the hook can be invoked.
 
-patchset-created
-----------------
-
-This is called whenever a patchset is created (this includes new
-changes)
-
-```
-  patchset-created --change <change id> --change-url <change url> --project <project name> --branch <branch> --uploader <uploader> --commit <sha1> --patchset <patchset id>
-```
-
-comment-added
+Configuration
 -------------
-
-This is called whenever a comment is added to a change.
-
-```
-  comment-added --change <change id> --change-url <change url> --project <project name> --branch <branch> --author <comment author> --commit <commit> --comment <comment> [--<approval category id> <score> --<approval category id> <score> ...]
-```
-
-change-merged
--------------
-
-Called whenever a change has been merged.
-
-```
-  change-merged --change <change id> --change-url <change url> --project <project name> --branch <branch> --submitter <submitter> --commit <sha1>
-```
-
-change-abandoned
-----------------
-
-Called whenever a change has been abandoned.
-
-```
-  change-abandoned --change <change id> --change-url <change url> --project <project name> --branch <branch> --abandoner <abandoner> --reason <reason>
-```
-
-change-restored
----------------
-
-Called whenever a change has been restored.
-
-```
-  change-restored --change <change id> --change-url <change url> --project <project name> --branch <branch> --restorer <restorer> --reason <reason>
-```
-
-ref-updated
------------
-
-Called whenever a ref has been updated.
-
-```
-  ref-updated --oldrev <old rev> --newrev <new rev> --refname <ref name> --project <project name> --submitter <submitter>
-```
-
-cla-signed
-----------
-
-Called whenever a user signs a contributor license agreement
-
-```
-  cla-signed --submitter <submitter> --user-id <user_id> --cla-id <cla_id>
-```
-
-Configuration Settings
-----------------------
 
 It is possible to change where this plugin looks for hooks, and what
-filenames it looks for by adding a `[hooks]` section to gerrit.config.
+filenames it looks for by adding a `[hooks]` section to `gerrit.config`.
 
-The plugin will use the value of hooks.path for the hooks directory,
-and the values of hooks.patchsetCreatedHook, hooks.commentAddedHook,
-hooks.changeMergedHook and hooks.changeAbandonedHook for the filenames
-for the hooks.
+hooks.path
+:	Location of hook executables. If not set, defaults to `$site_path/hooks`
+
+hooks.syncHookTimeout
+:	Timeout value in seconds for synchronous hooks. If not set, defaults
+to 30 seconds.
+
+hooks.changeAbandonedHook
+:	Filename for the change abandoned hook. If not set, defaults to `change-abandoned`.
+
+hooks.changeMergedHook
+:	Filename for the change merged hook. If not set, defaults to `change-merged`.
+
+hooks.changeRestoredHook
+:	Filename for the change restored hook. If not set, defaults to `change-restored`.
+
+hooks.claSignedHook
+:	Filename for the CLA signed hook. If not set, defaults to `cla-signed`.
+
+hooks.commentAddedHook
+:	Filename for the comment added hook. If not set, defaults to `comment-added`.
+
+hooks.draftPublishedHook
+:	Filename for the draft published hook. If not set, defaults to `draft-published`.
+
+hooks.hashtagsChangedHook
+:	Filename for the hashtags changed hook. If not set, defaults to `hashtags-changed`.
+
+hooks.patchsetCreatedHook
+:	Filename for the patchset created hook. If not set, defaults to `patchset-created`.
+
+hooks.projectCreatedHook
+:	Filename for the project created hook. If not set, defaults to `project-created`.
+
+hooks.refUpdate
+:	Filename for the ref update hook. If not set, defaults to `ref-update`.
+
+hooks.refUpdatedHook
+:	Filename for the ref updated hook. If not set, defaults to `ref-updated`.
+
+hooks.reviewerAddedHook
+:	Filename for the reviewer added hook. If not set, defaults to `reviewer-added`.
+
+hooks.reviewerDeletedHook
+:	Filename for the reviewer update hook. If not set, defaults to `reviewer-deleted`.
+
+hooks.topicChangedHook
+:	Filename for the topic changed hook. If not set, defaults to `topic-changed`.
+
 
 Missing Change URLs
 -------------------
