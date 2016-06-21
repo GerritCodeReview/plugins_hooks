@@ -25,7 +25,8 @@ import com.google.inject.Singleton;
 
 import org.eclipse.jgit.lib.Config;
 
-import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Listen
@@ -35,7 +36,7 @@ class HookQueue implements LifecycleListener {
   private final WorkQueue workQueue;
   private final SitePaths sitePaths;
   private final Config config;
-  private final File hooks;
+  private final Path hooks;
 
   private WorkQueue.Executor queue;
 
@@ -50,28 +51,26 @@ class HookQueue implements LifecycleListener {
     config = c;
 
     String v = config.getString("hooks", null, "path");
-    if (v == null) {
-      v = "hooks";
+    if (v != null) {
+      hooks = Paths.get(v);
+    } else {
+      hooks = s.hooks_dir;
     }
-    hooks = sitePaths.resolve(v);
   }
 
   Hook resolve(String configName, String defaultHook) {
     String v = config.getString("hooks", null, configName);
-    if (v == null) {
-      v = defaultHook;
-    }
-    return new Hook(
-        this,
-        sitePaths.resolve(new File(hooks, v).getPath()));
+    Path p = hooks.resolve(v != null ? v : defaultHook);
+
+    return new Hook(this, p);
   }
 
-  void submit(File hook, List<String> args) {
+  void submit(Path hook, List<String> args) {
     submit(null, hook, args);
   }
 
-  void submit(String projectName, File hook, List<String> args) {
-    if (hook.exists()) {
+  void submit(String projectName, Path hook, List<String> args) {
+    if (hook.toFile().exists()) {
       queue.submit(new RunHookTask(
           gitManager,
           sitePaths.site_path,

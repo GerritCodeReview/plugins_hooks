@@ -15,36 +15,37 @@
 package com.googlesource.gerrit.plugins.hooks;
 
 import com.google.common.collect.Lists;
-import com.google.gerrit.extensions.annotations.Listen;
-import com.google.gerrit.extensions.events.PostContributorAgreementAcceptedListener;
+import com.google.gerrit.extensions.common.AccountInfo;
+import com.google.gerrit.extensions.events.AgreementSignupListener;
 import com.google.gerrit.server.config.AnonymousCowardName;
 import com.google.inject.Inject;
 
 import java.util.List;
 
-@Listen
-class ClaAccepted implements PostContributorAgreementAcceptedListener {
+class ClaAccepted implements AgreementSignupListener {
   private final Hook hook;
   private final String anonymousCowardName;
 
   @Inject
-  ClaAccepted(HookQueue queue, @AnonymousCowardName String anonymousCowardName) {
+  ClaAccepted(HookQueue queue,
+      @AnonymousCowardName String anonymousCowardName) {
     this.hook = queue.resolve("claSignedHook", "cla-signed");
     this.anonymousCowardName = anonymousCowardName;
   }
 
   @Override
-  public void onPostContributorAgreementAccepted(Event event) {
+  public void onAgreementSignup(AgreementSignupListener.Event event) {
     List<String> args = Lists.newArrayList();
 
     args.add("--cla-name");
     args.add(event.getAgreementName());
 
+    AccountInfo account = event.getAccount();
     args.add("--user-id");
-    args.add(Integer.toString(event.getAccountId()));
+    args.add(Integer.toString(account._accountId));
 
     args.add("--submitter");
-    args.add(format(event.getAccountFullName(), event.getAccountEmail()));
+    args.add(format(account.name, account.email));
 
     hook.submit(args);
   }

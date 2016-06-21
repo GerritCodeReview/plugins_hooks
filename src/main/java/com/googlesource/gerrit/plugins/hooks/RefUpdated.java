@@ -15,46 +15,54 @@
 package com.googlesource.gerrit.plugins.hooks;
 
 import com.google.common.collect.Lists;
-import com.google.gerrit.extensions.annotations.Listen;
+import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
+import com.google.gerrit.server.config.AnonymousCowardName;
 import com.google.inject.Inject;
 
 import java.util.List;
 
-@Listen
 class RefUpdated implements GitReferenceUpdatedListener {
   private final Hook hook;
+  private final String anonymousCowardName;
 
   @Inject
-  RefUpdated(HookQueue queue) {
+  RefUpdated(HookQueue queue,
+      @AnonymousCowardName String anonymousCowardName) {
     this.hook = queue.resolve("refUpdatedHook", "ref-updated");
+    this.anonymousCowardName = anonymousCowardName;
   }
 
   @Override
-  public void onGitReferenceUpdated(Event event) {
-    for (Update u : event.getUpdates()) {
-      List<String> args = Lists.newArrayList();
+  public void onGitReferenceUpdated(GitReferenceUpdatedListener.Event event) {
+    List<String> args = Lists.newArrayList();
 
-      args.add("--project");
-      args.add(event.getProjectName());
+    args.add("--project");
+    args.add(event.getProjectName());
 
-      args.add("--refname");
-      args.add(u.getRefName());
+    args.add("--refname");
+    args.add(event.getRefName());
 
-      if (u.getOldObjectId() != null) {
-        args.add("--oldrev");
-        args.add(u.getOldObjectId());
-      }
+    args.add("--oldrev");
+    args.add(event.getOldObjectId());
 
-      if (u.getNewObjectId() != null) {
-        args.add("--newrev");
-        args.add(u.getNewObjectId());
-      }
+    args.add("--newrev");
+    args.add(event.getNewObjectId());
 
+    AccountInfo submitter = event.getUpdater();
+    if (submitter != null) {
       args.add("--submitter");
-      args.add(u.getSubmitter());
-
-      hook.submit(args);
+      args.add(format(submitter.name, submitter.email));
     }
+
+    hook.submit(args);
+  }
+
+  private String format(String name, String email) {
+    String who = (name == null) ? anonymousCowardName : name;
+    if (email != null) {
+      who += " (" + email + ")";
+    }
+    return who;
   }
 }
