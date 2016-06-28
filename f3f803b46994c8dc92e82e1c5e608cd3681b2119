@@ -22,6 +22,30 @@
       "revId": "f3f803b46994c8dc92e82e1c5e608cd3681b2119",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "00815bc8_b69c2876",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-06-28T06:53:04Z",
+      "side": 1,
+      "message": "Yes, it\u0027s a typo.  It\u0027s fixed in the following commit which restructures the documentation.",
+      "parentUuid": "a325f944_d35b7474",
+      "range": {
+        "startLine": 5,
+        "startChar": 15,
+        "endLine": 5,
+        "endChar": 53
+      },
+      "revId": "f3f803b46994c8dc92e82e1c5e608cd3681b2119",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
