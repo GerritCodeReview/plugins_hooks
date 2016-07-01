@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "1d562646_d75e1c2c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/CommitReceived.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1010008
+      },
+      "writtenOn": "2016-07-01T14:42:37Z",
+      "side": 1,
+      "message": "Yes, but what I\u0027m saying is there is no way to do that from a hook. The only possible non-exception return value from this method is an empty list.",
+      "parentUuid": "1d2466f2_67f4d28c",
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d562646_77bc707d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookArgs.java",
         "patchSetId": 8
@@ -106,6 +124,30 @@
       "side": 1,
       "message": "Sorry, I\u0027m not following what you mean here.",
       "parentUuid": "7d59e272_9a004d34",
+      "range": {
+        "startLine": 71,
+        "startChar": 26,
+        "endLine": 71,
+        "endChar": 43
+      },
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d562646_1744145a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookArgs.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1010008
+      },
+      "writtenOn": "2016-07-01T14:42:37Z",
+      "side": 1,
+      "message": "String url \u003d urlProvider.get();\n if (change !\u003d null \u0026\u0026 url !\u003d null)",
+      "parentUuid": "1d2466f2_a7ed2ac3",
       "range": {
         "startLine": 71,
         "startChar": 26,
@@ -210,6 +252,24 @@
       "side": 1,
       "message": "Why use StringBuilder here but not above (line 72-75)?",
       "parentUuid": "1d562646_f7afe03d",
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d59e272_bab55190",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookArgs.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1010008
+      },
+      "writtenOn": "2016-07-01T14:42:37Z",
+      "side": 1,
+      "message": "The reason not to use a StringBuilder above is that if you have no conditionals, it\u0027s faster. The JLS says to convert this:\n\n String s \u003d x + y + z;\n\nto bytecode equivalent to:\n\n String s \u003d new StringBuilder(x.length() + y.length() + z.length())\n     .append(x).append(y).append(z).toString();\n\n(With appropriate primitive operations to avoid boxing.) This is guaranteed to avoid growing the StringBuilder\u0027s backing array.\n\nIn Java 9 it can be even more exotic: http://openjdk.java.net/jeps/280\n\nIf you use StringBuilder manually, you are preventing the compiler from applying its optimizations.\n\nThe reason to use StringBuider here is that the universe of current and future optimizations does not handle any cases where there is a conditional, so you\u0027re not hurting anything by using a StringBuilder. But you are hurting something by doing \"x +\u003d y\", which always incurs a full copy of x.",
+      "parentUuid": "7dcc827d_029cea72",
       "revId": "63058390eb412235f91e504ec786b5ab2c443472",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
