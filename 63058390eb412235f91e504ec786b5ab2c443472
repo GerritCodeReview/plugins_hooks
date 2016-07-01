@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1d2466f2_67f4d28c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/CommitReceived.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-01T13:54:48Z",
+      "side": 1,
+      "message": "IIRC informational messages can be returned in the list of CommitValidationMessages that is returned.",
+      "parentUuid": "7d59e272_5aefd58a",
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d562646_77bc707d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookArgs.java",
         "patchSetId": 8
@@ -76,6 +94,30 @@
     },
     {
       "key": {
+        "uuid": "1d2466f2_a7ed2ac3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookArgs.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-01T13:54:48Z",
+      "side": 1,
+      "message": "Sorry, I\u0027m not following what you mean here.",
+      "parentUuid": "7d59e272_9a004d34",
+      "range": {
+        "startLine": 71,
+        "startChar": 26,
+        "endLine": 71,
+        "endChar": 43
+      },
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d562646_b7b56890",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookArgs.java",
         "patchSetId": 8
@@ -92,6 +134,29 @@
         "startChar": 6,
         "endLine": 75,
         "endChar": 29
+      },
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d2466f2_47f9ce82",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookArgs.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-01T13:54:48Z",
+      "side": 1,
+      "message": "This should be in an else-block.",
+      "range": {
+        "startLine": 77,
+        "startChar": 4,
+        "endLine": 77,
+        "endChar": 17
       },
       "revId": "63058390eb412235f91e504ec786b5ab2c443472",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
@@ -127,6 +192,24 @@
       "writtenOn": "2016-07-01T13:40:15Z",
       "side": 1,
       "message": "Use a StringBuilder instead.",
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7dcc827d_029cea72",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookArgs.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-01T13:54:48Z",
+      "side": 1,
+      "message": "Why use StringBuilder here but not above (line 72-75)?",
+      "parentUuid": "1d562646_f7afe03d",
       "revId": "63058390eb412235f91e504ec786b5ab2c443472",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -247,6 +330,24 @@
     },
     {
       "key": {
+        "uuid": "1d2466f2_87eaa6a6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookResult.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-01T13:54:48Z",
+      "side": 1,
+      "message": "This is copied directly from the implementation in core.  I\u0027ll check if it can be made final.",
+      "parentUuid": "1d562646_177254c9",
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d59e272_1aa0bd59",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookResult.java",
         "patchSetId": 8
@@ -332,6 +433,24 @@
       "writtenOn": "2016-07-01T13:40:15Z",
       "side": 1,
       "message": "I\u0027m just going to assume this documentation is up to date :)",
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d2466f2_07ffd66b",
+        "filename": "src/main/resources/Documentation/hooks.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-01T13:54:48Z",
+      "side": 1,
+      "message": "Content is from core and just reformatted to markdown.  It should be up to date.",
+      "parentUuid": "7d59e272_7aa57969",
       "revId": "63058390eb412235f91e504ec786b5ab2c443472",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
