@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "ddfd6ec1_a58afe2d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookArgs.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-04T01:23:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d562646_77bc707d",
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d59e272_ba03913f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookArgs.java",
         "patchSetId": 8
@@ -83,6 +101,24 @@
       "writtenOn": "2016-07-01T13:40:15Z",
       "side": 1,
       "message": "aka firstNonNull(value, false).toString()",
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d092ab0_888f173e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookArgs.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-04T01:23:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d59e272_ba03913f",
       "revId": "63058390eb412235f91e504ec786b5ab2c443472",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -160,6 +196,30 @@
     },
     {
       "key": {
+        "uuid": "3d092ab0_68950349",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookArgs.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-04T01:23:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d562646_1744145a",
+      "range": {
+        "startLine": 71,
+        "startChar": 26,
+        "endLine": 71,
+        "endChar": 43
+      },
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d562646_b7b56890",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookArgs.java",
         "patchSetId": 8
@@ -171,6 +231,30 @@
       "writtenOn": "2016-07-01T13:40:15Z",
       "side": 1,
       "message": "Just use string concatenation, it\u0027s faster and no less readable.",
+      "range": {
+        "startLine": 72,
+        "startChar": 6,
+        "endLine": 75,
+        "endChar": 29
+      },
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ddfd6ec1_858f023e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookArgs.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-04T01:23:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d562646_b7b56890",
       "range": {
         "startLine": 72,
         "startChar": 6,
@@ -206,6 +290,30 @@
     },
     {
       "key": {
+        "uuid": "ddfd6ec1_65952649",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookArgs.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-04T01:23:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d2466f2_47f9ce82",
+      "range": {
+        "startLine": 77,
+        "startChar": 4,
+        "endLine": 77,
+        "endChar": 17
+      },
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d562646_97b2e4a3",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookArgs.java",
         "patchSetId": 8
@@ -217,6 +325,24 @@
       "writtenOn": "2016-07-01T13:40:15Z",
       "side": 1,
       "message": "aka firstNonNull(account.name, anonymousCowardName)\n\nUnless you meant (account \u003d\u003d null) for the condition but I don\u0027t think you did.",
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d092ab0_48923f63",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookArgs.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-04T01:23:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d562646_97b2e4a3",
       "revId": "63058390eb412235f91e504ec786b5ab2c443472",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -276,6 +402,24 @@
     },
     {
       "key": {
+        "uuid": "3d092ab0_289f0b6b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookArgs.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-04T01:23:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d59e272_bab55190",
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d59e272_fafd093e",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookExecutor.java",
         "patchSetId": 8
@@ -287,6 +431,24 @@
       "writtenOn": "2016-07-01T13:40:15Z",
       "side": 1,
       "message": "Add an UncaughtExceptionHandler to log. (Fortunately we just had a bug about this yesterday, otherwise I would have forgotten to mention it.)",
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ddfd6ec1_45922a63",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookExecutor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-04T01:23:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d59e272_fafd093e",
       "revId": "63058390eb412235f91e504ec786b5ab2c443472",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -310,6 +472,24 @@
     },
     {
       "key": {
+        "uuid": "3d092ab0_089c4772",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookExecutor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-04T01:23:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d562646_d7ac5c4c",
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d59e272_dafac543",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookFactory.java",
         "patchSetId": 8
@@ -321,6 +501,30 @@
       "writtenOn": "2016-07-01T13:40:15Z",
       "side": 1,
       "message": "firstNonNull(v, defaultName)",
+      "range": {
+        "startLine": 63,
+        "startChar": 34,
+        "endLine": 63,
+        "endChar": 61
+      },
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ddfd6ec1_259f2e6b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookFactory.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-04T01:23:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d59e272_dafac543",
       "range": {
         "startLine": 63,
         "startChar": 34,
@@ -356,6 +560,30 @@
     },
     {
       "key": {
+        "uuid": "ddfd6ec1_059c3272",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookFactory.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-04T01:23:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d59e272_3a9b0135",
+      "range": {
+        "startLine": 69,
+        "startChar": 34,
+        "endLine": 69,
+        "endChar": 61
+      },
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d562646_376dd8ed",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookQueue.java",
         "patchSetId": 8
@@ -367,6 +595,24 @@
       "writtenOn": "2016-07-01T13:40:15Z",
       "side": 1,
       "message": "Files.exists",
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d092ab0_e8a7b3ba",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookQueue.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-04T01:23:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d562646_376dd8ed",
       "revId": "63058390eb412235f91e504ec786b5ab2c443472",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -408,6 +654,24 @@
     },
     {
       "key": {
+        "uuid": "ddfd6ec1_e5a7d6ba",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookResult.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-04T01:23:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d2466f2_87eaa6a6",
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d59e272_1aa0bd59",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookResult.java",
         "patchSetId": 8
@@ -425,6 +689,24 @@
     },
     {
       "key": {
+        "uuid": "3d092ab0_c8acefa1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookResult.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-04T01:23:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d59e272_1aa0bd59",
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d562646_777750b9",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookTask.java",
         "patchSetId": 8
@@ -436,6 +718,24 @@
       "writtenOn": "2016-07-01T13:40:15Z",
       "side": 1,
       "message": "aka new String(ByteStreams.toByteArray(is), UTF_8) which can just be inlined at the call site.\n\nSeparate question is whether/how to support non-UTF-8 output from hooks. But that\u0027s already broken, new InputStreamReader(is) just uses the default charset.",
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d37be6b_e1802612",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookTask.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-04T01:23:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d562646_777750b9",
       "revId": "63058390eb412235f91e504ec786b5ab2c443472",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
