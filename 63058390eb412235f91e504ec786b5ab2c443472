@@ -759,6 +759,24 @@
     },
     {
       "key": {
+        "uuid": "5d37be6b_01866a2b",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-04T02:00:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d562646_577ccc9b",
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d562646_b780c8ac",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 8
@@ -770,6 +788,30 @@
       "writtenOn": "2016-07-01T13:40:15Z",
       "side": 1,
       "message": "You\u0027re leaving the reader hanging here...what are the semantics for ref-update? A link to the specific hook documentation (can you do that in this markdown dialect?) would be fine.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 43
+      },
+      "revId": "63058390eb412235f91e504ec786b5ab2c443472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d3e8a4a_c08f1e3d",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-04T02:00:02Z",
+      "side": 1,
+      "message": "Links are possible, but it looks like the generated html doesn\u0027t have anchors.",
+      "parentUuid": "1d562646_b780c8ac",
       "range": {
         "startLine": 12,
         "startChar": 0,
