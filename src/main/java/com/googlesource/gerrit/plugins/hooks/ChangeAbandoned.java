@@ -41,7 +41,7 @@ class ChangeAbandoned implements ChangeAbandonedListener {
     args.add("--project", c.project);
     args.add("--branch", c.branch);
     args.add("--topic", c.topic);
-    args.add("--abandoner", event.getAbandoner());
+    args.add("--abandoner", event.getWho());
     args.add("--commit", c.currentRevision);
     args.add("--reason", event.getReason());
 

@@ -41,7 +41,7 @@ class HashtagsEdited implements HashtagsEditedListener {
     args.add("--change-owner", c.owner);
     args.add("--project", c.project);
     args.add("--branch", c.branch);
-    args.add("--editor", event.getEditor());
+    args.add("--editor", event.getWho());
     add(args, "--hashtag", event.getHashtags());
     add(args, "--added", event.getAddedHashtags());
     add(args, "--removed", event.getRemovedHashtags());

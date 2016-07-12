@@ -41,7 +41,7 @@ class ChangeRestored implements ChangeRestoredListener {
     args.add("--project", c.project);
     args.add("--branch", c.branch);
     args.add("--topic", c.topic);
-    args.add("--restorer", event.getRestorer());
+    args.add("--restorer", event.getWho());
     args.add("--commit", c.currentRevision);
     args.add("--reason", event.getReason());
 

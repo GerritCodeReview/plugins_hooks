@@ -39,7 +39,7 @@ class TopicEdited implements TopicEditedListener {
     args.add("--change-owner", c.owner);
     args.add("--project", c.project);
     args.add("--branch", c.branch);
-    args.add("--changer", event.getEditor());
+    args.add("--changer", event.getWho());
     args.add("--old-topic", event.getOldTopic());
     args.add("--new-topic", event.getChange().topic);
 

@@ -41,7 +41,7 @@ class DraftPublished implements DraftPublishedListener {
     args.add("--project", c.project);
     args.add("--branch", c.branch);
     args.add("--topic", c.topic);
-    args.add("--uploader", event.getPublisher());
+    args.add("--uploader", event.getWho());
     args.add("--commit", event.getRevision().commit.commit);
     args.add("--patchset", event.getRevision()._number);
 

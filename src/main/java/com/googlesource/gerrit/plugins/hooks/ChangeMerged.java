@@ -41,7 +41,7 @@ class ChangeMerged implements ChangeMergedListener {
     args.add("--project", c.project);
     args.add("--branch", c.branch);
     args.add("--topic", c.topic);
-    args.add("--submitter", event.getMerger());
+    args.add("--submitter", event.getWho());
     args.add("--commit", c.currentRevision);
     args.add("--newrev", event.getNewRevisionId());
 

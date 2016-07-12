@@ -42,7 +42,7 @@ class CommentAdded implements CommentAddedListener {
     args.add("--project", c.project);
     args.add("--branch", c.branch);
     args.add("--topic", c.topic);
-    args.add("--author", event.getAuthor());
+    args.add("--author", event.getWho());
     args.add("--commit", event.getRevision().commit.commit);
     args.add("--comment", event.getComment());
     args.addApprovals(event.getApprovals(), event.getOldApprovals());

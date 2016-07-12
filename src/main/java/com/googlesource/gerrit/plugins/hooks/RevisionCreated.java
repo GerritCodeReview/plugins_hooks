@@ -43,7 +43,7 @@ public class RevisionCreated implements RevisionCreatedListener {
     args.add("--project", c.project);
     args.add("--branch", c.branch);
     args.add("--topic", c.topic);
-    args.add("--uploader", event.getUploader());
+    args.add("--uploader", event.getWho());
     args.add("--commit", event.getRevision().commit.commit);
     args.add("--patchset", event.getRevision()._number);
 
