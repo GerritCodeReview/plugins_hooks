@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.hooks;
 
+import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.extensions.events.ReviewerAddedListener;
 import com.google.inject.Inject;
@@ -31,17 +32,19 @@ class ReviewerAdded implements ReviewerAddedListener {
   }
 
   @Override
-  public void onReviewerAdded(ReviewerAddedListener.Event event) {
-    HookArgs args = hookFactory.createArgs();
-
+  public void onReviewersAdded(ReviewerAddedListener.Event event) {
     ChangeInfo c = event.getChange();
-    args.add("--change", c.id);
-    args.addUrl(c);
-    args.add("--change-owner", c.owner);
-    args.add("--project", c.project);
-    args.add("--branch", c.branch);
-    args.add("--reviewer", event.getReviewer());
+    for (AccountInfo reviewer: event.getReviewers()) {
+      HookArgs args = hookFactory.createArgs();
 
-    hook.submit(c.project, args);
+      args.add("--change", c.id);
+      args.addUrl(c);
+      args.add("--change-owner", c.owner);
+      args.add("--project", c.project);
+      args.add("--branch", c.branch);
+      args.add("--reviewer", reviewer);
+
+      hook.submit(c.project, args);
+    }
   }
 }
