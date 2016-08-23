@@ -148,5 +148,5 @@ Called whenever a user signs a contributor license agreement.
   cla-signed --submitter <submitter> --user-id <user_id> --cla-id <cla_id>
 ```
 
-[1]: config.html#hooks.syncHookTimeout
+[1]: config.md#hooks.syncHookTimeout
 [2]: ../../../Documentation/json.html#patchSet
