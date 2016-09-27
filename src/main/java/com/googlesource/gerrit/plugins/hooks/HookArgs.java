@@ -73,7 +73,7 @@ class HookArgs {
     args.add("--change-url");
     String url = urlProvider.get();
     if (change != null && url != null) {
-      args.add(url + change.changeId);
+      args.add(url + change._number);
     } else {
       args.add("");
     }
