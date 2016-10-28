@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a6c19e1f_690ec5aa",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/CommitReceived.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1003873
+      },
+      "writtenOn": "2016-10-28T13:28:21Z",
+      "side": 1,
+      "message": "Why is this necessary? Do you want to be defensive against Windows line-endings?\n\nIn case of Windows line endings this will produce one empty lines after each non-empty line because the Splitter will split on any of these characters. Therefore \"line1\\r\\nline2\\r\\n\" will produce:\n\n  line1\n  \u003cempty-line\u003e\n  line2\n  \u003cempty-line\u003e\n\nTo properly handle Windows line endings I think that another variant of building the Splitter has to be used:\n\n  Splitter.on(Pattern.compile(\"\\r?\\n\"))",
+      "range": {
+        "startLine": 94,
+        "startChar": 48,
+        "endLine": 94,
+        "endChar": 54
+      },
+      "revId": "c842fc029b281e2e834b874bbc5d9a1f69d23cd0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
