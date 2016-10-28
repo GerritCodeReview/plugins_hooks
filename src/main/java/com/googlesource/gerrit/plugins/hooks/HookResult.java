@@ -57,6 +57,6 @@ public class HookResult {
       sb.append(executionError);
     }
 
-    return sb.toString();
+    return sb.toString().trim();
   }
 }
