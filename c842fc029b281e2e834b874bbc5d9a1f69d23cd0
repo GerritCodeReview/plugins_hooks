@@ -40,6 +40,24 @@
       "revId": "c842fc029b281e2e834b874bbc5d9a1f69d23cd0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "66b7a6b6_e77d0223",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/CommitReceived.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-10-28T13:37:11Z",
+      "side": 1,
+      "message": "I\u0027ve just realised the whole thing is unnecessary anyway; the output already gets split by line.",
+      "parentUuid": "a6c19e1f_091389cd",
+      "revId": "c842fc029b281e2e834b874bbc5d9a1f69d23cd0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
