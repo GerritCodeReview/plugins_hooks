@@ -17,6 +17,10 @@ package com.googlesource.gerrit.plugins.hooks;
 import static com.google.gerrit.reviewdb.client.RefNames.REFS_CHANGES;
 import static org.eclipse.jgit.lib.Constants.R_HEADS;
 
+import com.google.common.base.CharMatcher;
+import com.google.common.base.Function;
+import com.google.common.base.Splitter;
+import com.google.common.collect.FluentIterable;
 import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.events.CommitReceivedEvent;
 import com.google.gerrit.server.git.validators.CommitValidationException;
@@ -32,6 +36,14 @@ import java.util.List;
 public class CommitReceived implements CommitValidationListener {
   private final SynchronousHook hook;
   private final HookFactory hookFactory;
+
+  private static final Function<String, CommitValidationMessage> MESSAGE =
+      new Function<String, CommitValidationMessage>() {
+        @Override
+        public CommitValidationMessage apply(String message) {
+          return new CommitValidationMessage(message, false);
+        }
+      };
 
   @Inject
   CommitReceived(HookFactory hookFactory) {
@@ -70,8 +82,19 @@ public class CommitReceived implements CommitValidationListener {
     args.add("--newrev", receiveEvent.commit.name());
 
     HookResult result = hook.run(args);
-    if (result != null && result.getExitValue() != 0) {
-      throw new CommitValidationException(result.toString().trim());
+    if (result != null) {
+      String output = result.toString();
+      if (result.getExitValue() != 0) {
+        throw new CommitValidationException(output);
+      }
+      if (!output.isEmpty()) {
+        // Return the output with each line in a separate message so it
+        // gets displayed line by line to the client.
+        return FluentIterable
+            .from(Splitter.on(CharMatcher.anyOf("\n\r")).splitToList(output))
+            .transform(MESSAGE)
+            .toList();
+      }
     }
 
     return Collections.emptyList();
