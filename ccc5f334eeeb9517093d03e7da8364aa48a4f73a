@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "66f246e8_8f69553c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/CommitReceived.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-11-01T10:49:48Z",
+      "side": 1,
+      "message": "use receiveEvent.project.getName() instead, it\u0027s shorter so you will not have to wrap line which is exceeding 80 characters :-)",
+      "range": {
+        "startLine": 73,
+        "startChar": 33,
+        "endLine": 73,
+        "endChar": 76
+      },
+      "revId": "ccc5f334eeeb9517093d03e7da8364aa48a4f73a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
