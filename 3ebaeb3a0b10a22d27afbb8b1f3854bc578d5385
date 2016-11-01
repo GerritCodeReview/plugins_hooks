@@ -46,6 +46,30 @@
       "revId": "3ebaeb3a0b10a22d27afbb8b1f3854bc578d5385",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4649c200_1efecd45",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/CommitReceived.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2016-11-01T23:39:41Z",
+      "side": 1,
+      "message": "I answered myself: I read carefully the bug associated :-)\n\nSo then why not just getting the project name only once?\n\n```\n    String projectName \u003d receiveEvent.project.getName();\n    args.add(\"--project\", projectName);\n    ...\n    HookResult result \u003d hook.run(projectName, args);\n```",
+      "parentUuid": "4649c200_7e01116a",
+      "range": {
+        "startLine": 72,
+        "startChar": 33,
+        "endLine": 72,
+        "endChar": 74
+      },
+      "revId": "3ebaeb3a0b10a22d27afbb8b1f3854bc578d5385",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
