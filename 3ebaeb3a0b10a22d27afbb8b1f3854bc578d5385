@@ -22,6 +22,30 @@
       "revId": "3ebaeb3a0b10a22d27afbb8b1f3854bc578d5385",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "26468ef2_7da59789",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/CommitReceived.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-11-01T23:39:15Z",
+      "side": 1,
+      "message": "The GIT_DIR environment variable is only set when the project name is passed into the hook task.  This is separate from the project name passed as an argument.",
+      "parentUuid": "4649c200_7e01116a",
+      "range": {
+        "startLine": 72,
+        "startChar": 33,
+        "endLine": 72,
+        "endChar": 74
+      },
+      "revId": "3ebaeb3a0b10a22d27afbb8b1f3854bc578d5385",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
