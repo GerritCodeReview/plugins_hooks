@@ -69,7 +69,7 @@ public class CommitReceived implements CommitValidationListener {
     args.add("--oldrev", old.name());
     args.add("--newrev", receiveEvent.commit.name());
 
-    HookResult result = hook.run(args);
+    HookResult result = hook.run(receiveEvent.getProjectNameKey().toString(), args);
     if (result != null && result.getExitValue() != 0) {
       throw new CommitValidationException(result.toString().trim());
     }
