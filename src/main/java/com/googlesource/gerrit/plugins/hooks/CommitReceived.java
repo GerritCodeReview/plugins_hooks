@@ -64,13 +64,14 @@ public class CommitReceived implements CommitValidationListener {
     }
 
     HookArgs args = hookFactory.createArgs();
-    args.add("--project", receiveEvent.project.getName());
+    String projectName = receiveEvent.project.getName();
+    args.add("--project", projectName);
     args.add("--refname", refname);
     args.add("--uploader", user.getNameEmail());
     args.add("--oldrev", old.name());
     args.add("--newrev", receiveEvent.commit.name());
 
-    HookResult result = hook.run(args);
+    HookResult result = hook.run(projectName, args);
     if (result != null) {
       String output = result.toString();
       if (result.getExitValue() != 0) {
