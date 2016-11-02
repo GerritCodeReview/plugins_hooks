@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.hooks;
 import static com.google.gerrit.reviewdb.client.RefNames.REFS_CHANGES;
 import static org.eclipse.jgit.lib.Constants.R_HEADS;
 
+import com.google.common.collect.ImmutableList;
 import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.events.CommitReceivedEvent;
 import com.google.gerrit.server.git.validators.CommitValidationException;
@@ -63,15 +64,22 @@ public class CommitReceived implements CommitValidationListener {
     }
 
     HookArgs args = hookFactory.createArgs();
-    args.add("--project", receiveEvent.project.getName());
+    String projectName = receiveEvent.project.getName();
+    args.add("--project", projectName);
     args.add("--refname", refname);
     args.add("--uploader", user.getNameEmail());
     args.add("--oldrev", old.name());
     args.add("--newrev", receiveEvent.commit.name());
 
-    HookResult result = hook.run(args);
-    if (result != null && result.getExitValue() != 0) {
-      throw new CommitValidationException(result.toString().trim());
+    HookResult result = hook.run(projectName, args);
+    if (result != null) {
+      String output = result.toString();
+      if (result.getExitValue() != 0) {
+        throw new CommitValidationException(output);
+      }
+      if (!output.isEmpty()) {
+        return ImmutableList.of(new CommitValidationMessage(output, false));
+      }
     }
 
     return Collections.emptyList();
