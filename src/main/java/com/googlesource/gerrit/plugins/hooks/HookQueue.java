@@ -19,7 +19,6 @@ import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -31,9 +30,7 @@ class HookQueue implements LifecycleListener {
   private WorkQueue.Executor queue;
 
   @Inject
-  HookQueue(GitRepositoryManager m,
-      WorkQueue q,
-      SitePaths s) {
+  HookQueue(GitRepositoryManager m, WorkQueue q, SitePaths s) {
     gitManager = m;
     workQueue = q;
     sitePaths = s;
@@ -45,12 +42,7 @@ class HookQueue implements LifecycleListener {
 
   void submit(String projectName, Path hook, HookArgs args) {
     if (Files.exists(hook)) {
-      queue.submit(new HookTask.Async(
-          gitManager,
-          sitePaths.site_path,
-          projectName,
-          hook,
-          args));
+      queue.submit(new HookTask.Async(gitManager, sitePaths.site_path, projectName, hook, args));
     }
   }
 

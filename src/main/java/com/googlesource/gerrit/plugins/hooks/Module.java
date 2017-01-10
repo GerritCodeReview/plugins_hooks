@@ -38,42 +38,24 @@ class Module extends AbstractModule {
   @Override
   protected void configure() {
     bind(HookQueue.class).in(Scopes.SINGLETON);
-    bind(LifecycleListener.class)
-        .annotatedWith(UniqueAnnotations.create())
-        .to(HookQueue.class);
+    bind(LifecycleListener.class).annotatedWith(UniqueAnnotations.create()).to(HookQueue.class);
     bind(HookExecutor.class).in(Scopes.SINGLETON);
-    bind(LifecycleListener.class)
-        .annotatedWith(UniqueAnnotations.create())
-        .to(HookExecutor.class);
+    bind(LifecycleListener.class).annotatedWith(UniqueAnnotations.create()).to(HookExecutor.class);
 
-    DynamicSet.bind(binder(), AgreementSignupListener.class)
-        .to(AgreementSignup.class);
-    DynamicSet.bind(binder(), ChangeAbandonedListener.class)
-        .to(ChangeAbandoned.class);
-    DynamicSet.bind(binder(), ChangeMergedListener.class)
-        .to(ChangeMerged.class);
-    DynamicSet.bind(binder(), ChangeRestoredListener.class)
-        .to(ChangeRestored.class);
-    DynamicSet.bind(binder(), CommentAddedListener.class)
-        .to(CommentAdded.class);
-    DynamicSet.bind(binder(), DraftPublishedListener.class)
-        .to(DraftPublished.class);
-    DynamicSet.bind(binder(), GitReferenceUpdatedListener.class)
-        .to(GitReferenceUpdated.class);
-    DynamicSet.bind(binder(), HashtagsEditedListener.class)
-        .to(HashtagsEdited.class);
-    DynamicSet.bind(binder(), NewProjectCreatedListener.class)
-        .to(NewProjectCreated.class);
-    DynamicSet.bind(binder(), ReviewerAddedListener.class)
-        .to(ReviewerAdded.class);
-    DynamicSet.bind(binder(), ReviewerDeletedListener.class)
-        .to(ReviewerDeleted.class);
-    DynamicSet.bind(binder(), RevisionCreatedListener.class)
-        .to(RevisionCreated.class);
-    DynamicSet.bind(binder(), TopicEditedListener.class)
-        .to(TopicEdited.class);
+    DynamicSet.bind(binder(), AgreementSignupListener.class).to(AgreementSignup.class);
+    DynamicSet.bind(binder(), ChangeAbandonedListener.class).to(ChangeAbandoned.class);
+    DynamicSet.bind(binder(), ChangeMergedListener.class).to(ChangeMerged.class);
+    DynamicSet.bind(binder(), ChangeRestoredListener.class).to(ChangeRestored.class);
+    DynamicSet.bind(binder(), CommentAddedListener.class).to(CommentAdded.class);
+    DynamicSet.bind(binder(), DraftPublishedListener.class).to(DraftPublished.class);
+    DynamicSet.bind(binder(), GitReferenceUpdatedListener.class).to(GitReferenceUpdated.class);
+    DynamicSet.bind(binder(), HashtagsEditedListener.class).to(HashtagsEdited.class);
+    DynamicSet.bind(binder(), NewProjectCreatedListener.class).to(NewProjectCreated.class);
+    DynamicSet.bind(binder(), ReviewerAddedListener.class).to(ReviewerAdded.class);
+    DynamicSet.bind(binder(), ReviewerDeletedListener.class).to(ReviewerDeleted.class);
+    DynamicSet.bind(binder(), RevisionCreatedListener.class).to(RevisionCreated.class);
+    DynamicSet.bind(binder(), TopicEditedListener.class).to(TopicEdited.class);
 
-    DynamicSet.bind(binder(), CommitValidationListener.class)
-        .to(CommitReceived.class);
+    DynamicSet.bind(binder(), CommitValidationListener.class).to(CommitReceived.class);
   }
 }

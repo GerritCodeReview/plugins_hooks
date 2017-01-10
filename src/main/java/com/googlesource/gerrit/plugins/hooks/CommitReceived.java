@@ -24,11 +24,9 @@ import com.google.gerrit.server.git.validators.CommitValidationException;
 import com.google.gerrit.server.git.validators.CommitValidationListener;
 import com.google.gerrit.server.git.validators.CommitValidationMessage;
 import com.google.inject.Inject;
-
-import org.eclipse.jgit.lib.ObjectId;
-
 import java.util.Collections;
 import java.util.List;
+import org.eclipse.jgit.lib.ObjectId;
 
 public class CommitReceived implements CommitValidationListener {
   private final SynchronousHook hook;
@@ -41,8 +39,8 @@ public class CommitReceived implements CommitValidationListener {
   }
 
   @Override
-  public List<CommitValidationMessage> onCommitReceived(
-      CommitReceivedEvent receiveEvent) throws CommitValidationException {
+  public List<CommitValidationMessage> onCommitReceived(CommitReceivedEvent receiveEvent)
+      throws CommitValidationException {
     IdentifiedUser user = receiveEvent.user;
     String refname = receiveEvent.refName;
     ObjectId old = ObjectId.zeroId();
@@ -52,13 +50,13 @@ public class CommitReceived implements CommitValidationListener {
 
     if (receiveEvent.command.getRefName().startsWith(REFS_CHANGES)) {
       /*
-      * If the ref-update hook tries to distinguish behavior between pushes to
-      * refs/heads/... and refs/for/..., make sure we send it the correct
-      * refname.
-      * Also, if this is targetting refs/for/, make sure we behave the same as
-      * what a push to refs/for/ would behave; in particular, setting oldrev
-      * to 0000000000000000000000000000000000000000.
-      */
+       * If the ref-update hook tries to distinguish behavior between pushes to
+       * refs/heads/... and refs/for/..., make sure we send it the correct
+       * refname.
+       * Also, if this is targetting refs/for/, make sure we behave the same as
+       * what a push to refs/for/ would behave; in particular, setting oldrev
+       * to 0000000000000000000000000000000000000000.
+       */
       refname = refname.replace(R_HEADS, "refs/for/refs/heads/");
       old = ObjectId.zeroId();
     }
