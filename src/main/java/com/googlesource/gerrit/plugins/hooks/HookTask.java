@@ -20,11 +20,6 @@ import com.google.common.io.ByteStreams;
 import com.google.gerrit.metrics.Timer1;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.git.GitRepositoryManager;
-
-import org.eclipse.jgit.lib.Repository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
@@ -34,6 +29,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import org.eclipse.jgit.lib.Repository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 class HookTask {
   private static final Logger log = LoggerFactory.getLogger(HookTask.class);
@@ -48,8 +46,12 @@ class HookTask {
   private Process ps;
 
   public static class Async extends HookTask implements Runnable {
-    Async(GitRepositoryManager gitManager, Path sitePath, String projectName,
-        Path hook, HookArgs args) {
+    Async(
+        GitRepositoryManager gitManager,
+        Path sitePath,
+        String projectName,
+        Path hook,
+        HookArgs args) {
       super(gitManager, sitePath, projectName, hook, args);
     }
 
@@ -60,8 +62,12 @@ class HookTask {
   }
 
   public static class Sync extends HookTask implements Callable<HookResult> {
-    Sync(GitRepositoryManager gitManager, Path sitePath, String projectName,
-        Path hook, HookArgs args) {
+    Sync(
+        GitRepositoryManager gitManager,
+        Path sitePath,
+        String projectName,
+        Path hook,
+        HookArgs args) {
       super(gitManager, sitePath, projectName, hook, args);
     }
 
@@ -71,7 +77,8 @@ class HookTask {
     }
   }
 
-  HookTask(GitRepositoryManager gitManager,
+  HookTask(
+      GitRepositoryManager gitManager,
       Path sitePath,
       String projectName,
       Path hook,
@@ -112,8 +119,7 @@ class HookTask {
       env.put("GERRIT_SITE", sitePath.toAbsolutePath().toString());
 
       if (projectName != null) {
-        try (Repository git = gitManager.openRepository(
-              new Project.NameKey(projectName))) {
+        try (Repository git = gitManager.openRepository(new Project.NameKey(projectName))) {
           pb.directory(git.getDirectory());
           env.put("GIT_DIR", git.getDirectory().getAbsolutePath());
         }
@@ -121,8 +127,7 @@ class HookTask {
 
       ps = pb.start();
       ps.getOutputStream().close();
-      String output =
-          new String(ByteStreams.toByteArray(ps.getInputStream()), UTF_8);
+      String output = new String(ByteStreams.toByteArray(ps.getInputStream()), UTF_8);
       ps.waitFor();
       result = new HookResult(ps.exitValue(), output);
     } catch (InterruptedException iex) {
@@ -141,8 +146,7 @@ class HookTask {
         log.info("hook[" + getName() + "] exitValue:" + exitValue);
       }
 
-      BufferedReader br =
-          new BufferedReader(new StringReader(result.getOutput()));
+      BufferedReader br = new BufferedReader(new StringReader(result.getOutput()));
       try {
         String line;
         while ((line = br.readLine()) != null) {
@@ -161,4 +165,3 @@ class HookTask {
     return "hook " + hook.getFileName();
   }
 }
-

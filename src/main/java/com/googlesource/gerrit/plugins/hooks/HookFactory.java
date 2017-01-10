@@ -24,11 +24,9 @@ import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-
-import org.eclipse.jgit.lib.Config;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.eclipse.jgit.lib.Config;
 
 @Singleton
 public class HookFactory {
@@ -41,7 +39,8 @@ public class HookFactory {
   private final Path hooksPath;
 
   @Inject
-  HookFactory(HookQueue queue,
+  HookFactory(
+      HookQueue queue,
       HookExecutor syncHookExecutor,
       @GerritServerConfig Config config,
       @AnonymousCowardName String anonymousCowardName,
@@ -73,8 +72,7 @@ public class HookFactory {
   }
 
   public SynchronousHook createSync(String configName, String defaultName) {
-    return new SynchronousHook(
-        syncHookExecutor, getHookPath(configName, defaultName));
+    return new SynchronousHook(syncHookExecutor, getHookPath(configName, defaultName));
   }
 
   public HookArgs createArgs() {

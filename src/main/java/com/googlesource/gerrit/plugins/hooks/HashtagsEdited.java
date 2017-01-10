@@ -18,7 +18,6 @@ import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.extensions.events.HashtagsEditedListener;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-
 import java.util.Collection;
 
 @Singleton

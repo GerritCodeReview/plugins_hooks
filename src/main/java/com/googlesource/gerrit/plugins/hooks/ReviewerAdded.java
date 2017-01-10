@@ -34,7 +34,7 @@ class ReviewerAdded implements ReviewerAddedListener {
   @Override
   public void onReviewersAdded(ReviewerAddedListener.Event event) {
     ChangeInfo c = event.getChange();
-    for (AccountInfo reviewer: event.getReviewers()) {
+    for (AccountInfo reviewer : event.getReviewers()) {
       HookArgs args = hookFactory.createArgs();
 
       args.add("--change", c.id);

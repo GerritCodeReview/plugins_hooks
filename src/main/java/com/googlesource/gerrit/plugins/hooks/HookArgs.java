@@ -22,7 +22,6 @@ import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.common.ApprovalInfo;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.inject.Provider;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -33,8 +32,7 @@ class HookArgs {
   private final HookMetrics metrics;
   private final List<String> args;
 
-  HookArgs(String anonymousCowardName, Provider<String> urlProvider,
-      HookMetrics metrics) {
+  HookArgs(String anonymousCowardName, Provider<String> urlProvider, HookMetrics metrics) {
     this.anonymousCowardName = anonymousCowardName;
     this.urlProvider = urlProvider;
     this.metrics = metrics;
@@ -86,8 +84,8 @@ class HookArgs {
     }
   }
 
-  public void addApprovals(Map<String, ApprovalInfo> approvals,
-      Map<String, ApprovalInfo> oldApprovals) {
+  public void addApprovals(
+      Map<String, ApprovalInfo> approvals, Map<String, ApprovalInfo> oldApprovals) {
     for (Map.Entry<String, ApprovalInfo> approval : approvals.entrySet()) {
       if (approval.getValue() != null) {
         args.add("--" + approval.getKey());
@@ -104,12 +102,9 @@ class HookArgs {
   }
 
   private String format(AccountInfo account) {
-    StringBuilder who = new StringBuilder(
-        firstNonNull(account.name, anonymousCowardName));
+    StringBuilder who = new StringBuilder(firstNonNull(account.name, anonymousCowardName));
     if (account.email != null) {
-      who.append(" (")
-        .append(account.email)
-        .append(")");
+      who.append(" (").append(account.email).append(")");
     }
     return who.toString();
   }

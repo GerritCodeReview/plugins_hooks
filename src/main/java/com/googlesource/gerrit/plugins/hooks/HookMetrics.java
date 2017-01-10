@@ -32,23 +32,19 @@ public class HookMetrics {
   @Inject
   HookMetrics(MetricMaker metricMaker) {
     Field<String> field = Field.ofString("hook");
-    latency = metricMaker.newTimer("latency",
-        new Description("Time spent executing a hook")
-          .setCumulative()
-          .setUnit(Description.Units.MILLISECONDS),
-        field);
-    count = metricMaker.newCounter("count",
-        new Description("Hook executions")
-          .setRate(),
-        field);
-    error = metricMaker.newCounter("error",
-        new Description("Hook execution errors")
-          .setRate(),
-        field);
-    timeout = metricMaker.newCounter("timeout",
-        new Description("Hook execution timeouts")
-          .setRate(),
-        field);
+    latency =
+        metricMaker.newTimer(
+            "latency",
+            new Description("Time spent executing a hook")
+                .setCumulative()
+                .setUnit(Description.Units.MILLISECONDS),
+            field);
+    count = metricMaker.newCounter("count", new Description("Hook executions").setRate(), field);
+    error =
+        metricMaker.newCounter("error", new Description("Hook execution errors").setRate(), field);
+    timeout =
+        metricMaker.newCounter(
+            "timeout", new Description("Hook execution timeouts").setRate(), field);
   }
 
   public Timer1.Context start(String name) {
