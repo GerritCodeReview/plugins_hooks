@@ -22,6 +22,30 @@
       "revId": "dc8d1c18b3d140dd1b2fc7ffe4f4a53d39a1cf28",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c35807c_0e4a6934",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookMetrics.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "Feb 2, 2017 6:03:10 AM",
+      "side": 1,
+      "message": "That sounds better, but we use \"latency\" everywhere else in the other metrics.",
+      "parentUuid": "d1f83388_86ddafaf",
+      "range": {
+        "startLine": 35,
+        "startChar": 36,
+        "endLine": 35,
+        "endChar": 43
+      },
+      "revId": "dc8d1c18b3d140dd1b2fc7ffe4f4a53d39a1cf28",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
