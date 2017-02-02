@@ -36,6 +36,7 @@ public class HookFactory {
   private final HookExecutor syncHookExecutor;
   private final Config config;
   private final String anonymousCowardName;
+  private final HookMetrics metrics;
   private final Provider<String> urlProvider;
   private final Path hooksPath;
 
@@ -45,11 +46,13 @@ public class HookFactory {
       @GerritServerConfig Config config,
       @AnonymousCowardName String anonymousCowardName,
       @CanonicalWebUrl @Nullable Provider<String> urlProvider,
+      HookMetrics metrics,
       SitePaths sitePaths) {
     this.queue = queue;
     this.syncHookExecutor = syncHookExecutor;
     this.config = config;
     this.anonymousCowardName = anonymousCowardName;
+    this.metrics = metrics;
     this.urlProvider = urlProvider;
 
     String v = config.getString("hooks", null, "path");
@@ -75,6 +78,6 @@ public class HookFactory {
   }
 
   public HookArgs createArgs() {
-    return new HookArgs(anonymousCowardName, urlProvider);
+    return new HookArgs(anonymousCowardName, urlProvider, metrics);
   }
 }

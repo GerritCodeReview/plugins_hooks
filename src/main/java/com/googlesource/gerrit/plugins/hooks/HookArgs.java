@@ -30,12 +30,19 @@ import java.util.Map;
 class HookArgs {
   private final String anonymousCowardName;
   private final Provider<String> urlProvider;
+  private final HookMetrics metrics;
   private final List<String> args;
 
-  HookArgs(String anonymousCowardName, Provider<String> urlProvider) {
+  HookArgs(String anonymousCowardName, Provider<String> urlProvider,
+      HookMetrics metrics) {
     this.anonymousCowardName = anonymousCowardName;
     this.urlProvider = urlProvider;
+    this.metrics = metrics;
     this.args = new ArrayList<>();
+  }
+
+  public HookMetrics metrics() {
+    return metrics;
   }
 
   public ImmutableList<String> get() {
