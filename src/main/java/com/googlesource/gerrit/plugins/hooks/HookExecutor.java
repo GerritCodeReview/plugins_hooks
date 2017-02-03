@@ -3,8 +3,6 @@ package com.googlesource.gerrit.plugins.hooks;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.server.config.GerritServerConfig;
-import com.google.gerrit.server.config.SitePaths;
-import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.inject.Inject;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.nio.file.Files;
@@ -28,17 +26,11 @@ public class HookExecutor implements LifecycleListener {
         }
       };
 
-  private final SitePaths sitePaths;
-  private final GitRepositoryManager gitManager;
   private final ExecutorService threadPool;
   private final int timeout;
 
   @Inject
-  HookExecutor(
-      @GerritServerConfig Config config, SitePaths sitePaths, GitRepositoryManager gitManager) {
-    this.sitePaths = sitePaths;
-    this.gitManager = gitManager;
-
+  HookExecutor(@GerritServerConfig Config config) {
     this.timeout = config.getInt("hooks", "syncHookTimeout", 30);
     this.threadPool =
         Executors.newCachedThreadPool(
@@ -56,8 +48,7 @@ public class HookExecutor implements LifecycleListener {
     if (!Files.exists(hook)) {
       return null;
     }
-    HookTask.Sync hookTask =
-        new HookTask.Sync(gitManager, sitePaths.site_path, projectName, hook, args);
+    HookTask.Sync hookTask = new HookTask.Sync(projectName, hook, args);
     FutureTask<HookResult> task = new FutureTask<>(hookTask);
     threadPool.execute(task);
     String message;

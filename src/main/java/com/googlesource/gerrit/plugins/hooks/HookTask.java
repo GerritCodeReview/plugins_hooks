@@ -19,7 +19,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import com.google.common.io.ByteStreams;
 import com.google.gerrit.metrics.Timer1;
 import com.google.gerrit.reviewdb.client.Project;
-import com.google.gerrit.server.git.GitRepositoryManager;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
@@ -36,23 +35,16 @@ import org.slf4j.LoggerFactory;
 class HookTask {
   private static final Logger log = LoggerFactory.getLogger(HookTask.class);
 
-  private final GitRepositoryManager gitManager;
   private final Path sitePath;
   private final String projectName;
   private final Path hook;
-  private final List<String> args;
-  private final HookMetrics metrics;
+  private final HookArgs args;
   private StringWriter output;
   private Process ps;
 
   public static class Async extends HookTask implements Runnable {
-    Async(
-        GitRepositoryManager gitManager,
-        Path sitePath,
-        String projectName,
-        Path hook,
-        HookArgs args) {
-      super(gitManager, sitePath, projectName, hook, args);
+    Async(String projectName, Path hook, HookArgs args) {
+      super(projectName, hook, args);
     }
 
     @Override
@@ -62,13 +54,8 @@ class HookTask {
   }
 
   public static class Sync extends HookTask implements Callable<HookResult> {
-    Sync(
-        GitRepositoryManager gitManager,
-        Path sitePath,
-        String projectName,
-        Path hook,
-        HookArgs args) {
-      super(gitManager, sitePath, projectName, hook, args);
+    Sync(String projectName, Path hook, HookArgs args) {
+      super(projectName, hook, args);
     }
 
     @Override
@@ -77,18 +64,11 @@ class HookTask {
     }
   }
 
-  HookTask(
-      GitRepositoryManager gitManager,
-      Path sitePath,
-      String projectName,
-      Path hook,
-      HookArgs args) {
-    this.gitManager = gitManager;
-    this.sitePath = sitePath;
+  HookTask(String projectName, Path hook, HookArgs args) {
     this.projectName = projectName;
     this.hook = hook;
-    this.args = args.get();
-    this.metrics = args.metrics();
+    this.args = args;
+    this.sitePath = args.sitePaths.site_path;
   }
 
   public void cancel() {
@@ -106,11 +86,11 @@ class HookTask {
   public HookResult runHook() {
     HookResult result = null;
     String name = getName();
-    try (Timer1.Context timer = metrics.start(name)) {
-      metrics.count(name);
-      List<String> argv = new ArrayList<>(1 + args.size());
+    try (Timer1.Context timer = args.metrics.start(name)) {
+      args.metrics.count(name);
+      List<String> argv = new ArrayList<>(1 + args.get().size());
       argv.add(hook.toAbsolutePath().toString());
-      argv.addAll(args);
+      argv.addAll(args.get());
 
       ProcessBuilder pb = new ProcessBuilder(argv);
       pb.redirectErrorStream(true);
@@ -119,7 +99,7 @@ class HookTask {
       env.put("GERRIT_SITE", sitePath.toAbsolutePath().toString());
 
       if (projectName != null) {
-        try (Repository git = gitManager.openRepository(new Project.NameKey(projectName))) {
+        try (Repository git = args.gitManager.openRepository(new Project.NameKey(projectName))) {
           pb.directory(git.getDirectory());
           env.put("GIT_DIR", git.getDirectory().getAbsolutePath());
         }
@@ -132,9 +112,9 @@ class HookTask {
       result = new HookResult(ps.exitValue(), output);
     } catch (InterruptedException iex) {
       // InterruptedException - timeout or cancel
-      metrics.timeout(name);
+      args.metrics.timeout(name);
     } catch (Throwable err) {
-      metrics.error(name);
+      args.metrics.error(name);
       log.error("Error running hook " + hook.toAbsolutePath(), err);
     }
 
