@@ -21,6 +21,7 @@ import com.google.gerrit.server.config.AnonymousCowardName;
 import com.google.gerrit.server.config.CanonicalWebUrl;
 import com.google.gerrit.server.config.GerritServerConfig;
 import com.google.gerrit.server.config.SitePaths;
+import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -39,6 +40,8 @@ public class HookFactory {
   private final HookMetrics metrics;
   private final Provider<String> urlProvider;
   private final Path hooksPath;
+  private final GitRepositoryManager gitManager;
+  private final SitePaths sitePaths;
 
   @Inject
   HookFactory(HookQueue queue,
@@ -47,13 +50,16 @@ public class HookFactory {
       @AnonymousCowardName String anonymousCowardName,
       @CanonicalWebUrl @Nullable Provider<String> urlProvider,
       HookMetrics metrics,
-      SitePaths sitePaths) {
+      SitePaths sitePaths,
+      GitRepositoryManager gitManager) {
     this.queue = queue;
     this.syncHookExecutor = syncHookExecutor;
     this.config = config;
     this.anonymousCowardName = anonymousCowardName;
     this.metrics = metrics;
     this.urlProvider = urlProvider;
+    this.gitManager = gitManager;
+    this.sitePaths = sitePaths;
 
     String v = config.getString("hooks", null, "path");
     if (v != null) {
@@ -78,6 +84,7 @@ public class HookFactory {
   }
 
   public HookArgs createArgs() {
-    return new HookArgs(anonymousCowardName, urlProvider, metrics);
+    return new HookArgs(
+        anonymousCowardName, urlProvider, metrics, gitManager, sitePaths);
   }
 }
