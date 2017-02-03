@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.hooks;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.common.io.ByteStreams;
+import com.google.gerrit.metrics.Timer1;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.git.GitRepositoryManager;
 
@@ -42,6 +43,7 @@ class HookTask {
   private final String projectName;
   private final Path hook;
   private final List<String> args;
+  private final HookMetrics metrics;
   private StringWriter output;
   private Process ps;
 
@@ -79,6 +81,7 @@ class HookTask {
     this.projectName = projectName;
     this.hook = hook;
     this.args = args.get();
+    this.metrics = args.metrics();
   }
 
   public void cancel() {
@@ -95,7 +98,9 @@ class HookTask {
 
   public HookResult runHook() {
     HookResult result = null;
-    try {
+    String name = getName();
+    try (Timer1.Context timer = metrics.start(name)) {
+      metrics.count(name);
       List<String> argv = new ArrayList<>(1 + args.size());
       argv.add(hook.toAbsolutePath().toString());
       argv.addAll(args);
@@ -122,7 +127,9 @@ class HookTask {
       result = new HookResult(ps.exitValue(), output);
     } catch (InterruptedException iex) {
       // InterruptedException - timeout or cancel
+      metrics.timeout(name);
     } catch (Throwable err) {
+      metrics.error(name);
       log.error("Error running hook " + hook.toAbsolutePath(), err);
     }
 
