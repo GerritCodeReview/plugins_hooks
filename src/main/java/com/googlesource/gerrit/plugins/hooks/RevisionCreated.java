@@ -36,7 +36,6 @@ public class RevisionCreated implements RevisionCreatedListener {
 
     ChangeInfo c = event.getChange();
     args.add("--change", c.id);
-    args.add("--is-draft", event.getRevision().draft);
     args.add("--kind", String.valueOf(event.getRevision().kind));
     args.addUrl(c);
     args.add("--change-owner", c.owner);
