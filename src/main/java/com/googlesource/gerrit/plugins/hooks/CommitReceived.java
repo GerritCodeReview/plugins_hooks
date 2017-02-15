@@ -14,9 +14,6 @@
 
 package com.googlesource.gerrit.plugins.hooks;
 
-import static com.google.gerrit.reviewdb.client.RefNames.REFS_CHANGES;
-import static org.eclipse.jgit.lib.Constants.R_HEADS;
-
 import com.google.common.collect.ImmutableList;
 import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.events.CommitReceivedEvent;
@@ -43,22 +40,10 @@ public class CommitReceived implements CommitValidationListener {
       throws CommitValidationException {
     IdentifiedUser user = receiveEvent.user;
     String refname = receiveEvent.refName;
+    String commandRef = receiveEvent.command.getRefName();
     ObjectId old = ObjectId.zeroId();
     if (receiveEvent.commit.getParentCount() > 0) {
       old = receiveEvent.commit.getParent(0);
-    }
-
-    if (receiveEvent.command.getRefName().startsWith(REFS_CHANGES)) {
-      /*
-       * If the ref-update hook tries to distinguish behavior between pushes to
-       * refs/heads/... and refs/for/..., make sure we send it the correct
-       * refname.
-       * Also, if this is targetting refs/for/, make sure we behave the same as
-       * what a push to refs/for/ would behave; in particular, setting oldrev
-       * to 0000000000000000000000000000000000000000.
-       */
-      refname = refname.replace(R_HEADS, "refs/for/refs/heads/");
-      old = ObjectId.zeroId();
     }
 
     HookArgs args = hookFactory.createArgs();
@@ -68,6 +53,7 @@ public class CommitReceived implements CommitValidationListener {
     args.add("--uploader", user.getNameEmail());
     args.add("--oldrev", old.name());
     args.add("--newrev", receiveEvent.commit.name());
+    args.add("--cmdref", commandRef);
 
     HookResult result = hook.run(projectName, args);
     if (result != null) {
