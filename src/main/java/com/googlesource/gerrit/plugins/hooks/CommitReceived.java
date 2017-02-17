@@ -14,9 +14,6 @@
 
 package com.googlesource.gerrit.plugins.hooks;
 
-import static com.google.gerrit.reviewdb.client.RefNames.REFS_CHANGES;
-import static org.eclipse.jgit.lib.Constants.R_HEADS;
-
 import com.google.common.collect.ImmutableList;
 import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.events.CommitReceivedEvent;
@@ -50,16 +47,13 @@ public class CommitReceived implements CommitValidationListener {
       old = receiveEvent.commit.getParent(0);
     }
 
-    if (receiveEvent.command.getRefName().startsWith(REFS_CHANGES)) {
-      /*
-      * If the ref-update hook tries to distinguish behavior between pushes to
-      * refs/heads/... and refs/for/..., make sure we send it the correct
-      * refname.
-      * Also, if this is targetting refs/for/, make sure we behave the same as
-      * what a push to refs/for/ would behave; in particular, setting oldrev
-      * to 0000000000000000000000000000000000000000.
-      */
-      refname = refname.replace(R_HEADS, "refs/for/refs/heads/");
+    if (receiveEvent.command.getRefName().startsWith("refs/for/")) {
+       // In case the ref-update hook tries to distinguish behavior between pushes
+       // to refs/heads/... and refs/for/..., we need to make sure we send it the
+       // correct refname. Also, if this is targetting refs/for/, make sure we behave
+       // the same as a push to refs/for/, by setting the old revision to
+       // 0000000000000000000000000000000000000000.
+      refname = receiveEvent.command.getRefName();
       old = ObjectId.zeroId();
     }
 
