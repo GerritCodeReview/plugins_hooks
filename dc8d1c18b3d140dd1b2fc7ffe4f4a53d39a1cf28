@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6dcb95be_df8334f2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/CommitReceived.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-02-17T06:57:55Z",
+      "side": 0,
+      "message": "Actually I\u0027m not sure that removing this condition is correct.  I was only testing with pushes to refs/for/master but not refs/changes/12345 etc.",
+      "range": {
+        "startLine": 53,
+        "startChar": 8,
+        "endLine": 53,
+        "endChar": 66
+      },
+      "revId": "dc8d1c18b3d140dd1b2fc7ffe4f4a53d39a1cf28",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
