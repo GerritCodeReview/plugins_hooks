@@ -36,7 +36,6 @@ class CommentAdded implements CommentAddedListener {
 
     ChangeInfo c = event.getChange();
     args.add("--change", c.id);
-    args.add("--is-draft", event.getRevision().draft);
     args.addUrl(c);
     args.add("--change-owner", c.owner);
     args.add("--project", c.project);
