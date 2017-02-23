@@ -118,19 +118,14 @@ class HookTask {
       log.error("Error running hook " + hook.toAbsolutePath(), err);
     }
 
-    if (result != null) {
-      int exitValue = result.getExitValue();
-      if (exitValue == 0) {
-        log.debug("hook[" + getName() + "] exitValue:" + exitValue);
-      } else {
-        log.info("hook[" + getName() + "] exitValue:" + exitValue);
-      }
+    if (result != null && log.isDebugEnabled()) {
+      log.debug(String.format("hook[%s] exitValue: %d", name, result.getExitValue()));
 
       BufferedReader br = new BufferedReader(new StringReader(result.getOutput()));
       try {
         String line;
         while ((line = br.readLine()) != null) {
-          log.info("hook[" + getName() + "] output: " + line);
+          log.debug(String.format("hook[%s] output: %s", name, line));
         }
       } catch (IOException iox) {
         log.error("Error writing hook output", iox);
