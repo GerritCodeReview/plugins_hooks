@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9271d32c_608bf791",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookTask.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2017-02-23T08:22:52Z",
+      "side": 1,
+      "message": "Looks like the whole block can be guarded with:\n\n  if (log.isDebugEnabled()) {\n     [...]\n  }",
+      "range": {
+        "startLine": 124,
+        "startChar": 6,
+        "endLine": 132,
+        "endChar": 7
+      },
+      "revId": "a32974634954aa904acc00644bb0beb58b1ea934",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
