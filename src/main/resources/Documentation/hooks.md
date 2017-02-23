@@ -37,23 +37,14 @@ up server threads.  See [`hooks.syncHookTimeout`][1] for configuration details.
 patchset-created
 ----------------
 
-Called whenever a patchset is created (this includes new changes and drafts).
+Called whenever a patchset is created.
 
 ```
-  patchset-created --change <change id> --is-draft <boolean> --kind <change kind> --change-url <change url> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --topic <topic> --uploader <uploader> --uploader-username <username> --commit <sha1> --patchset <patchset id>
+  patchset-created --change <change id> --kind <change kind> --change-url <change url> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --topic <topic> --uploader <uploader> --uploader-username <username> --commit <sha1> --patchset <patchset id>
 ```
 
 The `--kind` parameter represents the kind of change uploaded. See documentation
 of [`patchSet`][2] for details.
-
-draft-published
----------------
-
-Called whenever a draft change is published.
-
-```
-  draft-published --change <change id> --change-url <change url> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --topic <topic> --uploader <uploader> --uploader-username <username> --commit <sha1> --patchset <patchset id>
-```
 
 comment-added
 -------------
