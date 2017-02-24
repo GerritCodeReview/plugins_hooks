@@ -56,6 +56,9 @@ class Module extends AbstractModule {
     DynamicSet.bind(binder(), RevisionCreatedListener.class).to(RevisionCreated.class);
     DynamicSet.bind(binder(), TopicEditedListener.class).to(TopicEdited.class);
 
+    DynamicSet.bind(binder(), CommitValidationListener.class).to(CommitReceive.class);
+
+    // DEPRECATED
     DynamicSet.bind(binder(), CommitValidationListener.class).to(CommitReceived.class);
   }
 }

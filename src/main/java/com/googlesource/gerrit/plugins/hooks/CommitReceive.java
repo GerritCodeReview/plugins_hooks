@@ -12,14 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// ============================================================================
-// This plugin is deprecated and will eventually be removed.
-// ============================================================================
-
 package com.googlesource.gerrit.plugins.hooks;
-
-import static com.google.gerrit.reviewdb.client.RefNames.REFS_CHANGES;
-import static org.eclipse.jgit.lib.Constants.R_HEADS;
 
 import com.google.common.collect.ImmutableList;
 import com.google.gerrit.server.IdentifiedUser;
@@ -31,18 +24,14 @@ import com.google.inject.Inject;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.jgit.lib.ObjectId;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class CommitReceived implements CommitValidationListener {
-  private static final Logger log = LoggerFactory.getLogger(CommitReceived.class);
-
+public class CommitReceive implements CommitValidationListener {
   private final SynchronousHook hook;
   private final HookFactory hookFactory;
 
   @Inject
-  CommitReceived(HookFactory hookFactory) {
-    this.hook = hookFactory.createSync("refUpdateHook", "ref-update");
+  CommitReceive(HookFactory hookFactory) {
+    this.hook = hookFactory.createSync("commitReceiveHook", "commit-receive");
     this.hookFactory = hookFactory;
   }
 
@@ -51,22 +40,10 @@ public class CommitReceived implements CommitValidationListener {
       throws CommitValidationException {
     IdentifiedUser user = receiveEvent.user;
     String refname = receiveEvent.refName;
+    String commandRef = receiveEvent.command.getRefName();
     ObjectId old = ObjectId.zeroId();
     if (receiveEvent.commit.getParentCount() > 0) {
       old = receiveEvent.commit.getParent(0);
-    }
-
-    if (receiveEvent.command.getRefName().startsWith(REFS_CHANGES)) {
-      /*
-       * If the ref-update hook tries to distinguish behavior between pushes to
-       * refs/heads/... and refs/for/..., make sure we send it the correct
-       * refname.
-       * Also, if this is targetting refs/for/, make sure we behave the same as
-       * what a push to refs/for/ would behave; in particular, setting oldrev
-       * to 0000000000000000000000000000000000000000.
-       */
-      refname = refname.replace(R_HEADS, "refs/for/refs/heads/");
-      old = ObjectId.zeroId();
     }
 
     HookArgs args = hookFactory.createArgs();
@@ -76,9 +53,7 @@ public class CommitReceived implements CommitValidationListener {
     args.add("--uploader", user.getNameEmail());
     args.add("--oldrev", old.name());
     args.add("--newrev", receiveEvent.commit.name());
-
-    log.warn("Deprecated hook 'ref-update' used. Please use the " +
-             "'commit-receive' hook instead");
+    args.add("--cmdref", commandRef);
 
     HookResult result = hook.run(projectName, args);
     if (result != null) {

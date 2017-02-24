@@ -1,7 +1,7 @@
 Supported Hooks
 ===============
 
-ref-update
+commit-receive
 ----------
 
 This is called when a push request is received by Gerrit. It allows a push to be
@@ -14,7 +14,7 @@ default timeout on the hook is set to 30 seconds to avoid "runaway" hooks using
 up server threads.  See [`hooks.syncHookTimeout`][1] for configuration details.
 
 ```
-  ref-update --project <project name> --refname <refname> --uploader <uploader> --oldrev <sha1> --newrev <sha1>
+  commit-receive --project <project name> --refname <refname> --uploader <uploader> --oldrev <sha1> --newrev <sha1> --cmdref <refname>
 ```
 
 patchset-created
