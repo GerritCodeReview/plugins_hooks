@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8886da40_1fbd0dab",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/CommitReceived.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1010601
+      },
+      "writtenOn": "2017-02-24T16:51:50Z",
+      "side": 1,
+      "message": "I don\u0027t understand this behavior. Wouldn\u0027t it be useful to the hook to get the old revision even if it\u0027s a review?",
+      "revId": "ff90cc1e5f8e2b0bac44191e750e4f884064be69",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
