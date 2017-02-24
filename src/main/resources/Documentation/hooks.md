@@ -17,6 +17,22 @@ up server threads.  See [`hooks.syncHookTimeout`][1] for configuration details.
   commit-receive --project <project name> --refname <refname> --uploader <uploader> --oldrev <sha1> --newrev <sha1> --cmdref <refname>
 ```
 
+ref-operate
+----------
+
+This is called when a ref-operation happens. It allows a ref change to be
+rejected before it is committed to the Gerrit repository. If the script exits
+with non-zero return code the op will be rejected. Any output from the script
+will be returned to the user, regardless of the return code.
+
+This hook is called synchronously so it is recommended that it not block. A
+default timeout on the hook is set to 30 seconds to avoid "runaway" hooks using
+up server threads.  See [`hooks.syncHookTimeout`][1] for configuration details.
+
+```
+  ref-operate --project <project name> --refname <refname> --uploader <uploader> --oldrev <sha1> --newrev <sha1>
+```
+
 patchset-created
 ----------------
 

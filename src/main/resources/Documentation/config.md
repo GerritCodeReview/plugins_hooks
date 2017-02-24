@@ -10,11 +10,11 @@ run.
 
 Make sure your hook scripts are executable if running on *nix.
 
-With the exception of the `commit-receive` hook, hooks are run in the
-background after the relevant change has taken place so are unable to affect
-the outcome of any given change. Because of the fact the hooks are run in the
-background after the activity, a hook might not be notified about an event if
-the server is shutdown before the hook can be invoked.
+With the exception of the `commit-receive` and `ref-operate` hooks, hooks are
+run in the background after the relevant change has taken place so are unable
+to affect the outcome of any given change. Because of the fact the hooks are
+run in the background after the activity, a hook might not be notified about an
+event if the server is shutdown before the hook can be invoked.
 
 Configuration
 -------------
@@ -58,6 +58,9 @@ hooks.patchsetCreatedHook
 
 hooks.projectCreatedHook
 :	Filename for the project created hook. If not set, defaults to `project-created`.
+
+hooks.refOperateHook
+:	Filename for the ref operate hook. If not set, defaults to `ref-operate`.
 
 hooks.refUpdatedHook
 :	Filename for the ref updated hook. If not set, defaults to `ref-updated`.
