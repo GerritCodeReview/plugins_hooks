@@ -16,6 +16,24 @@
       "revId": "ff90cc1e5f8e2b0bac44191e750e4f884064be69",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "863a6960_470f8554",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/CommitReceived.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-02-25T07:18:41Z",
+      "side": 1,
+      "message": "IIUC in the case of refs/changes/... it should be zero-id, because it\u0027s a new ref name for every patch set.\n\nWhether it should be zero-id in the case of refs/for is debatable, but that\u0027s what the code was intending to do and is what it does now after this fix.",
+      "parentUuid": "8886da40_1fbd0dab",
+      "revId": "ff90cc1e5f8e2b0bac44191e750e4f884064be69",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
