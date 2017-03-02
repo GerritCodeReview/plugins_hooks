@@ -4,6 +4,23 @@ Supported Hooks
 ref-update
 ----------
 
+This is called when a ref update request is received by Gerrit. It allows a
+request to be rejected before it is committed to the Gerrit repository. If
+the script exits with non-zero return code the update will be rejected. Any
+output from the script will be returned to the user, regardless of the return
+code.
+
+This hook is called synchronously so it is recommended that it not block. A
+default timeout on the hook is set to 30 seconds to avoid "runaway" hooks using
+up server threads.  See [`hooks.syncHookTimeout`][1] for configuration details.
+
+```
+  ref-update --project <project name> --refname <refname> --uploader <uploader> --oldrev <sha1> --newrev <sha1>
+```
+
+commit-received
+---------------
+
 This is called when a push request is received by Gerrit. It allows a push to be
 rejected before it is committed to the Gerrit repository. If the script exits
 with non-zero return code the push will be rejected. Any output from the script
@@ -14,7 +31,7 @@ default timeout on the hook is set to 30 seconds to avoid "runaway" hooks using
 up server threads.  See [`hooks.syncHookTimeout`][1] for configuration details.
 
 ```
-  ref-update --project <project name> --refname <refname> --uploader <uploader> --oldrev <sha1> --newrev <sha1>
+  commit-received --project <project name> --refname <refname> --uploader <uploader> --oldrev <sha1> --newrev <sha1> --cmdref <refname>
 ```
 
 patchset-created
