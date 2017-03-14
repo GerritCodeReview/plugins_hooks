@@ -22,6 +22,30 @@
       "revId": "60adf5742f44badc5193b42ffc841bb2d0f6e442",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "348b3289_d8bf4a5f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-03-14T11:48:20Z",
+      "side": 1,
+      "message": "\u003e In the stream-events, the ref-updated event is sent for ref updated caused by a direct push or a merged change.\n\nYou are confusing the ref-updated and ref-update hooks.  Easily done since they are similarly named :)\n\nThe ref-updated stream event is emitted and the ref-updated hook invoked (both asynchronously) after the refs were updated\n\nThe ref-update hook is invoked (synchronously) before the update operation is done, and can prevent it.",
+      "parentUuid": "9aefe947_5b7571b1",
+      "range": {
+        "startLine": 11,
+        "startChar": 62,
+        "endLine": 12,
+        "endChar": 16
+      },
+      "revId": "60adf5742f44badc5193b42ffc841bb2d0f6e442",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
