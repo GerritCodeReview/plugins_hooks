@@ -46,6 +46,30 @@
       "revId": "60adf5742f44badc5193b42ffc841bb2d0f6e442",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c07c717b_0d7b5a99",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2017-03-14T11:53:07Z",
+      "side": 1,
+      "message": "Oups, you are right, I had red-updated hook in mind. Forget my comment.",
+      "parentUuid": "348b3289_d8bf4a5f",
+      "range": {
+        "startLine": 11,
+        "startChar": 62,
+        "endLine": 12,
+        "endChar": 16
+      },
+      "revId": "60adf5742f44badc5193b42ffc841bb2d0f6e442",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
