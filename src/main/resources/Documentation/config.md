@@ -10,11 +10,11 @@ run.
 
 Make sure your hook scripts are executable if running on *nix.
 
-With the exception of the `commit-received` and `ref-update` hooks, hooks are
-run in the background after the relevant change has taken place so are unable
-to affect the outcome of any given change. Because of the fact the hooks are
-run in the background after the activity, a hook might not be notified about
-an event if the server is shutdown before the hook can be invoked.
+With the exception of the `ref-update` hook, hooks are run in the background
+after the relevant change has taken place so are unable to affect the outcome
+of any given change. Because of the fact the hooks are run in the background
+after the activity, a hook might not be notified about an event if
+the server is shutdown before the hook can be invoked.
 
 Configuration
 -------------
@@ -43,9 +43,6 @@ hooks.claSignedHook
 
 hooks.commentAddedHook
 :	Filename for the comment added hook. If not set, defaults to `comment-added`.
-
-hooks.commitReceived
-:	Filename for the commit received hook. If not set, defaults to `commit-received`.
 
 hooks.draftPublishedHook
 :	Filename for the draft published hook. If not set, defaults to `draft-published`.

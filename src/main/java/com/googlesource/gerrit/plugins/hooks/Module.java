@@ -30,7 +30,6 @@ import com.google.gerrit.extensions.events.RevisionCreatedListener;
 import com.google.gerrit.extensions.events.TopicEditedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.server.git.validators.CommitValidationListener;
-import com.google.gerrit.server.git.validators.RefOperationValidationListener;
 import com.google.inject.AbstractModule;
 import com.google.inject.Scopes;
 import com.google.inject.internal.UniqueAnnotations;
@@ -52,7 +51,6 @@ class Module extends AbstractModule {
     DynamicSet.bind(binder(), GitReferenceUpdatedListener.class).to(GitReferenceUpdated.class);
     DynamicSet.bind(binder(), HashtagsEditedListener.class).to(HashtagsEdited.class);
     DynamicSet.bind(binder(), NewProjectCreatedListener.class).to(NewProjectCreated.class);
-    DynamicSet.bind(binder(), RefOperationValidationListener.class).to(RefUpdate.class);
     DynamicSet.bind(binder(), ReviewerAddedListener.class).to(ReviewerAdded.class);
     DynamicSet.bind(binder(), ReviewerDeletedListener.class).to(ReviewerDeleted.class);
     DynamicSet.bind(binder(), RevisionCreatedListener.class).to(RevisionCreated.class);
