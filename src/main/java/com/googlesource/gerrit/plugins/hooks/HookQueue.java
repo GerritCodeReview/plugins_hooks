@@ -48,7 +48,6 @@ class HookQueue implements LifecycleListener {
   @Override
   public void stop() {
     if (queue != null) {
-      queue.unregisterWorkQueue();
       queue.shutdownNow();
       queue = null;
     }
