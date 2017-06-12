@@ -19,11 +19,12 @@ import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.concurrent.ScheduledExecutorService;
 
 class HookQueue implements LifecycleListener {
   private final WorkQueue workQueue;
 
-  private WorkQueue.Executor queue;
+  private ScheduledExecutorService queue;
 
   @Inject
   HookQueue(WorkQueue queue) {
