@@ -26,7 +26,7 @@ class ReviewerDeleted implements ReviewerDeletedListener {
 
   @Inject
   ReviewerDeleted(HookFactory hookFactory) {
-    this.hook = hookFactory.createAsync("reviewerDeleted", "reviewer-deleted");
+    this.hook = hookFactory.createAsync("reviewerDeletedHook", "reviewer-deleted");
     this.hookFactory = hookFactory;
   }
 

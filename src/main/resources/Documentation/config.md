@@ -44,7 +44,7 @@ hooks.claSignedHook
 hooks.commentAddedHook
 :	Filename for the comment added hook. If not set, defaults to `comment-added`.
 
-hooks.commitReceived
+hooks.commitReceivedHook
 :	Filename for the commit received hook. If not set, defaults to `commit-received`.
 
 hooks.draftPublishedHook
@@ -59,7 +59,7 @@ hooks.patchsetCreatedHook
 hooks.projectCreatedHook
 :	Filename for the project created hook. If not set, defaults to `project-created`.
 
-hooks.refUpdate
+hooks.refUpdateHook
 :	Filename for the ref update hook. If not set, defaults to `ref-update`.
 
 hooks.refUpdatedHook

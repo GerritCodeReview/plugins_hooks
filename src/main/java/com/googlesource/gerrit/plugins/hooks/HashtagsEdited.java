@@ -27,7 +27,7 @@ class HashtagsEdited implements HashtagsEditedListener {
 
   @Inject
   HashtagsEdited(HookFactory hookFactory) {
-    this.hook = hookFactory.createAsync("hashtagsChanged", "hashtags-changed");
+    this.hook = hookFactory.createAsync("hashtagsChangedHook", "hashtags-changed");
     this.hookFactory = hookFactory;
   }
 

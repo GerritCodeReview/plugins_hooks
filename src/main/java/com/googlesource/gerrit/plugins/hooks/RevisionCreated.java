@@ -26,7 +26,7 @@ public class RevisionCreated implements RevisionCreatedListener {
 
   @Inject
   RevisionCreated(HookFactory hookFactory) {
-    this.hook = hookFactory.createAsync("patchsetCreated", "patchset-created");
+    this.hook = hookFactory.createAsync("patchsetCreatedHook", "patchset-created");
     this.hookFactory = hookFactory;
   }
 
