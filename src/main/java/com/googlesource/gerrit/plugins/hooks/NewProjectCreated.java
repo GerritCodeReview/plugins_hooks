@@ -25,7 +25,7 @@ class NewProjectCreated implements NewProjectCreatedListener {
 
   @Inject
   NewProjectCreated(HookFactory hookFactory) {
-    this.hook = hookFactory.createAsync("projectCreated", "project-created");
+    this.hook = hookFactory.createAsync("projectCreatedHook", "project-created");
     this.hookFactory = hookFactory;
   }
 

@@ -26,7 +26,7 @@ class TopicEdited implements TopicEditedListener {
 
   @Inject
   TopicEdited(HookFactory hookFactory) {
-    this.hook = hookFactory.createAsync("topicChanged", "topic-changed");
+    this.hook = hookFactory.createAsync("topicChangedHook", "topic-changed");
     this.hookFactory = hookFactory;
   }
 

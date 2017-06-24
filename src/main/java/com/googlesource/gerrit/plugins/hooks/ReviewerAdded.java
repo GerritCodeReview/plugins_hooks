@@ -27,7 +27,7 @@ class ReviewerAdded implements ReviewerAddedListener {
 
   @Inject
   ReviewerAdded(HookFactory hookFactory) {
-    this.hook = hookFactory.createAsync("reviewerAdded", "reviewer-added");
+    this.hook = hookFactory.createAsync("reviewerAddedHook", "reviewer-added");
     this.hookFactory = hookFactory;
   }
 
