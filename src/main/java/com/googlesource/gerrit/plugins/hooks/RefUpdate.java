@@ -41,6 +41,7 @@ public class RefUpdate implements RefOperationValidationListener {
     HookArgs args = hookFactory.createArgs();
     args.add("--project", projectName);
     args.add("--uploader", refEvent.user.getNameEmail());
+    args.add("--uploaderUsername", refEvent.user.getUserName());
     args.add("--oldrev", refEvent.command.getOldId().getName());
     args.add("--newrev", refEvent.command.getNewId().getName());
     args.add("--refname", refEvent.command.getRefName());
