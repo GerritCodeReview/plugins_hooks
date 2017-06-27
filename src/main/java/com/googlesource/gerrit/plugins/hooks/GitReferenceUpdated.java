@@ -38,6 +38,7 @@ class GitReferenceUpdated implements GitReferenceUpdatedListener {
     args.add("--refname", event.getRefName());
     args.add("--project", event.getProjectName());
     args.add("--submitter", event.getUpdater());
+    args.add("--submitterUsername", event.getUpdater().username);
 
     hook.submit(event.getProjectName(), args);
   }
