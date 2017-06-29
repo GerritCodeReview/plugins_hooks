@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "32d5a69b_f08fd633",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/GitReferenceUpdated.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-06-29T02:06:07Z",
+      "side": 1,
+      "message": "What happens if the user does not have a username?",
+      "revId": "51fa82a143e13946dcd3c92bf9dddffe264853bb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
