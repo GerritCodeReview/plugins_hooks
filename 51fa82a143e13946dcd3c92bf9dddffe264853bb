@@ -16,6 +16,24 @@
       "revId": "51fa82a143e13946dcd3c92bf9dddffe264853bb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "768261f3_9c4720df",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/GitReferenceUpdated.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1043947
+      },
+      "writtenOn": "2017-07-11T19:11:38Z",
+      "side": 1,
+      "message": "Sorry for the late reply!\n\n`username` is a instance variable for class `AccountInfo`, so I assume it would be the default if the user somehow hasn\u0027t get the `username` set.",
+      "parentUuid": "32d5a69b_f08fd633",
+      "revId": "51fa82a143e13946dcd3c92bf9dddffe264853bb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
