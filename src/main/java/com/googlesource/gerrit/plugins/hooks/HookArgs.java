@@ -80,6 +80,8 @@ class HookArgs {
     if (account != null) {
       args.add(name);
       args.add(format(account));
+
+      add(name + "-username", account.username);
     }
   }
 
