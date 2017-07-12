@@ -49,6 +49,7 @@ public class CommitReceived implements CommitValidationListener {
     args.add("--project", projectName);
     args.add("--refname", refname);
     args.add("--uploader", receiveEvent.user.getNameEmail());
+    args.add("--uploader-username", receiveEvent.user.getUserName());
     args.add("--oldrev", old.name());
     args.add("--newrev", receiveEvent.commit.name());
     args.add("--cmdref", commandRef);

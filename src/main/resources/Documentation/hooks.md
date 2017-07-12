@@ -15,7 +15,7 @@ default timeout on the hook is set to 30 seconds to avoid "runaway" hooks using
 up server threads.  See [`hooks.syncHookTimeout`][1] for configuration details.
 
 ```
-  ref-update --project <project name> --refname <refname> --uploader <uploader> --oldrev <sha1> --newrev <sha1>
+  ref-update --project <project name> --refname <refname> --uploader <uploader> --uploader-username <username> --oldrev <sha1> --newrev <sha1>
 ```
 
 commit-received
@@ -31,7 +31,7 @@ default timeout on the hook is set to 30 seconds to avoid "runaway" hooks using
 up server threads.  See [`hooks.syncHookTimeout`][1] for configuration details.
 
 ```
-  commit-received --project <project name> --refname <refname> --uploader <uploader> --oldrev <sha1> --newrev <sha1> --cmdref <refname>
+  commit-received --project <project name> --refname <refname> --uploader <uploader> --uploader-username <username> --oldrev <sha1> --newrev <sha1> --cmdref <refname>
 ```
 
 patchset-created
@@ -40,7 +40,7 @@ patchset-created
 Called whenever a patchset is created (this includes new changes and drafts).
 
 ```
-  patchset-created --change <change id> --is-draft <boolean> --kind <change kind> --change-url <change url> --change-owner <change owner> --project <project name> --branch <branch> --topic <topic> --uploader <uploader> --commit <sha1> --patchset <patchset id>
+  patchset-created --change <change id> --is-draft <boolean> --kind <change kind> --change-url <change url> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --topic <topic> --uploader <uploader> --uploader-username <username> --commit <sha1> --patchset <patchset id>
 ```
 
 The `--kind` parameter represents the kind of change uploaded. See documentation
@@ -52,7 +52,7 @@ draft-published
 Called whenever a draft change is published.
 
 ```
-  draft-published --change <change id> --change-url <change url> --change-owner <change owner> --project <project name> --branch <branch> --topic <topic> --uploader <uploader> --commit <sha1> --patchset <patchset id>
+  draft-published --change <change id> --change-url <change url> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --topic <topic> --uploader <uploader> --uploader-username <username> --commit <sha1> --patchset <patchset id>
 ```
 
 comment-added
@@ -61,7 +61,7 @@ comment-added
 Called whenever a comment is added to a change.
 
 ```
-  comment-added --change <change id> --is-draft <boolean> --change-url <change url> --change-owner <change owner> --project <project name> --branch <branch> --topic <topic> --author <comment author> --commit <commit> --comment <comment> [--<approval category id> <score> --<approval category id> <score> --<approval category id>-oldValue <score> ...]
+  comment-added --change <change id> --is-draft <boolean> --change-url <change url> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --topic <topic> --author <comment author> --author-username <username> --commit <commit> --comment <comment> [--<approval category id> <score> --<approval category id> <score> --<approval category id>-oldValue <score> ...]
 ```
 
 change-merged
@@ -70,7 +70,7 @@ change-merged
 Called whenever a change has been merged.
 
 ```
-  change-merged --change <change id> --change-url <change url> --change-owner <change owner> --project <project name> --branch <branch> --topic <topic> --submitter <submitter> --commit <sha1> --newrev <sha1>
+  change-merged --change <change id> --change-url <change url> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --topic <topic> --submitter <submitter> --submitter-username <username> --commit <sha1> --newrev <sha1>
 ```
 
 change-abandoned
@@ -79,7 +79,7 @@ change-abandoned
 Called whenever a change has been abandoned.
 
 ```
-  change-abandoned --change <change id> --change-url <change url> --change-owner <change owner> --project <project name> --branch <branch> --topic <topic> --abandoner <abandoner> --commit <sha1> --reason <reason>
+  change-abandoned --change <change id> --change-url <change url> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --topic <topic> --abandoner <abandoner> --abandoner-username <username> --commit <sha1> --reason <reason>
 ```
 
 change-restored
@@ -88,7 +88,7 @@ change-restored
 Called whenever a change has been restored.
 
 ```
-  change-restored --change <change id> --change-url <change url> --change-owner <change owner> --project <project name> --branch <branch> --topic <topic> --restorer <restorer> --commit <sha1> --reason <reason>
+  change-restored --change <change id> --change-url <change url> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --topic <topic> --restorer <restorer> --restorer-username <username> --commit <sha1> --reason <reason>
 ```
 
 ref-updated
@@ -97,7 +97,7 @@ ref-updated
 Called whenever a ref has been updated.
 
 ```
-  ref-updated --oldrev <old rev> --newrev <new rev> --refname <ref name> --project <project name> --submitter <submitter>
+  ref-updated --oldrev <old rev> --newrev <new rev> --refname <ref name> --project <project name> --submitter <submitter> --submitter-username <username>
 ```
 
 project-created
@@ -115,7 +115,7 @@ reviewer-added
 Called whenever a reviewer is added to a change.
 
 ```
-  reviewer-added --change <change id> --change-url <change url> --change-owner <change owner> --project <project name> --branch <branch> --reviewer <reviewer>
+  reviewer-added --change <change id> --change-url <change url> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --reviewer <reviewer> --reviewer-username <username>
 ```
 
 reviewer-deleted
@@ -124,7 +124,7 @@ reviewer-deleted
 Called whenever a reviewer (with a vote) is removed from a change.
 
 ```
-  reviewer-deleted --change <change id> --change-url <change url> --change-owner <change owner> --project <project name> --branch <branch> --reviewer <reviewer> [--<approval category id> <score> --<approval category id> <score> ...]
+  reviewer-deleted --change <change id> --change-url <change url> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --reviewer <reviewer> [--<approval category id> <score> --<approval category id> <score> ...]
 ```
 
 topic-changed
@@ -133,7 +133,7 @@ topic-changed
 Called whenever a change's topic is changed from the Web UI or via the REST API.
 
 ```
-  topic-changed --change <change id> --change-owner <change owner> --project <project name> --branch <branch> --changer <changer> --old-topic <old topic> --new-topic <new topic>
+  topic-changed --change <change id> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --changer <changer> --changer-username <username> --old-topic <old topic> --new-topic <new topic>
 ```
 
 hashtags-changed
@@ -143,7 +143,7 @@ Called whenever hashtags are added to or removed from a change from the Web UI
 or via the REST API.
 
 ```
-  hashtags-changed --change <change id>  --change-owner <change owner> --project <project name> --branch <branch> --editor <editor> --added <hashtag> --removed <hashtag> --hashtag <hashtag>
+  hashtags-changed --change <change id>  --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --editor <editor> --editor-username <username> --added <hashtag> --removed <hashtag> --hashtag <hashtag>
 ```
 
 The `--added` parameter may be passed multiple times, once for each
