@@ -21,6 +21,8 @@ import com.google.common.collect.ImmutableList;
 import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.common.ApprovalInfo;
 import com.google.gerrit.extensions.common.ChangeInfo;
+import com.google.gerrit.reviewdb.client.Account;
+import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.inject.Provider;
@@ -29,7 +31,7 @@ import java.util.List;
 import java.util.Map;
 
 class HookArgs {
-  final String anonymousCowardName;
+  final IdentifiedUser.GenericFactory identifiedUserFactory;
   final Provider<String> urlProvider;
   final HookMetrics metrics;
   final GitRepositoryManager gitManager;
@@ -38,12 +40,12 @@ class HookArgs {
   private final List<String> args;
 
   HookArgs(
-      String anonymousCowardName,
+      IdentifiedUser.GenericFactory identifiedUserFactory,
       Provider<String> urlProvider,
       HookMetrics metrics,
       GitRepositoryManager gitManager,
       SitePaths sitePaths) {
-    this.anonymousCowardName = anonymousCowardName;
+    this.identifiedUserFactory = identifiedUserFactory;
     this.urlProvider = urlProvider;
     this.metrics = metrics;
     this.gitManager = gitManager;
@@ -111,10 +113,6 @@ class HookArgs {
   }
 
   private String format(AccountInfo account) {
-    StringBuilder who = new StringBuilder(firstNonNull(account.name, anonymousCowardName));
-    if (account.email != null) {
-      who.append(" (").append(account.email).append(")");
-    }
-    return who.toString();
+    return identifiedUserFactory.create(new Account.Id(account._accountId)).getNameEmail();
   }
 }
