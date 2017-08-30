@@ -17,7 +17,7 @@ package com.googlesource.gerrit.plugins.hooks;
 import static com.google.common.base.MoreObjects.firstNonNull;
 
 import com.google.gerrit.common.Nullable;
-import com.google.gerrit.server.config.AnonymousCowardName;
+import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.config.CanonicalWebUrl;
 import com.google.gerrit.server.config.GerritServerConfig;
 import com.google.gerrit.server.config.SitePaths;
@@ -34,7 +34,7 @@ public class HookFactory {
   private final HookQueue queue;
   private final HookExecutor syncHookExecutor;
   private final Config config;
-  private final String anonymousCowardName;
+  private final IdentifiedUser.GenericFactory identifiedUserFactory;
   private final HookMetrics metrics;
   private final Provider<String> urlProvider;
   private final Path hooksPath;
@@ -46,7 +46,7 @@ public class HookFactory {
       HookQueue queue,
       HookExecutor syncHookExecutor,
       @GerritServerConfig Config config,
-      @AnonymousCowardName String anonymousCowardName,
+      IdentifiedUser.GenericFactory identifiedUserFactory,
       @CanonicalWebUrl @Nullable Provider<String> urlProvider,
       HookMetrics metrics,
       SitePaths sitePaths,
@@ -54,7 +54,7 @@ public class HookFactory {
     this.queue = queue;
     this.syncHookExecutor = syncHookExecutor;
     this.config = config;
-    this.anonymousCowardName = anonymousCowardName;
+    this.identifiedUserFactory = identifiedUserFactory;
     this.metrics = metrics;
     this.urlProvider = urlProvider;
     this.gitManager = gitManager;
@@ -82,6 +82,6 @@ public class HookFactory {
   }
 
   public HookArgs createArgs() {
-    return new HookArgs(anonymousCowardName, urlProvider, metrics, gitManager, sitePaths);
+    return new HookArgs(identifiedUserFactory, urlProvider, metrics, gitManager, sitePaths);
   }
 }
