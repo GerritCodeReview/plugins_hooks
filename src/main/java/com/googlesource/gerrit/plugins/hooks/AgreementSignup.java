@@ -21,7 +21,7 @@ import com.google.inject.Singleton;
 
 @Singleton
 class AgreementSignup implements AgreementSignupListener {
-  private final AsynchronousHook hook;
+  private final Hook hook;
   private final HookFactory hookFactory;
 
   @Inject
@@ -40,7 +40,7 @@ class AgreementSignup implements AgreementSignupListener {
       args.add("--user-id", submitter._accountId);
       args.add("--cla-name", event.getAgreementName());
 
-      hook.submit(args);
+      hook.execute(args);
     }
   }
 }

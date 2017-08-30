@@ -21,7 +21,7 @@ import com.google.inject.Singleton;
 
 @Singleton
 class ReviewerDeleted implements ReviewerDeletedListener {
-  private final AsynchronousHook hook;
+  private final Hook hook;
   private final HookFactory hookFactory;
 
   @Inject
@@ -43,6 +43,6 @@ class ReviewerDeleted implements ReviewerDeletedListener {
     args.add("--reviewer", event.getReviewer());
     args.addApprovals(event.getNewApprovals(), event.getOldApprovals());
 
-    hook.submit(c.project, args);
+    hook.execute(c.project, args);
   }
 }

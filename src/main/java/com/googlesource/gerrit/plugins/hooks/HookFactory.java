@@ -57,11 +57,11 @@ public class HookFactory {
     return hooksPath.resolve(firstNonNull(v, defaultName));
   }
 
-  public AsynchronousHook createAsync(String configName, String defaultName) {
+  public Hook createAsync(String configName, String defaultName) {
     return new AsynchronousHook(queue, getHookPath(configName, defaultName));
   }
 
-  public SynchronousHook createSync(String configName, String defaultName) {
+  public Hook createSync(String configName, String defaultName) {
     return new SynchronousHook(syncHookExecutor, getHookPath(configName, defaultName));
   }
 

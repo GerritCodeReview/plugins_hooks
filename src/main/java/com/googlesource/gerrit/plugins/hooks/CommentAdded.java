@@ -21,7 +21,7 @@ import com.google.inject.Singleton;
 
 @Singleton
 class CommentAdded implements CommentAddedListener {
-  private final AsynchronousHook hook;
+  private final Hook hook;
   private final HookFactory hookFactory;
 
   @Inject
@@ -47,6 +47,6 @@ class CommentAdded implements CommentAddedListener {
     args.add("--comment", event.getComment());
     args.addApprovals(event.getApprovals(), event.getOldApprovals());
 
-    hook.submit(c.project, args);
+    hook.execute(c.project, args);
   }
 }

@@ -21,7 +21,7 @@ import com.google.inject.Singleton;
 
 @Singleton
 class ChangeMerged implements ChangeMergedListener {
-  private final AsynchronousHook hook;
+  private final Hook hook;
   private final HookFactory hookFactory;
 
   @Inject
@@ -45,6 +45,6 @@ class ChangeMerged implements ChangeMergedListener {
     args.add("--commit", c.currentRevision);
     args.add("--newrev", event.getNewRevisionId());
 
-    hook.submit(c.project, args);
+    hook.execute(c.project, args);
   }
 }

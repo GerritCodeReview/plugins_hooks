@@ -20,7 +20,7 @@ import com.google.inject.Singleton;
 
 @Singleton
 class NewProjectCreated implements NewProjectCreatedListener {
-  private final AsynchronousHook hook;
+  private final Hook hook;
   private final HookFactory hookFactory;
 
   @Inject
@@ -34,6 +34,6 @@ class NewProjectCreated implements NewProjectCreatedListener {
     HookArgs args = hookFactory.createArgs();
     args.add("--project", event.getProjectName());
     args.add("--head", event.getHeadName());
-    hook.submit(event.getProjectName(), args);
+    hook.execute(event.getProjectName(), args);
   }
 }

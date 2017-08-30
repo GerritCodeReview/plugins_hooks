@@ -20,7 +20,7 @@ import com.google.inject.Singleton;
 
 @Singleton
 class GitReferenceUpdated implements GitReferenceUpdatedListener {
-  private final AsynchronousHook hook;
+  private final Hook hook;
   private final HookFactory hookFactory;
 
   @Inject
@@ -39,6 +39,6 @@ class GitReferenceUpdated implements GitReferenceUpdatedListener {
     args.add("--project", event.getProjectName());
     args.add("--submitter", event.getUpdater());
 
-    hook.submit(event.getProjectName(), args);
+    hook.execute(event.getProjectName(), args);
   }
 }

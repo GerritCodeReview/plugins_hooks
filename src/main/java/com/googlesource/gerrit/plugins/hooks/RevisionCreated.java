@@ -21,7 +21,7 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class RevisionCreated implements RevisionCreatedListener {
-  private final AsynchronousHook hook;
+  private final Hook hook;
   private final HookFactory hookFactory;
 
   @Inject
@@ -47,6 +47,6 @@ public class RevisionCreated implements RevisionCreatedListener {
     args.add("--commit", event.getRevision().commit.commit);
     args.add("--patchset", event.getRevision()._number);
 
-    hook.submit(c.project, args);
+    hook.execute(c.project, args);
   }
 }

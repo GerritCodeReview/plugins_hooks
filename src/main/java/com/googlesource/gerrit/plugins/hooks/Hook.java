@@ -14,12 +14,17 @@
 
 package com.googlesource.gerrit.plugins.hooks;
 
+import com.google.gerrit.common.Nullable;
 import java.nio.file.Path;
 
-public class Hook {
+abstract class Hook {
   protected final Path path;
 
   Hook(Path path) {
     this.path = path;
   }
+
+  abstract @Nullable HookResult execute(HookArgs args);
+
+  abstract @Nullable HookResult execute(String projectName, HookArgs args);
 }

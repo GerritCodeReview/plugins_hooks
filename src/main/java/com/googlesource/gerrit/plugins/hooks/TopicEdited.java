@@ -21,7 +21,7 @@ import com.google.inject.Singleton;
 
 @Singleton
 class TopicEdited implements TopicEditedListener {
-  private final AsynchronousHook hook;
+  private final Hook hook;
   private final HookFactory hookFactory;
 
   @Inject
@@ -43,6 +43,6 @@ class TopicEdited implements TopicEditedListener {
     args.add("--old-topic", event.getOldTopic());
     args.add("--new-topic", event.getChange().topic);
 
-    hook.submit(c.project, args);
+    hook.execute(c.project, args);
   }
 }

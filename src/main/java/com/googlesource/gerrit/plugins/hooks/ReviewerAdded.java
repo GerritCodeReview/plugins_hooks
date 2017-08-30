@@ -22,7 +22,7 @@ import com.google.inject.Singleton;
 
 @Singleton
 class ReviewerAdded implements ReviewerAddedListener {
-  private final AsynchronousHook hook;
+  private final Hook hook;
   private final HookFactory hookFactory;
 
   @Inject
@@ -44,7 +44,7 @@ class ReviewerAdded implements ReviewerAddedListener {
       args.add("--branch", c.branch);
       args.add("--reviewer", reviewer);
 
-      hook.submit(c.project, args);
+      hook.execute(c.project, args);
     }
   }
 }

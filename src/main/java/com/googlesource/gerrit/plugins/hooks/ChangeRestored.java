@@ -21,7 +21,7 @@ import com.google.inject.Singleton;
 
 @Singleton
 class ChangeRestored implements ChangeRestoredListener {
-  private final AsynchronousHook hook;
+  private final Hook hook;
   private final HookFactory hookFactory;
 
   @Inject
@@ -45,6 +45,6 @@ class ChangeRestored implements ChangeRestoredListener {
     args.add("--commit", c.currentRevision);
     args.add("--reason", event.getReason());
 
-    hook.submit(c.project, args);
+    hook.execute(c.project, args);
   }
 }

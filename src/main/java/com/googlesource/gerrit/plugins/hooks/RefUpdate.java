@@ -24,7 +24,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class RefUpdate implements RefOperationValidationListener {
-  private final SynchronousHook hook;
+  private final Hook hook;
   private final HookFactory hookFactory;
 
   @Inject
@@ -46,7 +46,7 @@ public class RefUpdate implements RefOperationValidationListener {
     args.add("--newrev", refEvent.command.getNewId().getName());
     args.add("--refname", refEvent.command.getRefName());
 
-    HookResult result = hook.run(projectName, args);
+    HookResult result = hook.execute(projectName, args);
     if (result != null) {
       String output = result.toString();
       if (result.getExitValue() != 0) {

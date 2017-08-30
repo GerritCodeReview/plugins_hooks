@@ -24,11 +24,13 @@ class SynchronousHook extends Hook {
     this.executor = executor;
   }
 
-  HookResult run(HookArgs args) {
+  @Override
+  HookResult execute(HookArgs args) {
     return executor.submit(path, args);
   }
 
-  HookResult run(String projectName, HookArgs args) {
+  @Override
+  HookResult execute(String projectName, HookArgs args) {
     return executor.submit(projectName, path, args);
   }
 }

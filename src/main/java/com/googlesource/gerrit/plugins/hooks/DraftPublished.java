@@ -21,7 +21,7 @@ import com.google.inject.Singleton;
 
 @Singleton
 class DraftPublished implements DraftPublishedListener {
-  private final AsynchronousHook hook;
+  private final Hook hook;
   private final HookFactory hookFactory;
 
   @Inject
@@ -45,6 +45,6 @@ class DraftPublished implements DraftPublishedListener {
     args.add("--commit", event.getRevision().commit.commit);
     args.add("--patchset", event.getRevision()._number);
 
-    hook.submit(c.project, args);
+    hook.execute(c.project, args);
   }
 }

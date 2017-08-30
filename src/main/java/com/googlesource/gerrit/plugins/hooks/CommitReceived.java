@@ -25,7 +25,7 @@ import java.util.List;
 import org.eclipse.jgit.lib.ObjectId;
 
 public class CommitReceived implements CommitValidationListener {
-  private final SynchronousHook hook;
+  private final Hook hook;
   private final HookFactory hookFactory;
 
   @Inject
@@ -54,7 +54,7 @@ public class CommitReceived implements CommitValidationListener {
     args.add("--newrev", receiveEvent.commit.name());
     args.add("--cmdref", commandRef);
 
-    HookResult result = hook.run(projectName, args);
+    HookResult result = hook.execute(projectName, args);
     if (result != null) {
       String output = result.toString();
       if (result.getExitValue() != 0) {

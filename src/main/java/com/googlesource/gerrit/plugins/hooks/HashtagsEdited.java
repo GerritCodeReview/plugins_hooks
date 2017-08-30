@@ -22,7 +22,7 @@ import java.util.Collection;
 
 @Singleton
 class HashtagsEdited implements HashtagsEditedListener {
-  private final AsynchronousHook hook;
+  private final Hook hook;
   private final HookFactory hookFactory;
 
   @Inject
@@ -45,7 +45,7 @@ class HashtagsEdited implements HashtagsEditedListener {
     add(args, "--added", event.getAddedHashtags());
     add(args, "--removed", event.getRemovedHashtags());
 
-    hook.submit(c.project, args);
+    hook.execute(c.project, args);
   }
 
   private void add(HookArgs args, String name, Collection<String> hashtags) {
