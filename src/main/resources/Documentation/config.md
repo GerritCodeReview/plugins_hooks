@@ -22,6 +22,13 @@ Configuration
 It is possible to change where this plugin looks for hooks, and what
 filenames it looks for by adding a `[hooks]` section to `gerrit.config`.
 
+These configuration values are evaluated at plugin load. If the values are
+changed, the plugin must be reloaded for them to take effect.
+
+A hook may be temporarily disabled by either removing it or renaming it. Its
+behavior may be changed by replacing its content. Such changes will take
+immediate effect without having to reload the plugin.
+
 hooks.path
 :	Location of hook executables. If not set, defaults to `$site_path/hooks`
 
