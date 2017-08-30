@@ -25,12 +25,17 @@ import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.GitRepositoryManager;
+import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 class HookArgs {
+  interface Factory {
+    HookArgs create();
+  }
+
   final IdentifiedUser.GenericFactory identifiedUserFactory;
   final Provider<String> urlProvider;
   final HookMetrics metrics;
@@ -39,6 +44,7 @@ class HookArgs {
 
   private final List<String> args;
 
+  @Inject
   HookArgs(
       IdentifiedUser.GenericFactory identifiedUserFactory,
       Provider<String> urlProvider,

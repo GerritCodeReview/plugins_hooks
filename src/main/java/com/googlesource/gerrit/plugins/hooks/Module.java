@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.hooks;
 
+import com.google.gerrit.extensions.config.FactoryModule;
 import com.google.gerrit.extensions.events.AgreementSignupListener;
 import com.google.gerrit.extensions.events.ChangeAbandonedListener;
 import com.google.gerrit.extensions.events.ChangeMergedListener;
@@ -31,17 +32,18 @@ import com.google.gerrit.extensions.events.TopicEditedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.server.git.validators.CommitValidationListener;
 import com.google.gerrit.server.git.validators.RefOperationValidationListener;
-import com.google.inject.AbstractModule;
 import com.google.inject.Scopes;
 import com.google.inject.internal.UniqueAnnotations;
 
-class Module extends AbstractModule {
+class Module extends FactoryModule {
   @Override
   protected void configure() {
     bind(HookQueue.class).in(Scopes.SINGLETON);
     bind(LifecycleListener.class).annotatedWith(UniqueAnnotations.create()).to(HookQueue.class);
     bind(HookExecutor.class).in(Scopes.SINGLETON);
     bind(LifecycleListener.class).annotatedWith(UniqueAnnotations.create()).to(HookExecutor.class);
+
+    factory(HookArgs.Factory.class);
 
     DynamicSet.bind(binder(), AgreementSignupListener.class).to(AgreementSignup.class);
     DynamicSet.bind(binder(), ChangeAbandonedListener.class).to(ChangeAbandoned.class);

@@ -16,14 +16,9 @@ package com.googlesource.gerrit.plugins.hooks;
 
 import static com.google.common.base.MoreObjects.firstNonNull;
 
-import com.google.gerrit.common.Nullable;
-import com.google.gerrit.server.IdentifiedUser;
-import com.google.gerrit.server.config.CanonicalWebUrl;
 import com.google.gerrit.server.config.GerritServerConfig;
 import com.google.gerrit.server.config.SitePaths;
-import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -34,31 +29,20 @@ public class HookFactory {
   private final HookQueue queue;
   private final HookExecutor syncHookExecutor;
   private final Config config;
-  private final IdentifiedUser.GenericFactory identifiedUserFactory;
-  private final HookMetrics metrics;
-  private final Provider<String> urlProvider;
   private final Path hooksPath;
-  private final GitRepositoryManager gitManager;
-  private final SitePaths sitePaths;
+  private final HookArgs.Factory argsFactory;
 
   @Inject
   HookFactory(
       HookQueue queue,
       HookExecutor syncHookExecutor,
       @GerritServerConfig Config config,
-      IdentifiedUser.GenericFactory identifiedUserFactory,
-      @CanonicalWebUrl @Nullable Provider<String> urlProvider,
-      HookMetrics metrics,
       SitePaths sitePaths,
-      GitRepositoryManager gitManager) {
+      HookArgs.Factory argsFactory) {
     this.queue = queue;
     this.syncHookExecutor = syncHookExecutor;
     this.config = config;
-    this.identifiedUserFactory = identifiedUserFactory;
-    this.metrics = metrics;
-    this.urlProvider = urlProvider;
-    this.gitManager = gitManager;
-    this.sitePaths = sitePaths;
+    this.argsFactory = argsFactory;
 
     String v = config.getString("hooks", null, "path");
     if (v != null) {
@@ -82,6 +66,6 @@ public class HookFactory {
   }
 
   public HookArgs createArgs() {
-    return new HookArgs(identifiedUserFactory, urlProvider, metrics, gitManager, sitePaths);
+    return argsFactory.create();
   }
 }
