@@ -45,7 +45,7 @@ public class CommitReceived implements CommitValidationListener {
     }
 
     HookArgs args = hookFactory.createArgs();
-    String projectName = receiveEvent.project.getName();
+    String projectName = receiveEvent.project.get();
     args.add("--project", projectName);
     args.add("--refname", refname);
     args.add("--uploader", receiveEvent.user.getNameEmail());
