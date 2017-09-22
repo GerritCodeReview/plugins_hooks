@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.hooks;
 
 import com.google.common.collect.ImmutableList;
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.server.events.RefReceivedEvent;
 import com.google.gerrit.server.git.validators.RefOperationValidationListener;
 import com.google.gerrit.server.git.validators.ValidationMessage;
@@ -22,6 +23,7 @@ import com.google.gerrit.server.validators.ValidationException;
 import com.google.inject.Inject;
 import java.util.Collections;
 import java.util.List;
+import org.eclipse.jgit.lib.ObjectId;
 
 public class RefUpdate implements RefOperationValidationListener {
   private final Hook hook;
@@ -33,6 +35,10 @@ public class RefUpdate implements RefOperationValidationListener {
     this.hookFactory = hookFactory;
   }
 
+  private ObjectId getObjectId(@Nullable ObjectId object) {
+    return object == null ? ObjectId.zeroId() : object;
+  }
+
   @Override
   public List<ValidationMessage> onRefOperation(RefReceivedEvent refEvent)
       throws ValidationException {
@@ -42,8 +48,8 @@ public class RefUpdate implements RefOperationValidationListener {
     args.add("--project", projectName);
     args.add("--uploader", refEvent.user.getNameEmail());
     args.add("--uploader-username", refEvent.user.getUserName());
-    args.add("--oldrev", refEvent.command.getOldId().getName());
-    args.add("--newrev", refEvent.command.getNewId().getName());
+    args.add("--oldrev", getObjectId(refEvent.command.getOldId()).getName());
+    args.add("--newrev", getObjectId(refEvent.command.getNewId()).getName());
     args.add("--refname", refEvent.command.getRefName());
 
     HookResult result = hook.execute(projectName, args);
