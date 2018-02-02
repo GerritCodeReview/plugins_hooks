@@ -19,11 +19,11 @@ an event if the server is shutdown before the hook can be invoked.
 Configuration
 -------------
 
-It is possible to change where this plugin looks for hooks, and what
-filenames it looks for by adding a `[hooks]` section to `gerrit.config`.
+The plugin is configured in a `[hooks]` section in the `gerrit.config` file
+in the site's `etc` folder.
 
-These configuration values are evaluated at plugin load. If the values are
-changed, the plugin must be reloaded for them to take effect.
+The configuration values are evaluated when the plugin is loaded. If the values
+are changed, the plugin must be reloaded for them to take effect.
 
 A hook may be temporarily disabled by either removing it or renaming it. Its
 behavior may be changed by replacing its content. Such changes will take
@@ -87,7 +87,7 @@ Missing Change URLs
 
 If [gerrit.canonicalWebUrl][1] is not set in `gerrit.config` the
 `--change-url` flag may not be passed to all hooks.  Hooks started out
-of an SSH context (for example the patchset-created hook) don't know
+of an SSH context (for example the `patchset-created` hook) don't know
 the server's web URL, unless this variable is configured.
 
 
@@ -102,8 +102,8 @@ This can be done by editing the `log4j.properties` file (requires a
 Gerrit restart) or by setting the log level at runtime with the ssh
 command:
 
----
+```
   ssh -p 29418 user@gerrit gerrit logging set-level DEBUG com.googlesource.gerrit.plugins.hooks.HookTask
----
+```
 
 [1]: ../../../Documentation/config-gerrit.html#gerrit.canonicalWebUrl
