@@ -19,11 +19,11 @@ an event if the server is shutdown before the hook can be invoked.
 Configuration
 -------------
 
-It is possible to change where this plugin looks for hooks, and what
-filenames it looks for by adding a `[hooks]` section to `gerrit.config`.
+The plugin is configured in a `[hooks]` section in the `gerrit.config` file
+in the site's `etc` folder.
 
-These configuration values are evaluated at plugin load. If the values are
-changed, the plugin must be reloaded for them to take effect.
+The configuration values are evaluated when the plugin is loaded. If the values
+are changed, the plugin must be reloaded for them to take effect.
 
 A hook may be temporarily disabled by either removing it or renaming it. Its
 behavior may be changed by replacing its content. Such changes will take
