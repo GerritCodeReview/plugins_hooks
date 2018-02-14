@@ -40,11 +40,11 @@ class ReviewerAdded implements ReviewerAddedListener {
       args.add("--change", c.id);
       args.addUrl(c);
       args.add("--change-owner", c.owner);
-      args.add("--project", c.project);
+      args.add("--project", c.repository);
       args.add("--branch", c.branch);
       args.add("--reviewer", reviewer);
 
-      hook.execute(c.project, args);
+      hook.execute(c.repository, args);
     }
   }
 }

@@ -38,13 +38,13 @@ class ChangeAbandoned implements ChangeAbandonedListener {
     args.add("--change", c.id);
     args.addUrl(c);
     args.add("--change-owner", c.owner);
-    args.add("--project", c.project);
+    args.add("--project", c.repository);
     args.add("--branch", c.branch);
     args.add("--topic", c.topic);
     args.add("--abandoner", event.getWho());
     args.add("--commit", c.currentRevision);
     args.add("--reason", event.getReason());
 
-    hook.execute(c.project, args);
+    hook.execute(c.repository, args);
   }
 }

@@ -38,7 +38,7 @@ class CommentAdded implements CommentAddedListener {
     args.add("--change", c.id);
     args.addUrl(c);
     args.add("--change-owner", c.owner);
-    args.add("--project", c.project);
+    args.add("--project", c.repository);
     args.add("--branch", c.branch);
     args.add("--topic", c.topic);
     args.add("--author", event.getWho());
@@ -46,6 +46,6 @@ class CommentAdded implements CommentAddedListener {
     args.add("--comment", event.getComment());
     args.addApprovals(event.getApprovals(), event.getOldApprovals());
 
-    hook.execute(c.project, args);
+    hook.execute(c.repository, args);
   }
 }

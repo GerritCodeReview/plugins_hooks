@@ -38,11 +38,11 @@ class ReviewerDeleted implements ReviewerDeletedListener {
     args.add("--change", c.id);
     args.addUrl(c);
     args.add("--change-owner", c.owner);
-    args.add("--project", c.project);
+    args.add("--project", c.repository);
     args.add("--branch", c.branch);
     args.add("--reviewer", event.getReviewer());
     args.addApprovals(event.getNewApprovals(), event.getOldApprovals());
 
-    hook.execute(c.project, args);
+    hook.execute(c.repository, args);
   }
 }

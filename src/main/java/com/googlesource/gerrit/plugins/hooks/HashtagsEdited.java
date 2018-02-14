@@ -38,14 +38,14 @@ class HashtagsEdited implements HashtagsEditedListener {
     ChangeInfo c = event.getChange();
     args.add("--change", c.id);
     args.add("--change-owner", c.owner);
-    args.add("--project", c.project);
+    args.add("--project", c.repository);
     args.add("--branch", c.branch);
     args.add("--editor", event.getWho());
     add(args, "--hashtag", event.getHashtags());
     add(args, "--added", event.getAddedHashtags());
     add(args, "--removed", event.getRemovedHashtags());
 
-    hook.execute(c.project, args);
+    hook.execute(c.repository, args);
   }
 
   private void add(HookArgs args, String name, Collection<String> hashtags) {
