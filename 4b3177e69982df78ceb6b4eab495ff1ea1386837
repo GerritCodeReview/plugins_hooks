@@ -22,6 +22,30 @@
       "revId": "4b3177e69982df78ceb6b4eab495ff1ea1386837",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6cdd05c_0fdc6f7c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/ChangeAbandoned.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1026112
+      },
+      "writtenOn": "2018-02-15T07:36:43Z",
+      "side": 1,
+      "message": "Agreed. I\u0027ll, to this in a follow up change.\n\nFor the next week or so, the code will be slightly inconsistent but always completely functional. This enables me to make reasonably small changes that are not too hard to rebase.",
+      "parentUuid": "e955fa5e_5c43625e",
+      "range": {
+        "startLine": 41,
+        "startChar": 14,
+        "endLine": 41,
+        "endChar": 23
+      },
+      "revId": "4b3177e69982df78ceb6b4eab495ff1ea1386837",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
