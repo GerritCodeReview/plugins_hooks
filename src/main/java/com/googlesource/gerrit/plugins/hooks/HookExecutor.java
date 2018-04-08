@@ -1,8 +1,8 @@
 package com.googlesource.gerrit.plugins.hooks;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import com.google.gerrit.config.GerritServerConfig;
 import com.google.gerrit.extensions.events.LifecycleListener;
-import com.google.gerrit.server.config.GerritServerConfig;
 import com.google.inject.Inject;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.nio.file.Files;

@@ -15,9 +15,8 @@
 package com.googlesource.gerrit.plugins.hooks;
 
 import static com.google.common.base.MoreObjects.firstNonNull;
-
-import com.google.gerrit.server.config.GerritServerConfig;
-import com.google.gerrit.server.config.SitePaths;
+import com.google.gerrit.config.GerritServerConfig;
+import com.google.gerrit.config.SitePaths;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.nio.file.Path;
