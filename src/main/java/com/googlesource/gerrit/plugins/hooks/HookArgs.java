@@ -121,6 +121,12 @@ class HookArgs {
   }
 
   private String format(AccountInfo account) {
-    return identifiedUserFactory.create(new Account.Id(account._accountId)).getNameEmail();
+    return String.format(
+        "\"%s\"", identifiedUserFactory.create(new Account.Id(account._accountId)).getNameEmail());
+  }
+
+  @Override
+  public String toString() {
+    return String.format("HookArgs: %s", args.toString());
   }
 }
