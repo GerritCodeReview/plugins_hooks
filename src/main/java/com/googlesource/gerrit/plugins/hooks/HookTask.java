@@ -113,6 +113,7 @@ class HookTask {
     } catch (InterruptedException iex) {
       // InterruptedException - timeout or cancel
       args.metrics.timeout(name);
+      log.warn("hook[{}] timed out: {}", name, iex.getMessage());
     } catch (Throwable err) {
       args.metrics.error(name);
       log.error("Error running hook {}", hook.toAbsolutePath(), err);
