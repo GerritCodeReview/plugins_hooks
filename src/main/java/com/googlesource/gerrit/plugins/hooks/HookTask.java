@@ -113,22 +113,28 @@ class HookTask {
     } catch (InterruptedException iex) {
       // InterruptedException - timeout or cancel
       args.metrics.timeout(name);
+      log.warn("hook[{}] timed out: {}", name, iex.getMessage());
     } catch (Throwable err) {
       args.metrics.error(name);
-      log.error("Error running hook " + hook.toAbsolutePath(), err);
+      log.error("Error running hook {}", hook.toAbsolutePath(), err);
     }
 
-    if (result != null && log.isDebugEnabled()) {
-      log.debug(String.format("hook[%s] exitValue: %d", name, result.getExitValue()));
+    if (result != null) {
+      int exitValue = result.getExitValue();
+      if (exitValue != 0) {
+        log.warn("hook[{}] exited with error status: {}", name, exitValue);
+      }
 
-      BufferedReader br = new BufferedReader(new StringReader(result.getOutput()));
-      try {
-        String line;
-        while ((line = br.readLine()) != null) {
-          log.debug(String.format("hook[%s] output: %s", name, line));
+      if (log.isDebugEnabled()) {
+        BufferedReader br = new BufferedReader(new StringReader(result.getOutput()));
+        try {
+          String line;
+          while ((line = br.readLine()) != null) {
+            log.debug("hook[{}] output: {}", name, line);
+          }
+        } catch (IOException iox) {
+          log.error("Error writing hook [{}] output", name, iox);
         }
-      } catch (IOException iox) {
-        log.error("Error writing hook output", iox);
       }
     }
 
