@@ -22,7 +22,7 @@ public class HookExecutor implements LifecycleListener {
       new UncaughtExceptionHandler() {
         @Override
         public void uncaughtException(Thread t, Throwable e) {
-          log.error("HookExecutor thread " + t.getName() + " threw exception", e);
+          log.error("HookExecutor thread {} threw exception", t.getName(), e);
         }
       };
 
