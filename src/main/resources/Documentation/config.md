@@ -94,13 +94,17 @@ the server's web URL, unless this variable is configured.
 Debugging Hooks
 ---------------
 
-After execution of a hook, its exit code and any output are logged at
-debug level. To make this visible in Gerrit's log file, debug logging
-must be enabled for `com.googlesource.gerrit.plugins.hooks.HookTask`.
+If execution of a hook failed (i.e. it returned a non-zero exit code) the
+exit code is logged at error level. Likewise, if a hook timed out or was
+cancelled, this is logged at error level.
 
-This can be done by editing the `log4j.properties` file (requires a
-Gerrit restart) or by setting the log level at runtime with the ssh
-command:
+Any output (including both stdout and stderr) from the hook is logged at
+debug level.
+
+To make debug logs visible in Gerrit's log file, debug logging must be
+enabled for `com.googlesource.gerrit.plugins.hooks.HookTask`. This can be
+done by editing the `log4j.properties` file (requires a Gerrit restart) or
+by setting the log level at runtime with the ssh command:
 
 ```
   ssh -p 29418 user@gerrit gerrit logging set-level DEBUG com.googlesource.gerrit.plugins.hooks.HookTask
