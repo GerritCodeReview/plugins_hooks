@@ -129,7 +129,7 @@ class HookTask {
           log.debug("hook[{}] output: {}", name, line);
         }
       } catch (IOException iox) {
-        log.error("Error writing hook output", iox);
+        log.error("Error writing hook [{}] output", name, iox);
       }
     }
 
