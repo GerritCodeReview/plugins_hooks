@@ -102,12 +102,12 @@ Any output (including both stdout and stderr) from the hook is logged at
 debug level.
 
 To make debug logs visible in Gerrit's log file, debug logging must be
-enabled for `com.googlesource.gerrit.plugins.hooks.HookTask`. This can be
+enabled for the `com.googlesource.gerrit.plugins.hooks` package. This can be
 done by editing the `log4j.properties` file (requires a Gerrit restart) or
 by setting the log level at runtime with the ssh command:
 
 ```
-  ssh -p 29418 user@gerrit gerrit logging set-level DEBUG com.googlesource.gerrit.plugins.hooks.HookTask
+  ssh -p 29418 user@gerrit gerrit logging set-level DEBUG com.googlesource.gerrit.plugins.hooks
 ```
 
 [1]: ../../../Documentation/config-gerrit.html#gerrit.canonicalWebUrl
