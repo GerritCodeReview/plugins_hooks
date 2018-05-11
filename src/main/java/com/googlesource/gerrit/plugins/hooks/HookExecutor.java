@@ -46,6 +46,7 @@ public class HookExecutor implements LifecycleListener {
 
   HookResult submit(String projectName, Path hook, HookArgs args) {
     if (!Files.exists(hook)) {
+      log.debug("Hook file not found: {}", hook);
       return null;
     }
     HookTask.Sync hookTask = new HookTask.Sync(projectName, hook, args);
@@ -56,10 +57,10 @@ public class HookExecutor implements LifecycleListener {
     try {
       return task.get(timeout, TimeUnit.SECONDS);
     } catch (TimeoutException e) {
-      message = "Synchronous hook timed out " + hook.toAbsolutePath();
+      message = "Synchronous hook timed out " + hook;
       log.error(message);
     } catch (Exception e) {
-      message = "Error running hook " + hook.toAbsolutePath();
+      message = "Error running hook " + hook;
       log.error(message, e);
     }
     task.cancel(true);

@@ -20,8 +20,12 @@ import com.google.inject.Inject;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.concurrent.ScheduledExecutorService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 class HookQueue implements LifecycleListener {
+  private static final Logger log = LoggerFactory.getLogger(HookQueue.class);
+
   private final WorkQueue workQueue;
 
   private ScheduledExecutorService queue;
@@ -36,9 +40,11 @@ class HookQueue implements LifecycleListener {
   }
 
   void submit(String projectName, Path hook, HookArgs args) {
-    if (Files.exists(hook)) {
-      queue.submit(new HookTask.Async(projectName, hook, args));
+    if (!Files.exists(hook)) {
+      log.debug("Hook file not found: {}", hook.toAbsolutePath());
+      return;
     }
+    queue.submit(new HookTask.Async(projectName, hook, args));
   }
 
   @Override

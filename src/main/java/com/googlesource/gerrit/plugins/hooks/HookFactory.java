@@ -23,9 +23,13 @@ import com.google.inject.Singleton;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.eclipse.jgit.lib.Config;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Singleton
 public class HookFactory {
+  private static final Logger log = LoggerFactory.getLogger(HookFactory.class);
+
   private final HookQueue queue;
   private final HookExecutor syncHookExecutor;
   private final Config config;
@@ -50,11 +54,14 @@ public class HookFactory {
     } else {
       this.hooksPath = sitePaths.hooks_dir;
     }
+    log.info("hooks.path: {}", this.hooksPath);
   }
 
   private Path getHookPath(String configName, String defaultName) {
     String v = config.getString("hooks", null, configName);
-    return hooksPath.resolve(firstNonNull(v, defaultName));
+    Path hookPath = hooksPath.resolve(firstNonNull(v, defaultName));
+    log.info("hooks.{} resolved to {}", configName, hookPath);
+    return hookPath;
   }
 
   public Hook createAsync(String configName, String defaultName) {
