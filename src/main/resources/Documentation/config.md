@@ -78,6 +78,9 @@ hooks.reviewerAddedHook
 hooks.reviewerDeletedHook
 :	Filename for the reviewer update hook. If not set, defaults to `reviewer-deleted`.
 
+hooks.submitHook
+:	Filename for the submit hook. If not set, defaults to `submit`.
+
 hooks.topicChangedHook
 :	Filename for the topic changed hook. If not set, defaults to `topic-changed`.
 
