@@ -11,11 +11,12 @@ up server threads.  The timeout can be changed by setting [`hooks.syncHookTimeou
 
 ### ref-update
 
-This is called when a ref update request is received by Gerrit. It allows a
-request to be rejected before it is committed to the Gerrit repository. If
-the script exits with non-zero return code the update will be rejected. Any
-output from the script will be returned to the user, regardless of the return
-code.
+This is called when a ref update request (direct push, non-fastforward update, or
+ref deletion) is received by Gerrit. It allows a request to be rejected before it
+is committed to the Gerrit repository.
+
+If the hook exits with non-zero return code the update will be rejected. Any output
+from the hook will be returned to the user, regardless of the return code.
 
 ```
   ref-update --project <project name> --refname <refname> --uploader <uploader> --oldrev <sha1> --newrev <sha1>
@@ -23,10 +24,11 @@ code.
 
 ### commit-received
 
-This is called when a push request is received by Gerrit. It allows a push to be
-rejected before it is committed to the Gerrit repository. If the script exits
-with non-zero return code the push will be rejected. Any output from the script
-will be returned to the user, regardless of the return code.
+This is called when a commit is received for review by Gerrit. It allows a push to
+be rejected before the review is created.
+
+If the hook exits with non-zero return code the push will be rejected. Any output
+from the hook will be returned to the user, regardless of the return code.
 
 ```
   commit-received --project <project name> --refname <refname> --uploader <uploader> --oldrev <sha1> --newrev <sha1> --cmdref <refname>
