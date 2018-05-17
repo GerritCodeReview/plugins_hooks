@@ -22,6 +22,30 @@
       "revId": "2570c9ab71339eef63723314407195126159ca12",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd10517a_98a38a7d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-05-17T02:39:24Z",
+      "side": 1,
+      "message": "See: http://paste.openstack.org/show/721142/\n\nThe comment-added hook and the reviewer-deleted hook were both run twice (note that my hooks are intentionally exiting with error so that a log gets emitted) but the path resolution message only once for each hook.",
+      "parentUuid": "240c8eec_5b280504",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 58
+      },
+      "revId": "2570c9ab71339eef63723314407195126159ca12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
