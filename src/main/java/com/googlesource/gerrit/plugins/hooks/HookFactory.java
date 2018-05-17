@@ -76,7 +76,7 @@ public class HookFactory {
   private Path getHookPath(String configName, String defaultName) {
     String v = config.getString("hooks", null, configName);
     Path hookPath = hooksPath.resolve(firstNonNull(v, defaultName));
-    log.info("hooks.{} resolved to {}", configName, hookPath);
+    log.debug("hooks.{} resolved to {}", configName, hookPath);
     return hookPath;
   }
 
