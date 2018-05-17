@@ -21,10 +21,12 @@ import com.google.gerrit.server.git.validators.RefOperationValidationListener;
 import com.google.gerrit.server.git.validators.ValidationMessage;
 import com.google.gerrit.server.validators.ValidationException;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.jgit.lib.ObjectId;
 
+@Singleton
 public class RefUpdate implements RefOperationValidationListener {
   private final Hook hook;
   private final HookFactory hookFactory;
