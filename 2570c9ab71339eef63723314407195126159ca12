@@ -94,6 +94,30 @@
       "revId": "2570c9ab71339eef63723314407195126159ca12",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d209fbc_1aaec746",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2018-05-17T02:55:12Z",
+      "side": 1,
+      "message": "\u003e Hmm.  Maybe need to look into why those are not Singleton.\n\nyes, that is the way forward.",
+      "parentUuid": "09600c86_2e65a83e",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 58
+      },
+      "revId": "2570c9ab71339eef63723314407195126159ca12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
