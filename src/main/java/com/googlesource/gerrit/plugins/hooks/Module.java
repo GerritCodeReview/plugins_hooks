@@ -48,6 +48,7 @@ class Module extends AbstractModule {
     DynamicSet.bind(binder(), ChangeMergedListener.class).to(ChangeMerged.class);
     DynamicSet.bind(binder(), ChangeRestoredListener.class).to(ChangeRestored.class);
     DynamicSet.bind(binder(), CommentAddedListener.class).to(CommentAdded.class);
+    DynamicSet.bind(binder(), CommitValidationListener.class).to(CommitReceived.class);
     DynamicSet.bind(binder(), DraftPublishedListener.class).to(DraftPublished.class);
     DynamicSet.bind(binder(), GitReferenceUpdatedListener.class).to(GitReferenceUpdated.class);
     DynamicSet.bind(binder(), HashtagsEditedListener.class).to(HashtagsEdited.class);
@@ -57,7 +58,5 @@ class Module extends AbstractModule {
     DynamicSet.bind(binder(), ReviewerDeletedListener.class).to(ReviewerDeleted.class);
     DynamicSet.bind(binder(), RevisionCreatedListener.class).to(RevisionCreated.class);
     DynamicSet.bind(binder(), TopicEditedListener.class).to(TopicEdited.class);
-
-    DynamicSet.bind(binder(), CommitValidationListener.class).to(CommitReceived.class);
   }
 }
