@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "240c8eec_5b280504",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-05-17T02:34:43Z",
+      "side": 1,
+      "message": "Are you sure?  When I tested it was only called once when the hook implementation\u0027s singleton is instantiated and it creates the hook member.  The singleton is instantiated on the first time a hook is executed.\n\nThe log can appear multiple times, but each time should be for a different hook, and it should only log once per hook.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 58
+      },
+      "revId": "2570c9ab71339eef63723314407195126159ca12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
