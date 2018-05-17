@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "acf9e49a_0837f881",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookFactory.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2018-05-17T02:18:33Z",
+      "side": 1,
+      "message": "This one is logging every time a hook is executed, this should be debug.",
+      "range": {
+        "startLine": 79,
+        "startChar": 3,
+        "endLine": 79,
+        "endChar": 62
+      },
+      "revId": "1370e0d678579efe09678d33b3ee26c6f9428dac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
