@@ -70,6 +70,30 @@
       "revId": "2570c9ab71339eef63723314407195126159ca12",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09600c86_2e65a83e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-05-17T02:51:52Z",
+      "side": 1,
+      "message": "Hmm.  Maybe need to look into why those are not Singleton.",
+      "parentUuid": "e10bdd6f_c5015ec7",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 58
+      },
+      "revId": "2570c9ab71339eef63723314407195126159ca12",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
