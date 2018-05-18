@@ -27,7 +27,7 @@ class HookQueue implements LifecycleListener {
 
   private final WorkQueue workQueue;
 
-  private WorkQueue.Executor queue;
+  private WorkQueue.Executor queue = null;
 
   @Inject
   HookQueue(WorkQueue workQueue) {
@@ -43,13 +43,14 @@ class HookQueue implements LifecycleListener {
       log.debug("Hook file not found: {}", hook.toAbsolutePath());
       return;
     }
+    if (queue == null) {
+      queue = workQueue.createQueue(1, "HookQueue");
+    }
     queue.submit(new HookTask.Async(projectName, hook, args));
   }
 
   @Override
-  public void start() {
-    queue = workQueue.createQueue(1, "HookQueue");
-  }
+  public void start() {}
 
   @Override
   public void stop() {
