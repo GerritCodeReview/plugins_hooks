@@ -30,8 +30,8 @@ class HookQueue implements LifecycleListener {
   private WorkQueue.Executor queue;
 
   @Inject
-  HookQueue(WorkQueue queue) {
-    workQueue = queue;
+  HookQueue(WorkQueue workQueue) {
+    this.workQueue = workQueue;
   }
 
   void submit(Path hook, HookArgs args) {
