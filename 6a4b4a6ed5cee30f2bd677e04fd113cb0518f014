@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "706a708e_b1c34180",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2018-05-18T12:56:30Z",
+      "side": 1,
+      "message": "I know the chances are slim but it\u0027s possible that 2 threads end up creating the queue at the same time.\n\nI think creating the queue even if there is no hooks is not an issue, you should not install the plugin if you have no hooks.",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 48,
+        "endChar": 5
+      },
+      "revId": "6a4b4a6ed5cee30f2bd677e04fd113cb0518f014",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
