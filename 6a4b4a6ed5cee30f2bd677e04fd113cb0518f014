@@ -22,6 +22,30 @@
       "revId": "6a4b4a6ed5cee30f2bd677e04fd113cb0518f014",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ed13e4d_bca88202",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-05-19T07:47:32Z",
+      "side": 1,
+      "message": "\u003e I know the chances are slim but it\u0027s possible that 2 threads end up creating the queue at the same time.\n\nFixed by enclosing it in a synchronized block\n\n\u003e I think creating the queue even if there is no hooks is not an issue, you should not install the plugin if you have no hooks.\n\nInitially I did this change thinking it would fix the problem with metrics, but that was before I found that the WorkQueue doesn\u0027t close the metrics.  Then I thought that this change would be useful anyway for the case where there are no hooks.\n\nHowever it turns out that both this fix and the fix in WorkQueue are needed to make it work properly. I\u0027ve rewritten the commit message.",
+      "parentUuid": "706a708e_b1c34180",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 48,
+        "endChar": 5
+      },
+      "revId": "6a4b4a6ed5cee30f2bd677e04fd113cb0518f014",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
