@@ -20,10 +20,12 @@ import com.google.gerrit.server.git.validators.CommitValidationException;
 import com.google.gerrit.server.git.validators.CommitValidationListener;
 import com.google.gerrit.server.git.validators.CommitValidationMessage;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.jgit.lib.ObjectId;
 
+@Singleton
 public class CommitReceived implements CommitValidationListener {
   private final Hook hook;
   private final HookFactory hookFactory;

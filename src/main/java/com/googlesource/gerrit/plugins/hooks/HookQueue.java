@@ -31,8 +31,8 @@ class HookQueue implements LifecycleListener {
   private ScheduledExecutorService queue;
 
   @Inject
-  HookQueue(WorkQueue queue) {
-    workQueue = queue;
+  HookQueue(WorkQueue workQueue) {
+    this.workQueue = workQueue;
   }
 
   void submit(Path hook, HookArgs args) {

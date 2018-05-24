@@ -30,6 +30,7 @@ import com.google.gerrit.extensions.events.RevisionCreatedListener;
 import com.google.gerrit.extensions.events.TopicEditedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.server.git.validators.CommitValidationListener;
+import com.google.gerrit.server.git.validators.MergeValidationListener;
 import com.google.gerrit.server.git.validators.RefOperationValidationListener;
 import com.google.inject.Scopes;
 import com.google.inject.internal.UniqueAnnotations;
@@ -49,15 +50,15 @@ class Module extends FactoryModule {
     DynamicSet.bind(binder(), ChangeMergedListener.class).to(ChangeMerged.class);
     DynamicSet.bind(binder(), ChangeRestoredListener.class).to(ChangeRestored.class);
     DynamicSet.bind(binder(), CommentAddedListener.class).to(CommentAdded.class);
+    DynamicSet.bind(binder(), CommitValidationListener.class).to(CommitReceived.class);
     DynamicSet.bind(binder(), GitReferenceUpdatedListener.class).to(GitReferenceUpdated.class);
     DynamicSet.bind(binder(), HashtagsEditedListener.class).to(HashtagsEdited.class);
+    DynamicSet.bind(binder(), MergeValidationListener.class).to(Submit.class);
     DynamicSet.bind(binder(), NewProjectCreatedListener.class).to(NewProjectCreated.class);
     DynamicSet.bind(binder(), RefOperationValidationListener.class).to(RefUpdate.class);
     DynamicSet.bind(binder(), ReviewerAddedListener.class).to(ReviewerAdded.class);
     DynamicSet.bind(binder(), ReviewerDeletedListener.class).to(ReviewerDeleted.class);
     DynamicSet.bind(binder(), RevisionCreatedListener.class).to(RevisionCreated.class);
     DynamicSet.bind(binder(), TopicEditedListener.class).to(TopicEdited.class);
-
-    DynamicSet.bind(binder(), CommitValidationListener.class).to(CommitReceived.class);
   }
 }
