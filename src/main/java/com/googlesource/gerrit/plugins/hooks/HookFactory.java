@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.hooks;
 
 import static com.google.common.base.MoreObjects.firstNonNull;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.server.config.GerritServerConfig;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
@@ -23,12 +24,10 @@ import com.google.inject.Singleton;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.eclipse.jgit.lib.Config;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Singleton
 public class HookFactory {
-  private static final Logger log = LoggerFactory.getLogger(HookFactory.class);
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private final HookQueue queue;
   private final HookExecutor syncHookExecutor;
@@ -54,13 +53,13 @@ public class HookFactory {
     } else {
       this.hooksPath = sitePaths.hooks_dir;
     }
-    log.info("hooks.path: {}", this.hooksPath);
+    logger.atInfo().log("hooks.path: %s", this.hooksPath);
   }
 
   private Path getHookPath(String configName, String defaultName) {
     String v = config.getString("hooks", null, configName);
     Path hookPath = hooksPath.resolve(firstNonNull(v, defaultName));
-    log.info("hooks.{} resolved to {}", configName, hookPath);
+    logger.atInfo().log("hooks.%s resolved to %s", configName, hookPath);
     return hookPath;
   }
 

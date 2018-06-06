@@ -1,5 +1,6 @@
 package com.googlesource.gerrit.plugins.hooks;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.server.config.GerritServerConfig;
@@ -13,16 +14,15 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import org.eclipse.jgit.lib.Config;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class HookExecutor implements LifecycleListener {
-  private static final Logger log = LoggerFactory.getLogger(HookExecutor.class);
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
+
   private static final UncaughtExceptionHandler LOG_UNCAUGHT_EXCEPTION =
       new UncaughtExceptionHandler() {
         @Override
         public void uncaughtException(Thread t, Throwable e) {
-          log.error("HookExecutor thread {} threw exception", t.getName(), e);
+          logger.atSevere().withCause(e).log("HookExecutor thread %s threw exception", t.getName());
         }
       };
 
@@ -46,7 +46,7 @@ public class HookExecutor implements LifecycleListener {
 
   HookResult submit(String projectName, Path hook, HookArgs args) {
     if (!Files.exists(hook)) {
-      log.debug("Hook file not found: {}", hook);
+      logger.atFine().log("Hook file not found: %s", hook);
       return null;
     }
     HookTask.Sync hookTask = new HookTask.Sync(projectName, hook, args);
@@ -58,10 +58,10 @@ public class HookExecutor implements LifecycleListener {
       return task.get(timeout, TimeUnit.SECONDS);
     } catch (TimeoutException e) {
       message = "Synchronous hook timed out " + hook;
-      log.error(message);
+      logger.atSevere().log(message);
     } catch (Exception e) {
       message = "Error running hook " + hook;
-      log.error(message, e);
+      logger.atSevere().withCause(e).log(message);
     }
     task.cancel(true);
     hookTask.cancel();

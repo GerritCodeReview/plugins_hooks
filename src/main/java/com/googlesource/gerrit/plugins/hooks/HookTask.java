@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.hooks;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.common.io.ByteStreams;
 import com.google.gerrit.metrics.Timer1;
 import com.google.gerrit.reviewdb.client.Project;
@@ -29,11 +30,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import org.eclipse.jgit.lib.Repository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 class HookTask {
-  private static final Logger log = LoggerFactory.getLogger(HookTask.class);
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private final Path sitePath;
   private final String projectName;
@@ -113,27 +112,27 @@ class HookTask {
     } catch (InterruptedException iex) {
       // InterruptedException - timeout or cancel
       args.metrics.timeout(name);
-      log.error("hook[{}] timed out: {}", name, iex.getMessage());
+      logger.atSevere().log("hook[%s] timed out: %s", name, iex.getMessage());
     } catch (Throwable err) {
       args.metrics.error(name);
-      log.error("Error running hook {}", hook.toAbsolutePath(), err);
+      logger.atSevere().withCause(err).log("Error running hook %s", hook.toAbsolutePath());
     }
 
     if (result != null) {
       int exitValue = result.getExitValue();
       if (exitValue != 0) {
-        log.error("hook[{}] exited with error status: {}", name, exitValue);
+        logger.atSevere().log("hook[%s] exited with error status: %d", name, exitValue);
       }
 
-      if (log.isDebugEnabled()) {
+      if (logger.atFine().isEnabled()) {
         BufferedReader br = new BufferedReader(new StringReader(result.getOutput()));
         try {
           String line;
           while ((line = br.readLine()) != null) {
-            log.debug("hook[{}] output: {}", name, line);
+            logger.atFine().log("hook[%s] output: %s", name, line);
           }
         } catch (IOException iox) {
-          log.error("Error writing hook [{}] output", name, iox);
+          logger.atSevere().withCause(iox).log("Error writing hook [%s] output", name);
         }
       }
     }
