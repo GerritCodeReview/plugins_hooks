@@ -18,11 +18,13 @@ import static com.google.common.base.MoreObjects.firstNonNull;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.common.ApprovalInfo;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.server.IdentifiedUser;
+import com.google.gerrit.server.config.CanonicalWebUrl;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.inject.Inject;
@@ -47,7 +49,7 @@ class HookArgs {
   @Inject
   HookArgs(
       IdentifiedUser.GenericFactory identifiedUserFactory,
-      Provider<String> urlProvider,
+      @CanonicalWebUrl @Nullable Provider<String> urlProvider,
       HookMetrics metrics,
       GitRepositoryManager gitManager,
       SitePaths sitePaths) {
