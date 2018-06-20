@@ -107,9 +107,9 @@ class HookTask {
 
       ps = pb.start();
       ps.getOutputStream().close();
-      String output = new String(ByteStreams.toByteArray(ps.getInputStream()), UTF_8);
+      String out = new String(ByteStreams.toByteArray(ps.getInputStream()), UTF_8);
       ps.waitFor();
-      result = new HookResult(ps.exitValue(), output);
+      result = new HookResult(ps.exitValue(), out);
     } catch (InterruptedException iex) {
       // InterruptedException - timeout or cancel
       args.metrics.timeout(name);
