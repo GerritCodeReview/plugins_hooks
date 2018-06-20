@@ -126,12 +126,10 @@ class HookTask {
       }
 
       if (log.isDebugEnabled()) {
-        BufferedReader br = new BufferedReader(new StringReader(result.getOutput()));
-        try {
-          String line;
-          while ((line = br.readLine()) != null) {
-            log.debug("hook[{}] output: {}", name, line);
-          }
+        try (BufferedReader br = new BufferedReader(new StringReader(result.getOutput()))) {
+          br.lines()
+              .filter(s -> !s.isEmpty())
+              .forEach(line -> log.debug("hook[{}] output: {}", name, line));
         } catch (IOException iox) {
           log.error("Error writing hook [{}] output", name, iox);
         }
