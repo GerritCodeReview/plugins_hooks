@@ -107,9 +107,9 @@ class HookTask {
 
       ps = pb.start();
       ps.getOutputStream().close();
-      String output = new String(ByteStreams.toByteArray(ps.getInputStream()), UTF_8);
+      String out = new String(ByteStreams.toByteArray(ps.getInputStream()), UTF_8);
       ps.waitFor();
-      result = new HookResult(ps.exitValue(), output);
+      result = new HookResult(ps.exitValue(), out);
     } catch (InterruptedException iex) {
       // InterruptedException - timeout or cancel
       args.metrics.timeout(name);
@@ -126,12 +126,10 @@ class HookTask {
       }
 
       if (log.isDebugEnabled()) {
-        BufferedReader br = new BufferedReader(new StringReader(result.getOutput()));
-        try {
-          String line;
-          while ((line = br.readLine()) != null) {
-            log.debug("hook[{}] output: {}", name, line);
-          }
+        try (BufferedReader br = new BufferedReader(new StringReader(result.getOutput()))) {
+          br.lines()
+              .filter(s -> !s.isEmpty())
+              .forEach(line -> log.debug("hook[{}] output: {}", name, line));
         } catch (IOException iox) {
           log.error("Error writing hook [{}] output", name, iox);
         }
