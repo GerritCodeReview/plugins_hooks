@@ -20,6 +20,8 @@ import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.git.CodeReviewCommit;
 import com.google.gerrit.server.git.validators.MergeValidationException;
 import com.google.gerrit.server.git.validators.MergeValidationListener;
+import com.google.gerrit.server.project.ProjectAccessor;
+import com.google.gerrit.server.project.ProjectAccessor.Factory;
 import com.google.gerrit.server.project.ProjectState;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -45,7 +47,7 @@ public class Submit implements MergeValidationListener {
       PatchSet.Id patchSetId,
       IdentifiedUser caller)
       throws MergeValidationException {
-    String projectName = destProject.getProject().getName();
+    String projectName = destBranch.getParentKey().get();
 
     HookArgs args = hookFactory.createArgs();
     args.add("--project", projectName);
