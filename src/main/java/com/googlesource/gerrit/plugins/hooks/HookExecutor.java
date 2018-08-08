@@ -4,6 +4,7 @@ import com.google.common.flogger.FluentLogger;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.server.config.GerritServerConfig;
+import com.google.gerrit.server.logging.LoggingContextAwareThreadFactory;
 import com.google.inject.Inject;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.nio.file.Files;
@@ -35,6 +36,7 @@ public class HookExecutor implements LifecycleListener {
     this.threadPool =
         Executors.newCachedThreadPool(
             new ThreadFactoryBuilder()
+                .setThreadFactory(new LoggingContextAwareThreadFactory())
                 .setNameFormat("SyncHook-%d")
                 .setUncaughtExceptionHandler(LOG_UNCAUGHT_EXCEPTION)
                 .build());
