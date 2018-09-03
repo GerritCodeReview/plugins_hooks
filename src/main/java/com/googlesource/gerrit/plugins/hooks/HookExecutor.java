@@ -4,7 +4,7 @@ import com.google.common.flogger.FluentLogger;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.server.config.GerritServerConfig;
-import com.google.gerrit.server.logging.LoggingContextAwareThreadFactory;
+import com.google.gerrit.server.logging.LoggingContextAwareExecutorService;
 import com.google.inject.Inject;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.nio.file.Files;
@@ -34,12 +34,12 @@ public class HookExecutor implements LifecycleListener {
   HookExecutor(@GerritServerConfig Config config) {
     this.timeout = config.getInt("hooks", "syncHookTimeout", 30);
     this.threadPool =
-        Executors.newCachedThreadPool(
-            new ThreadFactoryBuilder()
-                .setThreadFactory(new LoggingContextAwareThreadFactory())
-                .setNameFormat("SyncHook-%d")
-                .setUncaughtExceptionHandler(LOG_UNCAUGHT_EXCEPTION)
-                .build());
+        new LoggingContextAwareExecutorService(
+            Executors.newCachedThreadPool(
+                new ThreadFactoryBuilder()
+                    .setNameFormat("SyncHook-%d")
+                    .setUncaughtExceptionHandler(LOG_UNCAUGHT_EXCEPTION)
+                    .build()));
   }
 
   HookResult submit(Path hook, HookArgs args) {
