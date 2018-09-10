@@ -18,17 +18,17 @@ import static com.google.common.base.MoreObjects.firstNonNull;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
-import com.google.gerrit.common.Nullable;
 import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.common.ApprovalInfo;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.reviewdb.client.Account;
+import com.google.gerrit.reviewdb.client.Change;
+import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.IdentifiedUser;
-import com.google.gerrit.server.config.CanonicalWebUrl;
+import com.google.gerrit.server.config.BrowseUrls;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -39,22 +39,22 @@ class HookArgs {
   }
 
   final IdentifiedUser.GenericFactory identifiedUserFactory;
-  final Provider<String> urlProvider;
   final HookMetrics metrics;
   final GitRepositoryManager gitManager;
   final SitePaths sitePaths;
+  final BrowseUrls browseUrls;
 
   private final List<String> args;
 
   @Inject
   HookArgs(
       IdentifiedUser.GenericFactory identifiedUserFactory,
-      @CanonicalWebUrl @Nullable Provider<String> urlProvider,
+      BrowseUrls browseUrls,
       HookMetrics metrics,
       GitRepositoryManager gitManager,
       SitePaths sitePaths) {
     this.identifiedUserFactory = identifiedUserFactory;
-    this.urlProvider = urlProvider;
+    this.browseUrls = browseUrls;
     this.metrics = metrics;
     this.gitManager = gitManager;
     this.sitePaths = sitePaths;
@@ -97,9 +97,11 @@ class HookArgs {
 
   public void addUrl(ChangeInfo change) {
     args.add("--change-url");
-    String url = urlProvider.get();
-    if (change != null && url != null) {
-      args.add(url + change._number);
+    if (change != null) {
+      args.add(
+          browseUrls
+              .getChangeViewUrl(new Project.NameKey(change.project), new Change.Id(change._number))
+              .orElse(""));
     } else {
       args.add("");
     }
