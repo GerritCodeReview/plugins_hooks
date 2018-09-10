@@ -23,7 +23,10 @@ import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.common.ApprovalInfo;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.reviewdb.client.Account;
+import com.google.gerrit.reviewdb.client.Change;
+import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.IdentifiedUser;
+import com.google.gerrit.server.config.BrowseUrls;
 import com.google.gerrit.server.config.CanonicalWebUrl;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.GitRepositoryManager;
@@ -43,6 +46,7 @@ class HookArgs {
   final HookMetrics metrics;
   final GitRepositoryManager gitManager;
   final SitePaths sitePaths;
+  final BrowseUrls browseUrls;
 
   private final List<String> args;
 
@@ -50,11 +54,13 @@ class HookArgs {
   HookArgs(
       IdentifiedUser.GenericFactory identifiedUserFactory,
       @CanonicalWebUrl @Nullable Provider<String> urlProvider,
+      BrowseUrls browseUrls,
       HookMetrics metrics,
       GitRepositoryManager gitManager,
       SitePaths sitePaths) {
     this.identifiedUserFactory = identifiedUserFactory;
     this.urlProvider = urlProvider;
+    this.browseUrls = browseUrls;
     this.metrics = metrics;
     this.gitManager = gitManager;
     this.sitePaths = sitePaths;
@@ -99,7 +105,9 @@ class HookArgs {
     args.add("--change-url");
     String url = urlProvider.get();
     if (change != null && url != null) {
-      args.add(url + change._number);
+      args.add(
+          browseUrls.reviewUrl(
+              new Project.NameKey(change.project), new Change.Id(change._number), null, null));
     } else {
       args.add("");
     }
