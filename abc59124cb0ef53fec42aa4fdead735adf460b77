@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "22e1df89_d14c126a",
+        "filename": "src/main/resources/Documentation/hooks.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-09-14T06:39:00Z",
+      "side": 1,
+      "message": "has",
+      "range": {
+        "startLine": 98,
+        "startChar": 25,
+        "endLine": 98,
+        "endChar": 27
+      },
+      "revId": "abc59124cb0ef53fec42aa4fdead735adf460b77",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
