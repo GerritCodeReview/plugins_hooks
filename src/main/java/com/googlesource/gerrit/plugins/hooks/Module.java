@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.hooks;
 
 import com.google.gerrit.extensions.events.AgreementSignupListener;
 import com.google.gerrit.extensions.events.ChangeAbandonedListener;
+import com.google.gerrit.extensions.events.ChangeDeletedListener;
 import com.google.gerrit.extensions.events.ChangeMergedListener;
 import com.google.gerrit.extensions.events.ChangeRestoredListener;
 import com.google.gerrit.extensions.events.CommentAddedListener;
@@ -46,6 +47,7 @@ class Module extends AbstractModule {
 
     DynamicSet.bind(binder(), AgreementSignupListener.class).to(AgreementSignup.class);
     DynamicSet.bind(binder(), ChangeAbandonedListener.class).to(ChangeAbandoned.class);
+    DynamicSet.bind(binder(), ChangeDeletedListener.class).to(ChangeDeleted.class);
     DynamicSet.bind(binder(), ChangeMergedListener.class).to(ChangeMerged.class);
     DynamicSet.bind(binder(), ChangeRestoredListener.class).to(ChangeRestored.class);
     DynamicSet.bind(binder(), CommentAddedListener.class).to(CommentAdded.class);
