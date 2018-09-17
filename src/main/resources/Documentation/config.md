@@ -39,6 +39,9 @@ to 30 seconds.
 hooks.changeAbandonedHook
 :	Filename for the change abandoned hook. If not set, defaults to `change-abandoned`.
 
+hooks.changeDeletedHook
+:	Filename for the change deleted hook. If not set, defaults to `change-deleted`.
+
 hooks.changeMergedHook
 :	Filename for the change merged hook. If not set, defaults to `change-merged`.
 
