@@ -25,7 +25,7 @@ import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.reviewdb.client.Change;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.IdentifiedUser;
-import com.google.gerrit.server.config.BrowseUrls;
+import com.google.gerrit.server.config.UrlFormatter;
 import com.google.gerrit.server.config.SitePaths;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.inject.Inject;
@@ -42,19 +42,19 @@ class HookArgs {
   final HookMetrics metrics;
   final GitRepositoryManager gitManager;
   final SitePaths sitePaths;
-  final BrowseUrls browseUrls;
+  final UrlFormatter urlFormatter;
 
   private final List<String> args;
 
   @Inject
   HookArgs(
       IdentifiedUser.GenericFactory identifiedUserFactory,
-      BrowseUrls browseUrls,
+      UrlFormatter urlFormatter,
       HookMetrics metrics,
       GitRepositoryManager gitManager,
       SitePaths sitePaths) {
     this.identifiedUserFactory = identifiedUserFactory;
-    this.browseUrls = browseUrls;
+    this.urlFormatter = urlFormatter;
     this.metrics = metrics;
     this.gitManager = gitManager;
     this.sitePaths = sitePaths;
@@ -99,7 +99,7 @@ class HookArgs {
     args.add("--change-url");
     if (change != null) {
       args.add(
-          browseUrls
+          urlFormatter
               .getChangeViewUrl(new Project.NameKey(change.project), new Change.Id(change._number))
               .orElse(""));
     } else {
