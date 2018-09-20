@@ -54,6 +54,12 @@ These hooks are invoked asynchronously on a background thread.
 
 Called whenever a patchset is created (this includes new changes).
 
+New patchsets do not generate this event when created as a result of merging a change
+(see change-merged for this). Examples are:
+* Submitting a change
+* Merging a change
+* Closing a change by direct push to branch
+
 ```
   patchset-created --change <change id> --kind <change kind> --change-url <change url> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --topic <topic> --uploader <uploader> --uploader-username <username> --commit <sha1> --patchset <patchset id>
 ```
