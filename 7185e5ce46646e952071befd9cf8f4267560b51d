@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fb4f122_7fce8a67",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookArgs.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1010008
+      },
+      "writtenOn": "2018-09-27T13:44:38Z",
+      "side": 0,
+      "message": "I don\u0027t understand why [--change-url \"\"] is better than not passing the arg, but *shrug*.",
+      "revId": "7185e5ce46646e952071befd9cf8f4267560b51d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
