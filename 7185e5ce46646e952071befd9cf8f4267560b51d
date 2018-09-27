@@ -16,6 +16,24 @@
       "revId": "7185e5ce46646e952071befd9cf8f4267560b51d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b8baa44f_d2db87b3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookArgs.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1024147
+      },
+      "writtenOn": "2018-09-27T13:58:37Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "3fb4f122_7fce8a67",
+      "revId": "7185e5ce46646e952071befd9cf8f4267560b51d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
