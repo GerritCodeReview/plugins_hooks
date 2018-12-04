@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4582491_e4ee8213",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookArgs.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-12-04T10:39:29Z",
+      "side": 1,
+      "message": "Remove the \"Item\" suffix.",
+      "range": {
+        "startLine": 54,
+        "startChar": 32,
+        "endLine": 54,
+        "endChar": 48
+      },
+      "revId": "ddc8b0f66a5af3a635932f51574362c59d2074c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
