@@ -21,6 +21,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.common.ApprovalInfo;
 import com.google.gerrit.extensions.common.ChangeInfo;
+import com.google.gerrit.extensions.registration.DynamicItem;
 import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.reviewdb.client.Change;
 import com.google.gerrit.reviewdb.client.Project;
@@ -32,6 +33,7 @@ import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 class HookArgs {
   interface Factory {
@@ -42,19 +44,19 @@ class HookArgs {
   final HookMetrics metrics;
   final GitRepositoryManager gitManager;
   final SitePaths sitePaths;
-  final UrlFormatter urlFormatter;
+  final DynamicItem<UrlFormatter> urlFormatterItem;
 
   private final List<String> args;
 
   @Inject
   HookArgs(
       IdentifiedUser.GenericFactory identifiedUserFactory,
-      UrlFormatter urlFormatter,
+      DynamicItem<UrlFormatter> urlFormatterItem,
       HookMetrics metrics,
       GitRepositoryManager gitManager,
       SitePaths sitePaths) {
     this.identifiedUserFactory = identifiedUserFactory;
-    this.urlFormatter = urlFormatter;
+    this.urlFormatterItem = urlFormatterItem;
     this.metrics = metrics;
     this.gitManager = gitManager;
     this.sitePaths = sitePaths;
@@ -98,9 +100,13 @@ class HookArgs {
   public void addUrl(ChangeInfo change) {
     args.add("--change-url");
     if (change != null) {
+      Optional<UrlFormatter> urlFormatter = Optional.ofNullable(urlFormatterItem.get());
       args.add(
           urlFormatter
-              .getChangeViewUrl(new Project.NameKey(change.project), new Change.Id(change._number))
+              .flatMap(
+                  f ->
+                      f.getChangeViewUrl(
+                          new Project.NameKey(change.project), new Change.Id(change._number)))
               .orElse(""));
     } else {
       args.add("");
