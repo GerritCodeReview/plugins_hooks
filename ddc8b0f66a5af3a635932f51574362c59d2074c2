@@ -46,6 +46,30 @@
       "revId": "ddc8b0f66a5af3a635932f51574362c59d2074c2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f5249e0_36936ddd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/hooks/HookArgs.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2018-12-04T10:46:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8097e33c_353eaebb",
+      "range": {
+        "startLine": 54,
+        "startChar": 32,
+        "endLine": 54,
+        "endChar": 48
+      },
+      "revId": "ddc8b0f66a5af3a635932f51574362c59d2074c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
