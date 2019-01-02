@@ -20,12 +20,8 @@ public class HookExecutor implements LifecycleListener {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private static final UncaughtExceptionHandler LOG_UNCAUGHT_EXCEPTION =
-      new UncaughtExceptionHandler() {
-        @Override
-        public void uncaughtException(Thread t, Throwable e) {
+      (t, e) ->
           logger.atSevere().withCause(e).log("HookExecutor thread %s threw exception", t.getName());
-        }
-      };
 
   private final ExecutorService threadPool;
   private final int timeout;
