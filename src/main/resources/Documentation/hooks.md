@@ -40,7 +40,7 @@ This is called when a user attempts to submit a change. It allows the submit to
 be rejected.
 
 If the hook exits with non-zero return code the submit will be rejected and the
-ouput from the hook will be returned to the user.
+output from the hook will be returned to the user.
 
 ```
   submit --project <project name> --branch <branch> --submitter <submitter> --patchset <patchset id> --commit <sha1>
