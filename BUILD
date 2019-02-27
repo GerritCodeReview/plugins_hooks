@@ -13,7 +13,7 @@ gerrit_plugin(
 
 junit_tests(
     name = "hooks_tests",
-    srcs = glob(["src/test/java/**/*Test.java"]),
+    srcs = glob(["src/test/java/**/*.java"]),
     tags = ["hooks"],
     visibility = ["//visibility:public"],
     deps = PLUGIN_TEST_DEPS + PLUGIN_DEPS + [
