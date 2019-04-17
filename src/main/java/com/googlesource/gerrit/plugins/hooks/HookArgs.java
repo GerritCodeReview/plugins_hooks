@@ -131,7 +131,7 @@ class HookArgs {
 
   private String format(AccountInfo account) {
     return String.format(
-        "\"%s\"", identifiedUserFactory.create(new Account.Id(account._accountId)).getNameEmail());
+        "\"%s\"", identifiedUserFactory.create(Account.id(account._accountId)).getNameEmail());
   }
 
   @Override
