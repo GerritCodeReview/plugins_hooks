@@ -49,7 +49,7 @@ public class Submit implements MergeValidationListener {
 
     HookArgs args = hookFactory.createArgs();
     args.add("--project", projectName);
-    args.add("--branch", destBranch.get());
+    args.add("--branch", destBranch.branch());
     args.add("--submitter", caller.getNameEmail());
     args.add("--submitter-username", caller.getUserName().get());
     args.add("--patchset", patchSetId.get());
