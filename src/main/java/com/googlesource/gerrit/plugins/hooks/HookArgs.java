@@ -105,7 +105,7 @@ class HookArgs {
           uf.flatMap(
                   f ->
                       f.getChangeViewUrl(
-                          new Project.NameKey(change.project), new Change.Id(change._number)))
+                          Project.nameKey(change.project), new Change.Id(change._number)))
               .orElse(""));
     } else {
       args.add("");

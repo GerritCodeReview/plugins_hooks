@@ -98,7 +98,7 @@ class HookTask {
       env.put("GERRIT_SITE", sitePath.toAbsolutePath().toString());
 
       if (projectName != null) {
-        try (Repository git = args.gitManager.openRepository(new Project.NameKey(projectName))) {
+        try (Repository git = args.gitManager.openRepository(Project.nameKey(projectName))) {
           pb.directory(git.getDirectory());
           env.put("GIT_DIR", git.getDirectory().getAbsolutePath());
         }
