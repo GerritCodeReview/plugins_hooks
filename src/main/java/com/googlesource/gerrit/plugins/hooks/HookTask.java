@@ -18,8 +18,8 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.common.flogger.FluentLogger;
 import com.google.common.io.ByteStreams;
+import com.google.gerrit.entities.Project;
 import com.google.gerrit.metrics.Timer1;
-import com.google.gerrit.reviewdb.client.Project;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
