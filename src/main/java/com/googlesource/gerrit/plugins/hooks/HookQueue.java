@@ -20,6 +20,7 @@ import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 
 class HookQueue implements LifecycleListener {
@@ -43,7 +44,8 @@ class HookQueue implements LifecycleListener {
       logger.atFine().log("Hook file not found: %s", hook.toAbsolutePath());
       return;
     }
-    queue.submit(new HookTask.Async(projectName, hook, args));
+    @SuppressWarnings("unused")
+    Future<?> ignored = queue.submit(new HookTask.Async(projectName, hook, args));
   }
 
   @Override
