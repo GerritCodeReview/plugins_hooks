@@ -31,7 +31,7 @@ public class HookMetrics {
 
   @Inject
   HookMetrics(MetricMaker metricMaker) {
-    Field<String> field = Field.ofString("hook");
+    Field<String> field = Field.ofString().name("hook").build();
     latency =
         metricMaker.newTimer(
             "latency",
