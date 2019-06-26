@@ -14,11 +14,13 @@
 
 package com.googlesource.gerrit.plugins.hooks;
 
+import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.metrics.Counter1;
 import com.google.gerrit.metrics.Description;
 import com.google.gerrit.metrics.Field;
 import com.google.gerrit.metrics.MetricMaker;
 import com.google.gerrit.metrics.Timer1;
+import com.google.gerrit.server.logging.PluginMetadata;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -30,8 +32,15 @@ public class HookMetrics {
   private final Counter1<String> timeout;
 
   @Inject
-  HookMetrics(MetricMaker metricMaker) {
-    Field<String> field = Field.ofString().name("hook").build();
+  HookMetrics(@PluginName String pluginName, MetricMaker metricMaker) {
+    Field<String> field =
+        Field.ofString(
+                (metadataBuilder, fieldValue) ->
+                    metadataBuilder
+                        .pluginName(pluginName)
+                        .addPluginMetadata(PluginMetadata.create("hook", fieldValue)))
+            .name("hook")
+            .build();
     latency =
         metricMaker.newTimer(
             "latency",
