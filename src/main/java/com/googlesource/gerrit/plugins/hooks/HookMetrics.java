@@ -47,7 +47,7 @@ public class HookMetrics {
             "timeout", new Description("Hook execution timeouts").setRate(), field);
   }
 
-  public Timer1.Context start(String name) {
+  public Timer1.Context<String> start(String name) {
     return latency.start(name);
   }
 

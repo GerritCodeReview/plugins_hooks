@@ -85,7 +85,7 @@ class HookTask {
   public HookResult runHook() {
     HookResult result = null;
     String name = getName();
-    try (Timer1.Context timer = args.metrics.start(name)) {
+    try (Timer1.Context<String> timer = args.metrics.start(name)) {
       args.metrics.count(name);
       List<String> argv = new ArrayList<>(1 + args.get().size());
       argv.add(hook.toAbsolutePath().toString());
