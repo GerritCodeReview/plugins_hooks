@@ -14,15 +14,24 @@
 
 package com.googlesource.gerrit.plugins.hooks;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.NoHttpd;
 import com.google.gerrit.acceptance.TestPlugin;
+import com.google.gerrit.server.config.SitePaths;
+import com.google.inject.Inject;
 import org.junit.Test;
 
 @NoHttpd
 @TestPlugin(name = "hooks", sysModule = "com.googlesource.gerrit.plugins.hooks.Module")
 public class HooksIT extends LightweightPluginDaemonTest {
+  @Inject HookFactory factory;
+  @Inject SitePaths sitePaths;
 
   @Test
-  public void doNothing() throws Exception {}
+  public void defaultHooksPathWithDefaultHookName() throws Exception {
+    Hook hook = factory.createAsync("test-hook", "test-hook");
+    assertThat(hook.path.toString()).isEqualTo(sitePaths.hooks_dir.resolve("test-hook"));
+  }
 }
