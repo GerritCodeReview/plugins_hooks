@@ -15,11 +15,13 @@
 package com.googlesource.gerrit.plugins.hooks;
 
 import com.google.gerrit.extensions.events.LifecycleListener;
+import com.google.gerrit.server.config.GerritServerConfig;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.concurrent.ScheduledExecutorService;
+import org.eclipse.jgit.lib.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,11 +29,13 @@ class HookQueue implements LifecycleListener {
   private static final Logger log = LoggerFactory.getLogger(HookQueue.class);
 
   private final WorkQueue workQueue;
+  private final int executorThreads;
 
   private ScheduledExecutorService queue;
 
   @Inject
-  HookQueue(WorkQueue workQueue) {
+  HookQueue(WorkQueue workQueue, @GerritServerConfig Config config) {
+    this.executorThreads = config.getInt("hooks", "executorThreads", 1);
     this.workQueue = workQueue;
   }
 
@@ -49,7 +53,7 @@ class HookQueue implements LifecycleListener {
 
   @Override
   public void start() {
-    queue = workQueue.createQueue(1, "HookQueue");
+    queue = workQueue.createQueue(executorThreads, "HookQueue");
   }
 
   @Override

@@ -37,6 +37,9 @@ hooks.syncHookTimeout
 :	Timeout value in seconds for synchronous hooks. If not set, defaults
 to 30 seconds.
 
+hooks.executorThreads
+:	Number of workers to use for hook execution. If not set, defaults to 1.
+
 hooks.changeAbandonedHook
 :	Filename for the change abandoned hook. If not set, defaults to `change-abandoned`.
 
