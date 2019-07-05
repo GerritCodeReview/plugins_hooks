@@ -51,7 +51,7 @@ public class Submit implements MergeValidationListener {
     args.add("--project", projectName);
     args.add("--branch", destBranch.branch());
     args.add("--submitter", caller.getNameEmail());
-    args.add("--submitter-username", caller.getUserName().get());
+    args.add("--submitter-username", caller.getUserName().orElse(null));
     args.add("--patchset", patchSetId.get());
     args.add("--commit", commit.getId().name());
 
