@@ -15,7 +15,6 @@
 package com.googlesource.gerrit.plugins.hooks;
 
 import com.google.gerrit.reviewdb.client.Branch;
-import com.google.gerrit.reviewdb.client.Change;
 import com.google.gerrit.reviewdb.client.PatchSet;
 import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.git.CodeReviewCommit;
@@ -43,14 +42,13 @@ public class Submit implements MergeValidationListener {
       CodeReviewCommit commit,
       ProjectState destProject,
       Branch.NameKey destBranch,
-      Change.Id changeId,
       PatchSet.Id patchSetId,
       IdentifiedUser caller)
       throws MergeValidationException {
     String projectName = destProject.getProject().getName();
 
     HookArgs args = hookFactory.createArgs();
-    args.add("--change", changeId.get());
+    args.add("--change", patchSetId.changeId.get());
     args.add("--project", projectName);
     args.add("--branch", destBranch.get());
     args.add("--submitter", caller.getNameEmail());
