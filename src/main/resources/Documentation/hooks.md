@@ -15,8 +15,8 @@ This is called when a ref update request (direct push, non-fastforward update, o
 ref deletion) is received by Gerrit. It allows a request to be rejected before it
 is committed to the Gerrit repository.
 
-If the hook exits with non-zero return code the update will be rejected. Any output
-from the hook will be returned to the user, regardless of the return code.
+If the hook exits with non-zero return code the update will be rejected and any
+output will be returned to the user.
 
 ```
   ref-update --project <project name> --refname <refname> --uploader <uploader> --uploader-username <username> --oldrev <sha1> --newrev <sha1>
