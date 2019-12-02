@@ -15,6 +15,10 @@ This is called when a ref update request (direct push, non-fastforward update, o
 ref deletion) is received by Gerrit. It allows a request to be rejected before it
 is committed to the Gerrit repository.
 
+When multiple commits are pushed by direct push, this hook is called once with
+the `--oldrev` being the sha1 of the current branch tip, and `--newrev` being the
+sha1 of the commit that will be the new tip of the branch.
+
 If the hook exits with non-zero return code the update will be rejected and any
 output will be returned to the user.
 
@@ -24,8 +28,10 @@ output will be returned to the user.
 
 ### commit-received
 
-This is called when a commit is received for review by Gerrit. It allows a push to
-be rejected before the review is created.
+This is called when a commit is received by Gerrit either by direct push or by
+push for review (to `refs/for/branch`). It allows a push to be rejected before
+a review is created, or before the branch is updated in case of a direct push.
+It is called once for each commit in the push.
 
 If the hook exits with non-zero return code the push will be rejected. Any output
 from the hook will be returned to the user, regardless of the return code.
