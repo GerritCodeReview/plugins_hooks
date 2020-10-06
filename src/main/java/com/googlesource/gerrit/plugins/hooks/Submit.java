@@ -18,6 +18,7 @@ import com.google.gerrit.entities.BranchNameKey;
 import com.google.gerrit.entities.PatchSet;
 import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.git.CodeReviewCommit;
+import com.google.gerrit.server.git.CodeReviewCommit.CodeReviewRevWalk;
 import com.google.gerrit.server.git.validators.MergeValidationException;
 import com.google.gerrit.server.git.validators.MergeValidationListener;
 import com.google.gerrit.server.project.ProjectState;
@@ -39,6 +40,7 @@ public class Submit implements MergeValidationListener {
   @Override
   public void onPreMerge(
       Repository repo,
+      CodeReviewRevWalk revWalk,
       CodeReviewCommit commit,
       ProjectState destProject,
       BranchNameKey destBranch,
