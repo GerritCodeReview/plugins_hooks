@@ -36,7 +36,7 @@ import com.google.gerrit.server.git.validators.RefOperationValidationListener;
 import com.google.inject.Scopes;
 import com.google.inject.internal.UniqueAnnotations;
 
-class Module extends FactoryModule {
+class PluginModule extends FactoryModule {
   @Override
   protected void configure() {
     bind(HookQueue.class).in(Scopes.SINGLETON);

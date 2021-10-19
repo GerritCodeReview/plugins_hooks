@@ -20,7 +20,7 @@ import com.google.gerrit.acceptance.TestPlugin;
 import org.junit.Test;
 
 @NoHttpd
-@TestPlugin(name = "hooks", sysModule = "com.googlesource.gerrit.plugins.hooks.Module")
+@TestPlugin(name = "hooks", sysModule = "com.googlesource.gerrit.plugins.hooks.PluginModule")
 public class HooksIT extends LightweightPluginDaemonTest {
 
   @Test
