@@ -20,7 +20,6 @@ import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.server.config.GerritServerConfig;
 import com.google.gerrit.server.logging.LoggingContextAwareExecutorService;
 import com.google.inject.Inject;
-import java.lang.Thread.UncaughtExceptionHandler;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.concurrent.ExecutorService;
@@ -33,10 +32,6 @@ import org.eclipse.jgit.lib.Config;
 public class HookExecutor implements LifecycleListener {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
-  private static final UncaughtExceptionHandler LOG_UNCAUGHT_EXCEPTION =
-      (t, e) ->
-          logger.atSevere().withCause(e).log("HookExecutor thread %s threw exception", t.getName());
-
   private final ExecutorService threadPool;
   private final int timeout;
 
@@ -48,7 +43,7 @@ public class HookExecutor implements LifecycleListener {
             Executors.newCachedThreadPool(
                 new ThreadFactoryBuilder()
                     .setNameFormat("SyncHook-%d")
-                    .setUncaughtExceptionHandler(LOG_UNCAUGHT_EXCEPTION)
+                    .setUncaughtExceptionHandler(HookExecutor::logUncaughtException)
                     .build()));
   }
 
@@ -95,5 +90,9 @@ public class HookExecutor implements LifecycleListener {
         isTerminated = false;
       }
     } while (!isTerminated);
+  }
+
+  private static void logUncaughtException(Thread t, Throwable e) {
+    logger.atSevere().withCause(e).log("HookExecutor thread %s threw exception", t.getName());
   }
 }
