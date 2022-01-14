@@ -17,12 +17,44 @@ package com.googlesource.gerrit.plugins.hooks;
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.NoHttpd;
 import com.google.gerrit.acceptance.TestPlugin;
+import com.google.gerrit.entities.Project;
+import com.google.gerrit.extensions.events.GitReferencesUpdatedListener;
+import com.google.gerrit.server.extensions.events.GitReferenceUpdated;
+import java.util.List;
+import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.transport.ReceiveCommand;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 @NoHttpd
 @TestPlugin(name = "hooks", sysModule = "com.googlesource.gerrit.plugins.hooks.PluginModule")
 public class HooksIT extends LightweightPluginDaemonTest {
 
   @Test
-  public void doNothing() throws Exception {}
+  public void hookIsTriggeredOnEachRefInBatchRefUpdate() {
+    Hook hook = Mockito.mock(Hook.class);
+    HookArgs hookArgs = Mockito.mock(HookArgs.class);
+    HookFactory hookFactory = Mockito.mock(HookFactory.class);
+
+    Mockito.when(hookFactory.createAsync("refUpdatedHook", "ref-updated")).thenReturn(hook);
+    Mockito.when(hookFactory.createArgs()).thenReturn(hookArgs);
+    Mockito.when(hook.execute("project", hookArgs)).thenReturn(null);
+
+    List<GitReferencesUpdatedListener.UpdatedRef> updatedRefs =
+        List.of(
+            new GitReferenceUpdated.UpdatedRef(
+                "refs/changes/01/1/1",
+                ObjectId.zeroId(),
+                ObjectId.fromString("0000000000000000000000000000000000000001"),
+                ReceiveCommand.Type.CREATE),
+            new GitReferenceUpdated.UpdatedRef(
+                "refs/changes/01/1/meta",
+                ObjectId.zeroId(),
+                ObjectId.fromString("0000000000000000000000000000000000000001"),
+                ReceiveCommand.Type.CREATE));
+    GitReferencesUpdatedListener.Event event =
+        new GitReferenceUpdated.Event(Project.NameKey.parse("project"), updatedRefs, null);
+    new GitReferencesUpdated(hookFactory).onGitReferencesUpdated(event);
+    Mockito.verify(hook, Mockito.times(2)).execute("project", hookArgs);
+  }
 }
