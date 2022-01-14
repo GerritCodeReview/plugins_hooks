@@ -14,31 +14,33 @@
 
 package com.googlesource.gerrit.plugins.hooks;
 
-import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
+import com.google.gerrit.extensions.events.GitReferencesUpdatedListener;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-class GitReferenceUpdated implements GitReferenceUpdatedListener {
+class GitReferencesUpdated implements GitReferencesUpdatedListener {
   private final Hook hook;
   private final HookFactory hookFactory;
 
   @Inject
-  GitReferenceUpdated(HookFactory hookFactory) {
+  GitReferencesUpdated(HookFactory hookFactory) {
     this.hook = hookFactory.createAsync("refUpdatedHook", "ref-updated");
     this.hookFactory = hookFactory;
   }
 
   @Override
-  public void onGitReferenceUpdated(GitReferenceUpdatedListener.Event event) {
-    HookArgs args = hookFactory.createArgs();
+  public void onGitReferencesUpdated(GitReferencesUpdatedListener.Event event) {
+    for (UpdatedRef updatedRef : event.getUpdatedRefs()) {
+      HookArgs args = hookFactory.createArgs();
 
-    args.add("--oldrev", event.getOldObjectId());
-    args.add("--newrev", event.getNewObjectId());
-    args.add("--refname", event.getRefName());
-    args.add("--project", event.getProjectName());
-    args.add("--submitter", event.getUpdater());
+      args.add("--oldrev", updatedRef.getOldObjectId());
+      args.add("--newrev", updatedRef.getNewObjectId());
+      args.add("--refname", updatedRef.getRefName());
+      args.add("--project", event.getProjectName());
+      args.add("--submitter", event.getUpdater());
 
-    hook.execute(event.getProjectName(), args);
+      hook.execute(event.getProjectName(), args);
+    }
   }
 }

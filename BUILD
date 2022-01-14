@@ -16,6 +16,7 @@ junit_tests(
     srcs = glob(["src/test/java/**/*.java"]),
     tags = ["hooks"],
     visibility = ["//visibility:public"],
-    runtime_deps = [":hooks__plugin"],
-    deps = PLUGIN_TEST_DEPS + PLUGIN_DEPS,
+    deps = PLUGIN_TEST_DEPS + PLUGIN_DEPS + [
+        ":hooks__plugin",
+    ],
 )

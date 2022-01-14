@@ -21,7 +21,7 @@ import com.google.gerrit.extensions.events.ChangeDeletedListener;
 import com.google.gerrit.extensions.events.ChangeMergedListener;
 import com.google.gerrit.extensions.events.ChangeRestoredListener;
 import com.google.gerrit.extensions.events.CommentAddedListener;
-import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
+import com.google.gerrit.extensions.events.GitReferencesUpdatedListener;
 import com.google.gerrit.extensions.events.HashtagsEditedListener;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.extensions.events.NewProjectCreatedListener;
@@ -53,7 +53,7 @@ class PluginModule extends FactoryModule {
     DynamicSet.bind(binder(), ChangeRestoredListener.class).to(ChangeRestored.class);
     DynamicSet.bind(binder(), CommentAddedListener.class).to(CommentAdded.class);
     DynamicSet.bind(binder(), CommitValidationListener.class).to(CommitReceived.class);
-    DynamicSet.bind(binder(), GitReferenceUpdatedListener.class).to(GitReferenceUpdated.class);
+    DynamicSet.bind(binder(), GitReferencesUpdatedListener.class).to(GitReferencesUpdated.class);
     DynamicSet.bind(binder(), HashtagsEditedListener.class).to(HashtagsEdited.class);
     DynamicSet.bind(binder(), MergeValidationListener.class).to(Submit.class);
     DynamicSet.bind(binder(), NewProjectCreatedListener.class).to(NewProjectCreated.class);
