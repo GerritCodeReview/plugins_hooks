@@ -40,6 +40,25 @@ from the hook will be returned to the user, regardless of the return code.
   commit-received --project <project name> --refname <refname> --uploader <uploader> --uploader-username <username> --oldrev <sha1> --newrev <sha1> --cmdref <refname>
 ```
 
+#### Push Options
+
+The synchronous hooks **ref-update** and **commit-received** can process git
+push options similar to the git **pre-receive** hook (see *githooks(5)*).
+The options must be prefixed with `hooks~option=`, this prefix will be stripped
+when calling the hook.
+
+If options are present, the hook will be called with the environment variable
+`GIT_PUSH_OPTION_COUNT` set to the number of options. Each option will be
+in the environment variable `GIT_PUSH_OPTION_0`, `GIT_PUSH_OPTION_1`, etc.
+If no options are present `GIT_PUSH_OPTION_COUNT` is set to `0`.
+
+E.g. a push with `--push-option` / `-o` given as
+`-o hooks~option=A -o hooks~option=B=C -o hooks~option=` will set the
+environment variables
+`GIT_PUSH_OPTION_0=A`, `GIT_PUSH_OPTION_1=B=C`, `GIT_PUSH_OPTION_2=` (empty) and
+`GIT_PUSH_OPTION_COUNT=3`.
+
+
 ### submit
 
 This is called when a user attempts to submit a change. It allows the submit to

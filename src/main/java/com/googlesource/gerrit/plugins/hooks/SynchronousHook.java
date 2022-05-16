@@ -14,7 +14,9 @@
 
 package com.googlesource.gerrit.plugins.hooks;
 
+import com.google.common.collect.ImmutableListMultimap;
 import java.nio.file.Path;
+import java.util.Optional;
 
 class SynchronousHook extends Hook {
   private final HookExecutor executor;
@@ -32,5 +34,11 @@ class SynchronousHook extends Hook {
   @Override
   HookResult execute(String projectName, HookArgs args) {
     return executor.submit(projectName, path, args);
+  }
+
+  @Override
+  HookResult execute(
+      String projectName, HookArgs args, Optional<ImmutableListMultimap> pushOptions) {
+    return executor.submit(projectName, path, args, pushOptions);
   }
 }

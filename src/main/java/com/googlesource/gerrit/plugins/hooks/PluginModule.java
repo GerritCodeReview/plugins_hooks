@@ -30,6 +30,7 @@ import com.google.gerrit.extensions.events.ReviewerDeletedListener;
 import com.google.gerrit.extensions.events.RevisionCreatedListener;
 import com.google.gerrit.extensions.events.TopicEditedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
+import com.google.gerrit.server.git.receive.PluginPushOption;
 import com.google.gerrit.server.git.validators.CommitValidationListener;
 import com.google.gerrit.server.git.validators.MergeValidationListener;
 import com.google.gerrit.server.git.validators.RefOperationValidationListener;
@@ -62,5 +63,7 @@ class PluginModule extends FactoryModule {
     DynamicSet.bind(binder(), ReviewerDeletedListener.class).to(ReviewerDeleted.class);
     DynamicSet.bind(binder(), RevisionCreatedListener.class).to(RevisionCreated.class);
     DynamicSet.bind(binder(), TopicEditedListener.class).to(TopicEdited.class);
+
+    DynamicSet.bind(binder(), PluginPushOption.class).to(MakePushOptionsAvailable.class);
   }
 }

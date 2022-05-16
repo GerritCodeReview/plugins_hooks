@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.hooks;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableListMultimap;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.server.events.RefReceivedEvent;
 import com.google.gerrit.server.git.validators.RefOperationValidationListener;
@@ -24,6 +25,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import org.eclipse.jgit.lib.ObjectId;
 
 @Singleton
@@ -54,7 +56,7 @@ public class RefUpdate implements RefOperationValidationListener {
     args.add("--newrev", getObjectId(refEvent.command.getNewId()).getName());
     args.add("--refname", refEvent.command.getRefName());
 
-    HookResult result = hook.execute(projectName, args);
+    HookResult result = hook.execute(projectName, args, Optional.of(refEvent.pushOptions));
     if (result != null) {
       String output = result.toString();
       if (result.getExitValue() != 0) {

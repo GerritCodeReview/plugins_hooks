@@ -14,7 +14,9 @@
 
 package com.googlesource.gerrit.plugins.hooks;
 
+import com.google.common.collect.ImmutableListMultimap;
 import java.nio.file.Path;
+import java.util.Optional;
 
 class AsynchronousHook extends Hook {
   private final HookQueue queue;
@@ -32,6 +34,13 @@ class AsynchronousHook extends Hook {
 
   @Override
   HookResult execute(String projectName, HookArgs args) {
+    queue.submit(projectName, path, args);
+    return null;
+  }
+
+  @Override
+  HookResult execute(
+      String projectName, HookArgs args, Optional<ImmutableListMultimap> _pushOptions) {
     queue.submit(projectName, path, args);
     return null;
   }

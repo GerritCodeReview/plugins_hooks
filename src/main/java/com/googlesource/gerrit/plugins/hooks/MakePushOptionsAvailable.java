@@ -1,4 +1,4 @@
-// Copyright (C) 2016 The Android Open Source Project
+// Copyright (C) 2022 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,22 +14,18 @@
 
 package com.googlesource.gerrit.plugins.hooks;
 
-import com.google.common.collect.ImmutableListMultimap;
-import com.google.gerrit.common.Nullable;
-import java.nio.file.Path;
-import java.util.Optional;
+import com.google.gerrit.server.git.receive.PluginPushOption;
 
-abstract class Hook {
-  protected final Path path;
+public final class MakePushOptionsAvailable implements PluginPushOption {
+  public static final String NAME = "option";
 
-  Hook(Path path) {
-    this.path = path;
+  @Override
+  public String getName() {
+    return NAME;
   }
 
-  abstract @Nullable HookResult execute(HookArgs args);
-
-  abstract @Nullable HookResult execute(String projectName, HookArgs args);
-
-  abstract @Nullable HookResult execute(
-      String projectName, HookArgs args, Optional<ImmutableListMultimap> pushOptions);
+  @Override
+  public String getDescription() {
+    return "make push options available to this plugin (-o hooks~option=...)";
+  }
 }

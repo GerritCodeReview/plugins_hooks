@@ -25,6 +25,7 @@ import com.google.gerrit.server.project.ProjectState;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.eclipse.jgit.lib.Repository;
+import java.util.Optional;
 
 @Singleton
 public class Submit implements MergeValidationListener {
@@ -58,7 +59,7 @@ public class Submit implements MergeValidationListener {
     args.add("--patchset", patchSetId.get());
     args.add("--commit", commit.getId().name());
 
-    HookResult result = hook.execute(projectName, args);
+    HookResult result = hook.execute(projectName, args, Optional.empty());
     if (result != null && result.getExitValue() != 0) {
       throw new MergeValidationException(result.toString());
     }

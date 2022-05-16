@@ -23,6 +23,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import org.eclipse.jgit.lib.ObjectId;
 
 @Singleton
@@ -56,7 +57,7 @@ public class CommitReceived implements CommitValidationListener {
     args.add("--newrev", receiveEvent.commit.name());
     args.add("--cmdref", commandRef);
 
-    HookResult result = hook.execute(projectName, args);
+    HookResult result = hook.execute(projectName, args, Optional.of(receiveEvent.pushOptions));
     if (result != null) {
       String output = result.toString();
       if (result.getExitValue() != 0) {

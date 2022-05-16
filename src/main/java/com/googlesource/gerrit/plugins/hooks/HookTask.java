@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.hooks;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.flogger.FluentLogger;
 import com.google.common.io.ByteStreams;
 import com.google.gerrit.entities.Project;
@@ -26,13 +27,18 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.Callable;
+import java.util.stream.Stream;
 import org.eclipse.jgit.lib.Repository;
 
 class HookTask {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
+  private static final String pushOptionPrefix =
+      String.format("%s~%s", "hooks", MakePushOptionsAvailable.NAME);
 
   private final Path sitePath;
   private final String projectName;
@@ -40,6 +46,7 @@ class HookTask {
   private final HookArgs args;
   private StringWriter output;
   private Process ps;
+  Optional<ImmutableListMultimap> pushOptions;
 
   public static class Async extends HookTask implements Runnable {
     Async(String projectName, Path hook, HookArgs args) {
@@ -53,8 +60,10 @@ class HookTask {
   }
 
   public static class Sync extends HookTask implements Callable<HookResult> {
-    Sync(String projectName, Path hook, HookArgs args) {
+    Sync(
+        String projectName, Path hook, HookArgs args, Optional<ImmutableListMultimap> pushOptions) {
       super(projectName, hook, args);
+      this.pushOptions = pushOptions;
     }
 
     @Override
@@ -96,6 +105,23 @@ class HookTask {
 
       Map<String, String> env = pb.environment();
       env.put("GERRIT_SITE", sitePath.toAbsolutePath().toString());
+
+      pushOptions.ifPresent(
+          pushOpts -> {
+            int pushOptionCount = 0;
+            if (!pushOpts.isEmpty()) {
+              Iterator<Integer> it = Stream.iterate(0, n -> n + 1).iterator();
+              pushOpts.forEach(
+                  (key, value) -> {
+                    if (((String) key).startsWith(pushOptionPrefix)) {
+                      String envKey = String.format("GIT_PUSH_OPTION_%d", it.next());
+                      env.put(envKey, (String) value);
+                    }
+                  });
+              pushOptionCount = it.next();
+            }
+            env.put("GIT_PUSH_OPTION_COUNT", Integer.toString(pushOptionCount));
+          });
 
       if (projectName != null) {
         try (Repository git = args.gitManager.openRepository(Project.nameKey(projectName))) {

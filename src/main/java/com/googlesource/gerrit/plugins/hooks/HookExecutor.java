@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.hooks;
 
+import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.flogger.FluentLogger;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.google.gerrit.extensions.events.LifecycleListener;
@@ -27,6 +28,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.Optional;
 import org.eclipse.jgit.lib.Config;
 
 public class HookExecutor implements LifecycleListener {
@@ -52,11 +54,16 @@ public class HookExecutor implements LifecycleListener {
   }
 
   HookResult submit(String projectName, Path hook, HookArgs args) {
+    return submit(null, hook, args, Optional.empty());
+  }
+
+  HookResult submit(
+      String projectName, Path hook, HookArgs args, Optional<ImmutableListMultimap> pushOptions) {
     if (!Files.exists(hook)) {
       logger.atFine().log("Hook file not found: %s", hook);
       return null;
     }
-    HookTask.Sync hookTask = new HookTask.Sync(projectName, hook, args);
+    HookTask.Sync hookTask = new HookTask.Sync(projectName, hook, args, pushOptions);
     FutureTask<HookResult> task = new FutureTask<>(hookTask);
     threadPool.execute(task);
     String message;
