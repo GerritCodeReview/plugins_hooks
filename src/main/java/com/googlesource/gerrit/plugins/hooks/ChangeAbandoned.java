@@ -37,6 +37,8 @@ class ChangeAbandoned implements ChangeAbandonedListener {
     ChangeInfo c = event.getChange();
     args.add("--change", c.id);
     args.addUrl(c);
+    args.add("--private", c.isPrivate);
+    args.add("--wip", c.workInProgress);
     args.add("--change-owner", c.owner);
     args.add("--project", c.project);
     args.add("--branch", c.branch);

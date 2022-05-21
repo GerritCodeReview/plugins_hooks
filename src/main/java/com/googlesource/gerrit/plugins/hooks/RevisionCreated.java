@@ -38,6 +38,8 @@ public class RevisionCreated implements RevisionCreatedListener {
     args.add("--change", c.id);
     args.add("--kind", String.valueOf(event.getRevision().kind));
     args.addUrl(c);
+    args.add("--private", c.isPrivate);
+    args.add("--wip", c.workInProgress);
     args.add("--change-owner", c.owner);
     args.add("--project", c.project);
     args.add("--branch", c.branch);

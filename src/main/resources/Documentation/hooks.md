@@ -67,7 +67,7 @@ New patchsets do not generate this event when created as a result of merging a c
 * Closing a change by direct push to branch
 
 ```
-  patchset-created --change <change id> --kind <change kind> --change-url <change url> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --topic <topic> --uploader <uploader> --uploader-username <username> --commit <sha1> --patchset <patchset id>
+  patchset-created --change <change id> --kind <change kind> --change-url <change url> --private <boolean> --wip <boolean> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --topic <topic> --uploader <uploader> --uploader-username <username> --commit <sha1> --patchset <patchset id>
 ```
 
 The `--kind` parameter represents the kind of change uploaded. See documentation
@@ -78,7 +78,7 @@ of [`patchSet`][2] for details.
 Called whenever a comment is added to a change.
 
 ```
-  comment-added --change <change id> --change-url <change url> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --topic <topic> --author <comment author> --author-username <username> --commit <commit> --comment <comment> [--<approval category id> <score> --<approval category id> <score> --<approval category id>-oldValue <score> ...]
+  comment-added --change <change id> --change-url <change url> --private <boolean> --wip <boolean> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --topic <topic> --author <comment author> --author-username <username> --commit <commit> --comment <comment> [--<approval category id> <score> --<approval category id> <score> --<approval category id>-oldValue <score> ...]
 ```
 
 ### change-merged
@@ -86,7 +86,7 @@ Called whenever a comment is added to a change.
 Called whenever a change has been merged.
 
 ```
-  change-merged --change <change id> --change-url <change url> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --topic <topic> --submitter <submitter> --submitter-username <username> --commit <sha1> --newrev <sha1>
+  change-merged --change <change id> --change-url <change url> --private <boolean> --wip <boolean> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --topic <topic> --submitter <submitter> --submitter-username <username> --commit <sha1> --newrev <sha1>
 ```
 
 ### change-abandoned
@@ -94,7 +94,7 @@ Called whenever a change has been merged.
 Called whenever a change has been abandoned.
 
 ```
-  change-abandoned --change <change id> --change-url <change url> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --topic <topic> --abandoner <abandoner> --abandoner-username <username> --commit <sha1> --reason <reason>
+  change-abandoned --change <change id> --change-url <change url> --private <boolean> --wip <boolean> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --topic <topic> --abandoner <abandoner> --abandoner-username <username> --commit <sha1> --reason <reason>
 ```
 
 ### change-deleted
@@ -102,7 +102,7 @@ Called whenever a change has been abandoned.
 Called whenever a change has been deleted.
 
 ```
-  change-deleted --change <change id> --change-url <change url> --change-owner <change owner> --project <project name> --branch <branch> --topic <topic> --deleter <deleter>
+  change-deleted --change <change id> --change-url <change url> --private <boolean> --wip <boolean> --change-owner <change owner> --project <project name> --branch <branch> --topic <topic> --deleter <deleter>
 ```
 
 ### change-restored
@@ -110,7 +110,7 @@ Called whenever a change has been deleted.
 Called whenever a change has been restored.
 
 ```
-  change-restored --change <change id> --change-url <change url> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --topic <topic> --restorer <restorer> --restorer-username <username> --commit <sha1> --reason <reason>
+  change-restored --change <change id> --change-url <change url> --private <boolean> --wip <boolean> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --topic <topic> --restorer <restorer> --restorer-username <username> --commit <sha1> --reason <reason>
 ```
 
 ### ref-updated
@@ -134,7 +134,7 @@ Called whenever a project has been created.
 Called whenever a reviewer is added to a change.
 
 ```
-  reviewer-added --change <change id> --change-url <change url> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --reviewer <reviewer> --reviewer-username <username>
+  reviewer-added --change <change id> --change-url <change url> --private <boolean> --wip <boolean> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --reviewer <reviewer> --reviewer-username <username>
 ```
 
 ### reviewer-deleted
@@ -142,7 +142,7 @@ Called whenever a reviewer is added to a change.
 Called whenever a reviewer (with a vote) is removed from a change.
 
 ```
-  reviewer-deleted --change <change id> --change-url <change url> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --reviewer <reviewer> [--<approval category id> <score> --<approval category id> <score> ...]
+  reviewer-deleted --change <change id> --change-url <change url> --private <boolean> --wip <boolean> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --reviewer <reviewer> [--<approval category id> <score> --<approval category id> <score> ...]
 ```
 
 ### topic-changed
@@ -150,7 +150,7 @@ Called whenever a reviewer (with a vote) is removed from a change.
 Called whenever a change's topic is changed from the Web UI or via the REST API.
 
 ```
-  topic-changed --change <change id> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --changer <changer> --changer-username <username> --old-topic <old topic> --new-topic <new topic>
+  topic-changed --change <change id> --change-url <change url> --private <boolean> --wip <boolean> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --changer <changer> --changer-username <username> --old-topic <old topic> --new-topic <new topic>
 ```
 
 ### hashtags-changed
@@ -159,7 +159,7 @@ Called whenever hashtags are added to or removed from a change from the Web UI
 or via the REST API.
 
 ```
-  hashtags-changed --change <change id>  --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --editor <editor> --editor-username <username> --added <hashtag> --removed <hashtag> --hashtag <hashtag>
+  hashtags-changed --change <change id> --change-url <change url> --private <boolean> --wip <boolean>  --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --editor <editor> --editor-username <username> --added <hashtag> --removed <hashtag> --hashtag <hashtag>
 ```
 
 The `--added` parameter may be passed multiple times, once for each
