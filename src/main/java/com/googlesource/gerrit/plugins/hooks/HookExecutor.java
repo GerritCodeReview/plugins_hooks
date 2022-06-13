@@ -65,10 +65,10 @@ public class HookExecutor implements LifecycleListener {
       return task.get(timeout, TimeUnit.SECONDS);
     } catch (TimeoutException e) {
       message = "Synchronous hook timed out " + hook;
-      logger.atSevere().log(message);
+      logger.atSevere().log("%s", message);
     } catch (Exception e) {
       message = "Error running hook " + hook;
-      logger.atSevere().withCause(e).log(message);
+      logger.atSevere().withCause(e).log("%s", message);
     }
     task.cancel(true);
     hookTask.cancel();
