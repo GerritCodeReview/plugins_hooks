@@ -18,6 +18,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.common.flogger.FluentLogger;
 import com.google.common.io.ByteStreams;
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.metrics.Timer1;
 import java.io.BufferedReader;
@@ -78,6 +79,7 @@ class HookTask {
     return hook.getFileName().toString();
   }
 
+  @Nullable
   public String getOutput() {
     return output != null ? output.toString() : null;
   }

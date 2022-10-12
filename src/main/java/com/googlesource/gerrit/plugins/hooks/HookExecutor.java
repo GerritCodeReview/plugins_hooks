@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.hooks;
 
 import com.google.common.flogger.FluentLogger;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.server.config.GerritServerConfig;
 import com.google.gerrit.server.logging.LoggingContextAwareExecutorService;
@@ -51,6 +52,7 @@ public class HookExecutor implements LifecycleListener {
     return submit(null, hook, args);
   }
 
+  @Nullable
   HookResult submit(String projectName, Path hook, HookArgs args) {
     if (!Files.exists(hook)) {
       logger.atFine().log("Hook file not found: %s", hook);

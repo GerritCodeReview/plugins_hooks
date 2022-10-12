@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.hooks;
 
+import com.google.gerrit.common.Nullable;
 import java.nio.file.Path;
 
 class AsynchronousHook extends Hook {
@@ -24,12 +25,14 @@ class AsynchronousHook extends Hook {
     this.queue = queue;
   }
 
+  @Nullable
   @Override
   HookResult execute(HookArgs args) {
     queue.submit(path, args);
     return null;
   }
 
+  @Nullable
   @Override
   HookResult execute(String projectName, HookArgs args) {
     queue.submit(projectName, path, args);
