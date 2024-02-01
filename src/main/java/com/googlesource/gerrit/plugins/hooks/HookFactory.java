@@ -22,7 +22,6 @@ import com.google.gerrit.server.config.SitePaths;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import org.eclipse.jgit.lib.Config;
 
 @Singleton
@@ -49,7 +48,7 @@ public class HookFactory {
 
     String v = config.getString("hooks", null, "path");
     if (v != null) {
-      this.hooksPath = Paths.get(v);
+      this.hooksPath = Path.of(v);
     } else {
       this.hooksPath = sitePaths.hooks_dir;
     }
