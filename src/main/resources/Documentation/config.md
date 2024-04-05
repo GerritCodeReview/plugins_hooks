@@ -32,6 +32,7 @@ immediate effect without having to reload the plugin.
 
 hooks.path
 :	Location of hook executables. If not set, defaults to `$site_path/hooks`
+    When given as relative path, resolved against the `$site_path`.
 
 hooks.syncHookTimeout
 :	Timeout value in seconds for synchronous hooks. If not set, defaults

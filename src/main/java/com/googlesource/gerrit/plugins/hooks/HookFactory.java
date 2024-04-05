@@ -48,7 +48,7 @@ public class HookFactory {
 
     String v = config.getString("hooks", null, "path");
     if (v != null) {
-      this.hooksPath = Path.of(v);
+      this.hooksPath = sitePaths.resolve(v);
     } else {
       this.hooksPath = sitePaths.hooks_dir;
     }
