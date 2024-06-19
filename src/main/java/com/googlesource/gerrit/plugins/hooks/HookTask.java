@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.logging.Level;
 import org.eclipse.jgit.lib.Repository;
 
 class HookTask {
@@ -124,20 +125,25 @@ class HookTask {
       int exitValue = result.getExitValue();
       if (exitValue != 0) {
         logger.atSevere().log("hook[%s] exited with error status: %d", name, exitValue);
+        printHookOutput(name, result, Level.SEVERE);
       }
 
       if (logger.atFine().isEnabled()) {
-        try (BufferedReader br = new BufferedReader(new StringReader(result.getOutput()))) {
-          br.lines()
-              .filter(s -> !s.isEmpty())
-              .forEach(line -> logger.atFine().log("hook[%s] output: %s", name, line));
-        } catch (IOException iox) {
-          logger.atSevere().withCause(iox).log("Error writing hook [%s] output", name);
-        }
+        printHookOutput(name, result, Level.FINE);
       }
     }
 
     return result;
+  }
+
+  private void printHookOutput(String name, HookResult result, Level logLevel) {
+    try (BufferedReader br = new BufferedReader(new StringReader(result.getOutput()))) {
+      br.lines()
+          .filter(s -> !s.isEmpty())
+          .forEach(line -> logger.at(logLevel).log("hook[%s] output: %s", name, line));
+    } catch (IOException iox) {
+      logger.atSevere().withCause(iox).log("Error writing hook [%s] output", name);
+    }
   }
 
   @Override
