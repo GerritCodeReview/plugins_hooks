@@ -4,6 +4,9 @@ Configuration
 Environment
 -----------
 
+When a hook is run by Gerrit, the environment will have `GERRIT_SITE` set to
+the full path of the root of the Gerrit site ($site_path).
+
 When a project is given to a hook, the environment will have `GIT_DIR` set to
 the full path of the affected git repository so that git commands can be easily
 run.
