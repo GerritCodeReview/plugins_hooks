@@ -16,6 +16,29 @@
       "message": "Let me know if I should use a different target branch.\n\nLocally, I built it in the stable-3.5 tree of Gerrit (this includes an additional commit that\u0027s only in stable-3.6, so updating stable-3.5 to this commit at least works ; can\u0027t tell for earlier versions)",
       "revId": "c96255c3590ce7f72d0268617c3619f1d1c00a3e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "500e2522_d5eb6948",
+        "filename": "src/main/resources/Documentation/hooks.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 3604707
+      },
+      "writtenOn": "2025-01-24T22:19:05Z",
+      "side": 1,
+      "message": "--is-private, or pass in --is-private/--is-not-private? (git has some convention for boolean switches that do not involve passing a parmeter to the switch, we probably want to follow that?)",
+      "range": {
+        "startLine": 70,
+        "startChar": 87,
+        "endLine": 70,
+        "endChar": 96
+      },
+      "revId": "c96255c3590ce7f72d0268617c3619f1d1c00a3e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
