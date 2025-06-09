@@ -49,7 +49,7 @@ If the hook exits with non-zero return code the submit will be rejected and the
 output from the hook will be returned to the user.
 
 ```
-  submit --project <project name> --branch <branch> --submitter <submitter> --patchset <patchset id> --commit <sha1>
+  submit --change <change id> --project <project name> --branch <branch> --submitter <submitter> --submitter-username <username> --patchset <patchset id> --commit <sha1>
 ```
 
 ## Asynchronous Hooks
