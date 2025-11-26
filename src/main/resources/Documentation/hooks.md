@@ -78,7 +78,7 @@ of [`patchSet`][2] for details.
 Called whenever a comment is added to a change.
 
 ```
-  comment-added --change <change id> --change-url <change url> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --topic <topic> --author <comment author> --author-username <username> --commit <commit> --comment <comment> [--<approval category id> <score> --<approval category id> <score> --<approval category id>-oldValue <score> ...]
+  comment-added --change <change id> --change-url <change url> --change-owner <change owner> --change-owner-username <username> --project <project name> --branch <branch> --topic <topic> --author <comment author> --author-username <username> --commit <commit> --patchset <patchset id> --comment <comment> [--<approval category id> <score> --<approval category id> <score> --<approval category id>-oldValue <score> ...]
 ```
 
 ### change-merged
