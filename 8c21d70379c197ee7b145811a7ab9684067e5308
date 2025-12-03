@@ -55,6 +55,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e9cca3a1_5550881d",
+        "filename": "src/main/resources/Documentation/hooks.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2025-12-03T14:30:27Z",
+      "side": 1,
+      "message": "here",
+      "range": {
+        "startLine": 52,
+        "startChar": 129,
+        "endLine": 52,
+        "endChar": 169
+      },
+      "revId": "8c21d70379c197ee7b145811a7ab9684067e5308",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91e50bc7_93809c83",
+        "filename": "src/main/resources/Documentation/hooks.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2025-12-03T14:30:27Z",
+      "side": 1,
+      "message": "here",
+      "range": {
+        "startLine": 70,
+        "startChar": 264,
+        "endLine": 71,
+        "endChar": 3
+      },
+      "revId": "8c21d70379c197ee7b145811a7ab9684067e5308",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c794421f_0035a20f",
         "filename": "src/main/resources/Documentation/hooks.md",
         "patchSetId": 1
@@ -66,6 +112,30 @@
       "writtenOn": "2025-12-03T13:42:09Z",
       "side": 1,
       "message": "The `--commit` identified the patch-set that the commend is added to.\nAdding the `--patchset` opens the door to inconsistency, as you are sending the same concept twice with two different formats.",
+      "range": {
+        "startLine": 81,
+        "startChar": 242,
+        "endLine": 81,
+        "endChar": 259
+      },
+      "revId": "8c21d70379c197ee7b145811a7ab9684067e5308",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85b86403_654dc3f8",
+        "filename": "src/main/resources/Documentation/hooks.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2025-12-03T14:30:27Z",
+      "side": 1,
+      "message": "hi, thanks for review!\n\nI do not think that consistency is the problem, as gerrit will always provide consistent information to the hook. The question is what hook would like to use for its task. For example either commit for git operations or patchset for api.\n\nIt also aligned to the `patchset-created` and `submit` see above.\n\nNot sure why only `comment-added` lacks it.\n\nDo you recommend of using the commit id for all API invocations instead of the patchset?",
+      "parentUuid": "c794421f_0035a20f",
       "range": {
         "startLine": 81,
         "startChar": 242,
