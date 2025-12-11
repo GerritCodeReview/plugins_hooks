@@ -144,6 +144,30 @@
       },
       "revId": "8c21d70379c197ee7b145811a7ab9684067e5308",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "620081ea_a321239c",
+        "filename": "src/main/resources/Documentation/hooks.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1040243
+      },
+      "writtenOn": "2025-12-11T15:33:39Z",
+      "side": 1,
+      "message": "@luca.milanesio@gmail.com : I do not want to bother you, but can you please look at my comment, this change is aligned with the current practices as far as I understand, it is the same as patchset-created and submit.\n\nThanks!",
+      "parentUuid": "85b86403_654dc3f8",
+      "range": {
+        "startLine": 81,
+        "startChar": 242,
+        "endLine": 81,
+        "endChar": 259
+      },
+      "revId": "8c21d70379c197ee7b145811a7ab9684067e5308",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
