@@ -168,6 +168,30 @@
       },
       "revId": "8c21d70379c197ee7b145811a7ab9684067e5308",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27148cc8_ffedce41",
+        "filename": "src/main/resources/Documentation/hooks.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-12-15T20:08:33Z",
+      "side": 1,
+      "message": "I believe you should address the comment https://gerrit-review.googlesource.com/c/plugins/hooks/+/531301/comments/606071b9_3952aa69, where you show that you\u0027ve raised the issue that you are trying to address with this fix.",
+      "parentUuid": "620081ea_a321239c",
+      "range": {
+        "startLine": 81,
+        "startChar": 242,
+        "endLine": 81,
+        "endChar": 259
+      },
+      "revId": "8c21d70379c197ee7b145811a7ab9684067e5308",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
