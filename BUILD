@@ -1,5 +1,5 @@
 load("@com_googlesource_gerrit_bazlets//tools:junit.bzl", "junit_tests")
-load("//tools/bzl:plugin.bzl", "PLUGIN_DEPS", "PLUGIN_TEST_DEPS", "gerrit_plugin")
+load("@com_googlesource_gerrit_bazlets//:gerrit_plugin.bzl", "gerrit_plugin")
 
 gerrit_plugin(
     name = "hooks",
@@ -17,5 +17,7 @@ junit_tests(
     tags = ["hooks"],
     visibility = ["//visibility:public"],
     runtime_deps = [":hooks__plugin"],
-    deps = PLUGIN_TEST_DEPS + PLUGIN_DEPS,
+    deps = [
+        "//java/com/google/gerrit/acceptance:lib",
+    ],
 )
