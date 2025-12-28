@@ -3,11 +3,11 @@
     "zuul-check:plugins_hooks": {
       "state": "FAILED",
       "message": "Change failed",
-      "url": "https://ci.gerritcodereview.com/t/gerrit/buildset/115d51b49fa644f6b8bb1aee98498dec",
-      "started": "2025-12-28T08:16:00Z",
-      "finished": "2025-12-28T08:16:00Z",
+      "url": "https://ci.gerritcodereview.com/t/gerrit/buildset/844386d840b74e3ea42ae4ea96720d38",
+      "started": "2025-12-28T08:16:30Z",
+      "finished": "2025-12-28T08:16:30Z",
       "created": "2025-12-11T14:43:44Z",
-      "updated": "2025-12-28T08:16:00Z"
+      "updated": "2025-12-28T08:16:30Z"
     }
   }
 }
