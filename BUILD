@@ -3,6 +3,7 @@ load("@com_googlesource_gerrit_bazlets//:gerrit_plugin.bzl", "gerrit_plugin", "g
 
 gerrit_plugin(
     name = "hooks",
+    flavour = "any",
     srcs = glob(["src/main/java/**/*.java"]),
     manifest_entries = [
         "Gerrit-PluginName: hooks",
