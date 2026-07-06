@@ -1,0 +1,13 @@
+{
+  "checks": {
+    "zuul-check:plugins_hooks": {
+      "state": "FAILED",
+      "message": "Change failed",
+      "url": "https://ci.gerritcodereview.com/t/gerrit/buildset/15dfefb7751e4da0ad1724b8e1a136cc",
+      "started": "2026-07-06T06:05:56Z",
+      "finished": "2026-07-06T06:05:56Z",
+      "created": "2026-07-06T06:05:56Z",
+      "updated": "2026-07-06T06:05:56Z"
+    }
+  }
+}
